@@ -1,2 +1,10 @@
 # Ignore node shit
 node_modules/
+
+# Dotnet compiler results
+bin/
+obj/
+
+# Ionide stuff
+.fake
+.ionide
