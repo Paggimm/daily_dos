@@ -1,0 +1,15 @@
+source https://api.nuget.org/v3/index.json
+storage: none
+
+framework: net5.0
+
+nuget FSharp.Core
+nuget Saturn
+nuget Simple.Migrations
+nuget Microsoft.Data.Sqlite
+nuget Dapper
+nuget TaskBuilder.fs
+
+nuget Fake.Core.Target
+nuget Fake.IO.FileSystem
+nuget Fake.DotNet.Cli
