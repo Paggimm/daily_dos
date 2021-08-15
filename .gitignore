@@ -1,6 +1,9 @@
 # Ignore node shit
 node_modules/
 
+# pnpm
+.pnpm-store/
+
 # Dotnet compiler results
 bin/
 obj/

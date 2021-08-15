@@ -8,6 +8,5 @@
 
 # Setup client
 (
-    cd vue_client
-    npm install
+    pnpm install
 )

@@ -20,5 +20,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run build
+      - name: Install dependencies
+        run: pnpm install
+      - name: Compile
+        run: pnpm run build
+      - name: Run linter
+        run: pnpm run lint
