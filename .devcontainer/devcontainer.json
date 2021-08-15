@@ -18,7 +18,9 @@
 		"ybaumes.highlight-trailing-white-spaces",
 		"ms-dotnettools.csharp",
 		"Ionide.Ionide-fsharp",
+		"dbaeumer.vscode-eslint",
 		"octref.vetur",
+		"ecmel.vscode-html-css",
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
