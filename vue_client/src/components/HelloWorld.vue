@@ -2,12 +2,42 @@
   <div>
     <h1>schicke neue App</h1>
     <p>ich hoffe sie gefällt dir</p>
-    <button>OK</button>
-    <p>und wenn nicht ist auch nicht so schlimm</p>
+    <button v-on:click="changeText">OK</button>
+    <p class="temp_txt1">{{ msg }}</p>
+    <h1>Hier sehen wir einen Counter</h1>
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "HelloWorld",
+  // in Data kommen verwendete Attribute rein
+  data() {
+    return {
+      msg: "",
+      msg1: "und wenn nicht ist auch nicht so schlimm",
+      msg2: "ist es das wirklich?",
+    };
+  },
+  mounted() {
+    this.initializeText();
+  },
+  // in Methods werden Methoden definiert
+  methods: {
+    changeText: function () {
+      if (this.msg === this.msg1) {
+        this.msg = this.msg2;
+      } else {
+        this.msg = this.msg1;
+      }
+    },
+    initializeText: function () {
+      this.msg = this.msg1;
+    },
+  },
+});
 </script>
 
 <style></style>
