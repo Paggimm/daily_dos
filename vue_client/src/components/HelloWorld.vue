@@ -2,8 +2,12 @@
   <div>
     <h1>schicke neue App</h1>
     <p>ich hoffe sie gefällt dir</p>
-    <button v-on:click="changeText">OK</button>
-    <p class="temp_txt1">{{ msg }}</p>
+    <button @click="changeText">
+      OK
+    </button>
+    <p class="temp_txt1">
+      {{ msg }}
+    </p>
     <h1>Hier sehen wir einen Counter</h1>
   </div>
 </template>
