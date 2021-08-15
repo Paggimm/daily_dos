@@ -23,4 +23,4 @@ jobs:
       - name: Restore tools
         run: dotnet tool restore
       - name: Run build
-        run: dotnet run -- Build
+        run: dotnet build

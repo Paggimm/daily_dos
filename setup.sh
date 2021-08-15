@@ -3,7 +3,7 @@
 (
     cd api
     dotnet tool restore
-    dotnet run -- Restore
+    dotnet restore
 ) &
 
 # Setup client

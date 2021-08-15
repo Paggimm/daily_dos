@@ -21,6 +21,7 @@
 		"dbaeumer.vscode-eslint",
 		"octref.vetur",
 		"ecmel.vscode-html-css",
+		"rohit-gohri.format-code-action"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
