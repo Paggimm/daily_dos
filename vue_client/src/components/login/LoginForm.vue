@@ -1,24 +1,27 @@
 <template>
   <div class="columns">
     <div class="column is-one-third is-offset-one-third">
-      <label class="label">Username</label>
-      <input
-        v-model="username"
-        class="input block"
-        type="text"
-      >
-      <label class="label">Password</label>
-      <input
-        v-model="password"
-        class="input block"
-        type="password"
-      >
-      <button
-        class="button is-primary"
-        @click="submit"
-      >
-        Submit
-      </button>
+      <form @submit="submit">
+        <label class="label">Username</label>
+        <input
+          v-model="username"
+          class="input block"
+          required="required"
+          type="text"
+        >
+        <label class="label">Password</label>
+        <input
+          v-model="password"
+          class="input block"
+          required="required"
+          type="password"
+        >
+        <button
+          class="button is-primary"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   </div>
 </template>
