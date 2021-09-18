@@ -12,7 +12,7 @@
         v-text="online ? 'online' : 'offline'"
       />
     </div>
-    <router-view />
+    <router-view @got_token="gotToken" />
   </div>
 </template>
 
@@ -27,6 +27,7 @@ interface PingResponse {
 
 export default class App extends Vue {
   protected online = false;
+  protected token: string | undefined = undefined;
   protected intervalPid: number | undefined = undefined;
 
   public async created(): Promise<void> {
@@ -42,10 +43,15 @@ export default class App extends Vue {
     }, 10000);
   }
 
+  protected gotToken(token: string): void {
+    this.token = token;
+  }
+
   protected async ping(): Promise<void> {
     const headers = new Headers();
     headers.append("pragma", "no-cache");
     headers.append("cache-control", "no-cache");
+    headers.append("Authorization", `Bearer ${this.token}`);
 
     const myInit = {
       method: "GET",

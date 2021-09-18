@@ -4,4 +4,5 @@ storage: none
 framework: net5.0
 
 nuget Giraffe ~> 5.0
+nuget Microsoft.AspNetCore.Authentication.JwtBearer ~> 5.0
 nuget Ply ~> 0.3
