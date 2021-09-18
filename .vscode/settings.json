@@ -15,5 +15,8 @@
     "vetur.format.defaultFormatter.ts": "prettier",
     "[vue]": {
         "editor.defaultFormatter": "octref.vetur",
-    }
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
 }

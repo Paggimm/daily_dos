@@ -2,20 +2,42 @@
   <div class="columns">
     <div class="column is-one-third is-offset-one-third">
       <form @submit.prevent="submit">
-        <label class="label">Username</label>
-        <input
-          v-model="username"
-          class="input block"
-          required="required"
-          type="text"
-        >
-        <label class="label">Password</label>
-        <input
-          v-model="password"
-          class="input block"
-          required="required"
-          type="password"
-        >
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control has-icons-left">
+            <input
+              v-model="username"
+              :class="invalidLogin ? 'is-danger' : ''"
+              class="input block"
+              required="required"
+              type="text"
+            >
+            <span class="icon is-small is-left">
+              <i class="fas fa-user" />
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control has-icons-left">
+            <input
+              v-model="password"
+              :class="invalidLogin ? 'is-danger' : ''"
+              class="input block"
+              required="required"
+              type="password"
+            >
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock" />
+            </span>
+          </div>
+          <p
+            v-if="invalidLogin"
+            class="help is-danger"
+          >
+            This login is invalid
+          </p>
+        </div>
         <button class="button is-primary">Submit</button>
       </form>
     </div>
@@ -38,7 +60,10 @@ export default class LoginForm extends Vue {
   protected username = "";
   protected password = "";
 
+  protected invalidLogin = false;
+
   protected async submit(): Promise<void> {
+    this.invalidLogin = false;
     await this.getToken({ email: this.username, password: this.password });
   }
 
@@ -48,11 +73,19 @@ export default class LoginForm extends Vue {
         body: JSON.stringify(request),
         method: "POST",
       });
-      const body: TokenResponse = await response.json();
-      this.$emit("got_token", body.token);
-      console.log("Got token!");
+      switch (response.status) {
+        case 200:
+          {
+            const body: TokenResponse = await response.json();
+            this.$emit("got_token", body.token);
+          }
+          break;
+        case 401:
+          this.invalidLogin = true;
+          break;
+      }
     } catch (e) {
-      console.log("Error while fetching token :(");
+      console.log(e);
     }
   }
 }

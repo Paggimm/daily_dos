@@ -13,5 +13,5 @@ pnpm run serve
 To run the server (Port 8085):
 ```bash
 cd api
-dotnet run
+dotnet watch run
 ```

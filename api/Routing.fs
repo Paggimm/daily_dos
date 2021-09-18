@@ -4,7 +4,6 @@ open FSharp.Control.Tasks
 open Giraffe
 open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Http
-open Microsoft.AspNetCore.Hosting
 open Microsoft.IdentityModel.Tokens
 open System
 open System.IdentityModel.Tokens.Jwt
@@ -100,25 +99,22 @@ module Routing =
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
 
-                // authenticate user
+                // TODO: add real authentication
+                let result =
+                    match model.email.ToLower(), model.password with
+                    | ("bernie" as name, "123456")
+                    | ("nico" as name, "654321") -> json (generateToken name)
+                    | _ ->
+                        // Invalid login data
+                        setStatusCode 401
 
-                let tokenResult = generateToken model.email
-
-                return! json tokenResult next ctx
+                return! result next ctx
             }
-
-    let indexHandler (name: string) =
-        let greetings = sprintf "Hello %s, from Giraffe!" name
-        let model = { Text = greetings }
-        let view = Views.index model
-        htmlView view
 
     let webApp: HttpHandler =
         choose [
             GET
             >=> choose [
-                    route "/" >=> indexHandler "world"
-                    routef "/hello/%s" indexHandler
                     route "/ping" >=> json {| online = true |}
                     route "/authping"
                     >=> authorize
