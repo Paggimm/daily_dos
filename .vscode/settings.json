@@ -5,7 +5,7 @@
     "typescript.format.placeOpenBraceOnNewLineForFunctions": true,
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
-    "vetur.format.defaultFormatter.html": "prettier",
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
     "vetur.format.defaultFormatter.css": "prettier",
     "vetur.format.defaultFormatter.postcss": "prettier",
     "vetur.format.defaultFormatter.scss": "prettier",

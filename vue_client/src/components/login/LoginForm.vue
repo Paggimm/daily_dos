@@ -8,14 +8,14 @@
           class="input block"
           required="required"
           type="text"
-        />
+        >
         <label class="label">Password</label>
         <input
           v-model="password"
           class="input block"
           required="required"
           type="password"
-        />
+        >
         <button class="button is-primary">Submit</button>
       </form>
     </div>
