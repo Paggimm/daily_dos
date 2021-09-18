@@ -19,4 +19,6 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "javascript.format.semicolons": "remove",
+    "typescript.format.semicolons": "remove",
 }

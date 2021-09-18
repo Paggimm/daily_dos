@@ -38,6 +38,7 @@ importers:
       vue: ^3.0.0
       vue-class-component: ^8.0.0-0
       vue-router: ^4.0.0-0
+      vuex: next
     dependencies:
       core-js: 3.16.1
       npm-watch: 0.11.0
@@ -45,6 +46,7 @@ importers:
       vue: 3.2.2
       vue-class-component: 8.0.0-rc.1_vue@3.2.2
       vue-router: 4.0.11_vue@3.2.2
+      vuex: 4.0.2_vue@3.2.2
     devDependencies:
       '@vue/cli-plugin-babel': 4.5.13_3eeff913873aa7c0a992b2321c0d482f
       '@vue/cli-plugin-eslint': 4.5.13_a58cf9e4d577795b8c257bee96d49483
@@ -9393,6 +9395,15 @@ packages:
       '@vue/compiler-dom': 3.2.2
       '@vue/runtime-dom': 3.2.2
       '@vue/shared': 3.2.2
+    dev: false
+
+  /vuex/4.0.2_vue@3.2.2:
+    resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.15
+      vue: 3.2.2
     dev: false
 
   /watchpack-chokidar2/2.0.1:

@@ -17,12 +17,12 @@
         v-text="authenticated ? 'yes' : 'no'"
       />
     </div>
-    <router-view @got_token="gotToken" />
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { VueWithStore } from "./store";
 import { fetchWithTimeout } from "./utils";
 
 // TODO: generate? Move into own file?
@@ -30,10 +30,9 @@ interface PingResponse {
   online?: boolean | unknown;
 }
 
-export default class App extends Vue {
+export default class App extends VueWithStore {
   protected online = false;
   protected authenticated = false;
-  protected token: string | undefined = undefined;
   protected intervalPid: number | undefined = undefined;
 
   public async created(): Promise<void> {
@@ -51,15 +50,11 @@ export default class App extends Vue {
     }, 10000);
   }
 
-  protected gotToken(token: string): void {
-    this.token = token;
-  }
-
   protected async ping(check_auth: boolean): Promise<void> {
     const headers = new Headers();
     headers.append("pragma", "no-cache");
     headers.append("cache-control", "no-cache");
-    headers.append("Authorization", `Bearer ${this.token}`);
+    headers.append("Authorization", `Bearer ${this.state.token}`);
 
     const myInit = {
       method: "GET",
@@ -73,9 +68,13 @@ export default class App extends Vue {
         myInit,
         1000
       );
-      const body: PingResponse = await response.json();
-      result = body.online === true;
-      console.log("Update!");
+      if (response.status === 200) {
+        const body: PingResponse = await response.json();
+        result = body.online === true;
+        console.log("Update!");
+      } else {
+        result = false;
+      }
     } catch (e) {
       console.log("Timeout!");
       result = false;

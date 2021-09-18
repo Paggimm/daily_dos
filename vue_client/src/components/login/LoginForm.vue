@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { VueWithStore } from "@/store";
 
 interface TokenRequest {
   email: string;
@@ -56,7 +56,7 @@ interface TokenResponse {
   token: string;
 }
 
-export default class LoginForm extends Vue {
+export default class LoginForm extends VueWithStore {
   protected username = "";
   protected password = "";
 
@@ -77,7 +77,7 @@ export default class LoginForm extends Vue {
         case 200:
           {
             const body: TokenResponse = await response.json();
-            this.$emit("got_token", body.token);
+            this.mutations.setToken(body.token);
           }
           break;
         case 401:

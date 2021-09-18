@@ -1,6 +1,6 @@
 <template>
   <h1 class="title">Login</h1>
-  <login-form @got_token="gotToken" />
+  <login-form />
 </template>
 
 <script lang="ts">
@@ -12,9 +12,5 @@ import LoginForm from "../components/login/LoginForm.vue";
     "login-form": LoginForm,
   },
 })
-export default class Login extends Vue {
-  protected gotToken(token: string): void {
-    this.$emit("got_token", token);
-  }
-}
+export default class Login extends Vue {}
 </script>
