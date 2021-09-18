@@ -11,6 +11,11 @@
         :class="online ? 'has-text-success' : 'has-text-danger'"
         v-text="online ? 'online' : 'offline'"
       />
+      | Authenticated:
+      <span
+        :class="authenticated ? 'has-text-success' : 'has-text-danger'"
+        v-text="authenticated ? 'yes' : 'no'"
+      />
     </div>
     <router-view @got_token="gotToken" />
   </div>
@@ -27,11 +32,13 @@ interface PingResponse {
 
 export default class App extends Vue {
   protected online = false;
+  protected authenticated = false;
   protected token: string | undefined = undefined;
   protected intervalPid: number | undefined = undefined;
 
   public async created(): Promise<void> {
-    await this.ping();
+    await this.ping(false);
+    await this.ping(true);
   }
 
   public async mounted(): Promise<void> {
@@ -39,7 +46,8 @@ export default class App extends Vue {
     clearInterval(this.intervalPid);
     this.intervalPid = setInterval(async () => {
       console.log("Trigger ping");
-      await this.ping();
+      await this.ping(false);
+      await this.ping(true);
     }, 10000);
   }
 
@@ -47,7 +55,7 @@ export default class App extends Vue {
     this.token = token;
   }
 
-  protected async ping(): Promise<void> {
+  protected async ping(check_auth: boolean): Promise<void> {
     const headers = new Headers();
     headers.append("pragma", "no-cache");
     headers.append("cache-control", "no-cache");
@@ -61,7 +69,7 @@ export default class App extends Vue {
     let result: boolean;
     try {
       const response = await fetchWithTimeout(
-        "http://localhost:8085/ping",
+        "http://localhost:8085/" + (check_auth ? "authping" : "ping"),
         myInit,
         1000
       );
@@ -72,7 +80,12 @@ export default class App extends Vue {
       console.log("Timeout!");
       result = false;
     }
-    this.online = result;
+
+    if (check_auth) {
+      this.authenticated = result;
+    } else {
+      this.online = result;
+    }
   }
 }
 </script>

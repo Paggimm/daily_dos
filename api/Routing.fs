@@ -119,7 +119,8 @@ module Routing =
             >=> choose [
                     route "/" >=> indexHandler "world"
                     routef "/hello/%s" indexHandler
-                    route "/ping"
+                    route "/ping" >=> json {| online = true |}
+                    route "/authping"
                     >=> authorize
                     >=> json {| online = true |}
                 ]
