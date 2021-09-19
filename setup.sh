@@ -1,8 +1,10 @@
 #!/bin/bash
 # Setup server
 (
-    cd api
     dotnet tool restore
+    cd api
+    dotnet restore
+    cd ../codegen
     dotnet restore
 ) &
 

@@ -46,14 +46,11 @@
 
 <script lang="ts">
 import { VueWithStore } from "@/store";
+import { LoginResponse } from "@/generated/models";
 
 interface TokenRequest {
   email: string;
   password: string;
-}
-
-interface TokenResponse {
-  token: string;
 }
 
 export default class LoginForm extends VueWithStore {
@@ -76,7 +73,7 @@ export default class LoginForm extends VueWithStore {
       switch (response.status) {
         case 200:
           {
-            const body: TokenResponse = await response.json();
+            const body: LoginResponse = await response.json();
             this.mutations.setToken(body.token);
           }
           break;

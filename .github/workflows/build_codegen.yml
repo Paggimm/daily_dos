@@ -19,4 +19,4 @@ jobs:
       - name: Restore tools
         run: dotnet tool restore
       - name: Run build
-        run: cd api && dotnet build
+        run: cd codegen && dotnet build
