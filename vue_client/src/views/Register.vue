@@ -7,14 +7,13 @@
 
 <script lang="ts">
 import RegisterForm from "@/components/auth/RegisterForm.vue";
-import { Vue, Options } from "vue-class-component";
+import { defineComponent } from "vue";
 
-@Options({
+export default defineComponent({
   components: {
     "register-form": RegisterForm,
   },
-})
-export default class Register extends Vue {}
+});
 </script>
 <style>
 .register-form {

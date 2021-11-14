@@ -7,17 +7,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
+import { defineComponent } from "vue";
 import Header from "./components/header/Header.vue";
 import ServerStatus from "./components/server/ServerStatus.vue";
 
-@Options({
+export default defineComponent({
   components: {
     "header-component": Header,
     "server-status": ServerStatus,
   },
-})
-export default class App extends Vue {}
+});
 </script>
 
 <style>

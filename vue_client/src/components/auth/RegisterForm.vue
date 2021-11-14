@@ -40,24 +40,29 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
 import { RegisterData } from "@/generated/models";
+import { defineComponent } from "vue";
 
-export default class RegisterForm extends Vue {
-  protected register_data: RegisterData = {
-    email: "",
-    password: "",
-    username: "",
-  };
+export default defineComponent({
+  data() {
+    return {
+      register_data: {
+        email: "",
+        password: "",
+        username: "",
+      } as RegisterData,
+    };
+  },
 
-  protected async submit(): Promise<void> {
-    this.register(this.register_data);
-  }
-
-  protected async register(register_data: RegisterData): Promise<void> {
-    console.log("tried to register with the following data:" + register_data);
-  }
-}
+  methods: {
+    async submit(): Promise<void> {
+      this.register(this.register_data);
+    },
+    async register(register_data: RegisterData): Promise<void> {
+      console.log("tried to register with the following data:" + register_data);
+    },
+  },
+});
 </script>
 
 <style>

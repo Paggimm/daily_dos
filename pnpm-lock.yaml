@@ -36,7 +36,6 @@ importers:
       npm-watch: ^0.11.0
       regenerator-runtime: ^0.13.9
       vue: ^3.0.0
-      vue-class-component: ^8.0.0-0
       vue-router: ^4.0.0-0
       vuex: next
     dependencies:
@@ -44,15 +43,14 @@ importers:
       npm-watch: 0.11.0
       regenerator-runtime: 0.13.9
       vue: 3.2.2
-      vue-class-component: 8.0.0-rc.1_vue@3.2.2
       vue-router: 4.0.11_vue@3.2.2
       vuex: 4.0.2_vue@3.2.2
     devDependencies:
       '@vue/cli-plugin-babel': 4.5.13_3eeff913873aa7c0a992b2321c0d482f
-      '@vue/cli-plugin-eslint': 4.5.13_a58cf9e4d577795b8c257bee96d49483
+      '@vue/cli-plugin-eslint': 4.5.13_@vue+cli-service@4.5.13
       '@vue/cli-plugin-router': 4.5.13_@vue+cli-service@4.5.13
-      '@vue/cli-plugin-typescript': 4.5.13_5da177be71fb3d55eaef41d100a3cb69
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-plugin-typescript': 4.5.13_d4a4ee91c3364019e58cee541459e4a0
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
       '@vue/compiler-sfc': 3.2.2
 
 packages:
@@ -1740,7 +1738,7 @@ packages:
     dependencies:
       '@babel/core': 7.15.0
       '@vue/babel-preset-app': 4.5.13_vue@3.2.2
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
       '@vue/cli-shared-utils': 4.5.13
       babel-loader: 8.2.2_be352a5a80662835a7707f972edfcfde
       cache-loader: 4.1.0_webpack@4.46.0
@@ -1753,16 +1751,15 @@ packages:
       - webpack-command
     dev: true
 
-  /@vue/cli-plugin-eslint/4.5.13_a58cf9e4d577795b8c257bee96d49483:
+  /@vue/cli-plugin-eslint/4.5.13_@vue+cli-service@4.5.13:
     resolution: {integrity: sha512-yc2uXX6aBiy3vEf5TwaueaDqQbdIXIhk0x0KzEtpPo23jBdLkpOSoU5NCgE06g/ZiGAcettpmBSv73Hfp4wHEw==}
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
       eslint: '>= 1.6.0 < 7.0.0'
     dependencies:
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
       '@vue/cli-shared-utils': 4.5.13
-      eslint: 6.8.0
-      eslint-loader: 2.2.1_eslint@6.8.0+webpack@4.46.0
+      eslint-loader: 2.2.1_webpack@4.46.0
       globby: 9.2.0
       inquirer: 7.3.3
       webpack: 4.46.0
@@ -1777,11 +1774,11 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
       '@vue/cli-shared-utils': 4.5.13
     dev: true
 
-  /@vue/cli-plugin-typescript/4.5.13_5da177be71fb3d55eaef41d100a3cb69:
+  /@vue/cli-plugin-typescript/4.5.13_d4a4ee91c3364019e58cee541459e4a0:
     resolution: {integrity: sha512-CpLlIdFNV1gn9uC4Yh6QgWI42uk2x5Z3cb2ScxNSwWsR1vgSdr0/1DdNzoBm68aP8RUtnHHO/HZfPnvXiq42xA==}
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
@@ -1792,16 +1789,15 @@ packages:
         optional: true
     dependencies:
       '@types/webpack-env': 1.16.2
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
       '@vue/cli-shared-utils': 4.5.13
       '@vue/compiler-sfc': 3.2.2
       cache-loader: 4.1.0_webpack@4.46.0
       fork-ts-checker-webpack-plugin: 3.1.1
       globby: 9.2.0
       thread-loader: 2.1.3_webpack@4.46.0
-      ts-loader: 6.2.2_typescript@4.1.6
-      tslint: 5.20.1_typescript@4.1.6
-      typescript: 4.1.6
+      ts-loader: 6.2.2
+      tslint: 5.20.1
       webpack: 4.46.0
       yorkie: 2.0.0
     optionalDependencies:
@@ -1816,10 +1812,10 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': 4.5.13_b96041ef25e88fb9e26694eeac3032d1
+      '@vue/cli-service': 4.5.13_@vue+compiler-sfc@3.2.2
     dev: true
 
-  /@vue/cli-service/4.5.13_b96041ef25e88fb9e26694eeac3032d1:
+  /@vue/cli-service/4.5.13_@vue+compiler-sfc@3.2.2:
     resolution: {integrity: sha512-CKAZN4iokMMsaUyJRU22oUAz3oS/X9sVBSKAF2/shFBV5xh3jqAlKl8OXZYz4cXGFLA6djNuYrniuLAo7Ku97A==}
     engines: {node: '>=8'}
     hasBin: true
@@ -1889,7 +1885,7 @@ packages:
       lodash.transform: 4.6.0
       mini-css-extract-plugin: 0.9.0_webpack@4.46.0
       minimist: 1.2.5
-      pnp-webpack-plugin: 1.7.0_typescript@4.1.6
+      pnp-webpack-plugin: 1.7.0
       portfinder: 1.0.28
       postcss-loader: 3.0.0
       ssri: 8.0.1
@@ -4119,14 +4115,13 @@ packages:
     engines: {node: '>=0.8.0'}
     dev: true
 
-  /eslint-loader/2.2.1_eslint@6.8.0+webpack@4.46.0:
+  /eslint-loader/2.2.1_webpack@4.46.0:
     resolution: {integrity: sha512-RLgV9hoCVsMLvOxCuNjdqOrUqIj9oJg8hF44vzJaYqsAHuY9G2YAeN3joQ9nxP0p5Th9iFSIpKo+SD8KISxXRg==}
     deprecated: This loader has been deprecated. Please use eslint-webpack-plugin
     peerDependencies:
       eslint: '>=1.6.0 <7.0.0'
       webpack: '>=2.0.0 <5.0.0'
     dependencies:
-      eslint: 6.8.0
       loader-fs-cache: 1.0.3
       loader-utils: 1.4.0
       object-assign: 4.1.1
@@ -7121,11 +7116,11 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /pnp-webpack-plugin/1.7.0_typescript@4.1.6:
+  /pnp-webpack-plugin/1.7.0:
     resolution: {integrity: sha512-2Rb3vm+EXble/sMXNSu6eoBx8e79gKqhNq9F5ZWW6ERNCTE/Q0wQNne5541tE5vKjfM8hpNCYL+LGc1YTfI0dg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0_typescript@4.1.6
+      ts-pnp: 1.2.0
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -8891,7 +8886,7 @@ packages:
     resolution: {integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==}
     dev: true
 
-  /ts-loader/6.2.2_typescript@4.1.6:
+  /ts-loader/6.2.2:
     resolution: {integrity: sha512-HDo5kXZCBml3EUPcc7RlZOV/JGlLHwppTLEHb3SHnr5V7NXD4klMEkrhJe5wgRbaWsSXi+Y1SIBN/K9B6zWGWQ==}
     engines: {node: '>=8.6'}
     peerDependencies:
@@ -8902,10 +8897,9 @@ packages:
       loader-utils: 1.4.0
       micromatch: 4.0.4
       semver: 6.3.0
-      typescript: 4.1.6
     dev: true
 
-  /ts-pnp/1.2.0_typescript@4.1.6:
+  /ts-pnp/1.2.0:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -8913,8 +8907,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-    dependencies:
-      typescript: 4.1.6
     dev: true
 
   /tslib/1.14.1:
@@ -8925,7 +8917,7 @@ packages:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: true
 
-  /tslint/5.20.1_typescript@4.1.6:
+  /tslint/5.20.1:
     resolution: {integrity: sha512-EcMxhzCFt8k+/UP5r8waCf/lzmeSyVlqxqMEDQE7rWYiQky8KpIBz1JAoYXfROHrPZ1XXd43q8yQnULOLiBRQg==}
     engines: {node: '>=4.8.0'}
     hasBin: true
@@ -8944,17 +8936,15 @@ packages:
       resolve: 1.20.0
       semver: 5.7.1
       tslib: 1.14.1
-      tsutils: 2.29.0_typescript@4.1.6
-      typescript: 4.1.6
+      tsutils: 2.29.0
     dev: true
 
-  /tsutils/2.29.0_typescript@4.1.6:
+  /tsutils/2.29.0:
     resolution: {integrity: sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==}
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.1.6
     dev: true
 
   /tsutils/3.21.0_typescript@4.1.6:
@@ -9298,14 +9288,6 @@ packages:
   /vm-browserify/1.1.2:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
     dev: true
-
-  /vue-class-component/8.0.0-rc.1_vue@3.2.2:
-    resolution: {integrity: sha512-w1nMzsT/UdbDAXKqhwTmSoyuJzUXKrxLE77PCFVuC6syr8acdFDAq116xgvZh9UCuV0h+rlCtxXolr3Hi3HyPQ==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      vue: 3.2.2
-    dev: false
 
   /vue-eslint-parser/7.10.0_eslint@6.8.0:
     resolution: {integrity: sha512-7tc/ewS9Vq9Bn741pvpg8op2fWJPH3k32aL+jcIcWGCTzh/zXSdh7pZ5FV3W2aJancP9+ftPAv292zY5T5IPCg==}

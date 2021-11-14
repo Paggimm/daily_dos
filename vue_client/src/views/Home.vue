@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <HelloWorld initmsg="Diese Message wurde weiter gereicht" />
   </div>
 </template>
 

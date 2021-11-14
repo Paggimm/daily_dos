@@ -4,13 +4,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
+import { defineComponent } from "vue";
 import LoginForm from "../components/auth/LoginForm.vue";
 
-@Options({
+export default defineComponent({
   components: {
     "login-form": LoginForm,
   },
-})
-export default class Login extends Vue {}
+});
 </script>

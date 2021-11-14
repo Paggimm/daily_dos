@@ -1,5 +1,4 @@
-import { InjectionKey } from 'vue'
-import { Vue } from 'vue-class-component'
+import * as Vue from 'vue'
 import { createStore, useStore as baseUseStore, Store as VuexStore } from 'vuex'
 import { Mutations, mutations } from './store/mutations'
 
@@ -10,7 +9,7 @@ export interface State
 }
 
 // define injection key
-export const key: InjectionKey<VuexStore<State>> = Symbol()
+export const key: Vue.InjectionKey<VuexStore<State>> = Symbol()
 
 export const store = createStore<State>({
     mutations: mutations,
@@ -26,7 +25,7 @@ function useStore(): VuexStore<State>
     return baseUseStore(key)
 }
 
-export class VueWithStore extends Vue
+export class VueWithStore
 {
     private readonly store = useStore()
     protected readonly state = store.state

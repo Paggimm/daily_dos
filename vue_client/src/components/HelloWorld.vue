@@ -8,7 +8,6 @@
     <p class="temp_txt1">
       {{ msg }}
     </p>
-    <h1>Hier sehen wir einen Counter</h1>
   </div>
 </template>
 
@@ -17,17 +16,18 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HelloWorld",
+  props: {
+    initmsg: { type: String, required: true, default: "" },
+  },
   // in Data kommen verwendete Attribute rein
   data() {
     return {
-      msg: "",
+      msg: this.initmsg,
       msg1: "und wenn nicht ist auch nicht so schlimm",
       msg2: "ist es das wirklich?",
     };
   },
-  mounted() {
-    this.initializeText();
-  },
+
   // in Methods werden Methoden definiert
   methods: {
     changeText: function () {
@@ -36,9 +36,6 @@ export default defineComponent({
       } else {
         this.msg = this.msg1;
       }
-    },
-    initializeText: function () {
-      this.msg = this.msg1;
     },
   },
 });
