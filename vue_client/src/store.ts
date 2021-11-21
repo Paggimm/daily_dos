@@ -28,6 +28,6 @@ function useStore(): VuexStore<State>
 export class VueWithStore
 {
     private readonly store = useStore()
-    protected readonly state = store.state
-    protected mutations = new Mutations(store)
+    public readonly state = store.state
+    public mutations = new Mutations(store)
 }

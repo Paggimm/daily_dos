@@ -47,43 +47,49 @@
 <script lang="ts">
 import { VueWithStore } from "@/store";
 import { LoginResponse } from "@/generated/models";
+import { defineComponent } from "vue";
 
 interface TokenRequest {
   email: string;
   password: string;
 }
 
-export default class LoginForm extends VueWithStore {
-  protected username = "";
-  protected password = "";
-
-  protected invalidLogin = false;
-
-  protected async submit(): Promise<void> {
-    this.invalidLogin = false;
-    await this.getToken({ email: this.username, password: this.password });
-  }
-
-  private async getToken(request: TokenRequest): Promise<void> {
-    try {
-      const response = await fetch("http://localhost:8085/token", {
-        body: JSON.stringify(request),
-        method: "POST",
-      });
-      switch (response.status) {
-        case 200:
-          {
-            const body: LoginResponse = await response.json();
-            this.mutations.setToken(body.token);
-          }
-          break;
-        case 401:
-          this.invalidLogin = true;
-          break;
+export default defineComponent({
+  name: "LoginForm",
+  data() {
+    return {
+      username: "",
+      password: "",
+      invalidLogin: false,
+      vueStore: new VueWithStore(),
+    };
+  },
+  methods: {
+    async submit(): Promise<void> {
+      this.invalidLogin = false;
+      await this.getToken({ email: this.username, password: this.password });
+    },
+    async getToken(request: TokenRequest): Promise<void> {
+      try {
+        const response = await fetch("http://localhost:8085/token", {
+          body: JSON.stringify(request),
+          method: "POST",
+        });
+        switch (response.status) {
+          case 200:
+            {
+              const body: LoginResponse = await response.json();
+              this.vueStore.mutations.setToken(body.token);
+            }
+            break;
+          case 401:
+            this.invalidLogin = true;
+            break;
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-}
+    },
+  },
+});
 </script>
