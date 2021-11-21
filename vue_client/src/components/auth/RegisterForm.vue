@@ -1,5 +1,6 @@
 <template>
   <div class="register-container">
+    <image-upload />
     <form @submit.prevent="submit">
       <div class="field">
         <label class="label">Username</label>
@@ -42,8 +43,13 @@
 <script lang="ts">
 import { RegisterData } from "@/generated/models";
 import { defineComponent } from "vue";
+import ImageUpload from "../input/ImageUpload.vue";
 
 export default defineComponent({
+  components: {
+    ImageUpload,
+  },
+
   data() {
     return {
       register_data: {
@@ -55,7 +61,7 @@ export default defineComponent({
   },
 
   methods: {
-    async submit(): Promise<void> {
+    async submit() {
       this.register(this.register_data);
     },
     async register(register_data: RegisterData): Promise<void> {
@@ -66,4 +72,7 @@ export default defineComponent({
 </script>
 
 <style>
+.filepond--item {
+  width: calc(50% - 0.5em);
+}
 </style>
