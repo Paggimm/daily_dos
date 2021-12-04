@@ -37,7 +37,7 @@ export default defineComponent({
     // For Hotreload: Delete old Interval before we add a new one
     clearInterval(this.intervalPid);
     this.intervalPid = setInterval(async () => {
-      console.log("Trigger ping");
+      //console.log("Trigger ping");
       await this.ping(false);
       await this.ping(true);
     }, 10000);
@@ -63,17 +63,17 @@ export default defineComponent({
         const response = await fetchWithTimeout(
           "http://localhost:8085/" + (check_auth ? "authping" : "ping"),
           myInit,
-          1000
+          5000
         );
         if (response.status === 200) {
           const body: PingResponse = await response.json();
           result = body.online === true;
-          console.log("Update!");
+          //console.log("Update!");
         } else {
           result = false;
         }
       } catch (e) {
-        console.log("Timeout!");
+        //console.log("Timeout!");
         result = false;
       }
 

@@ -7,6 +7,7 @@
       :allow-multiple="true"
       accepted-file-types="image/jpeg, image/png"
       server="/api"
+      instant-upload="false"
       @init="handleFilePondInit"
     />
   </div>
