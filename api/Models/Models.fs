@@ -4,4 +4,7 @@ namespace DailyDos.Api.Models
 type LoginViewModel = { email: string; password: string }
 
 [<CLIMutable>]
+type User = { id: int; name: string }
+
+[<CLIMutable>]
 type TokenResult = { token: string }

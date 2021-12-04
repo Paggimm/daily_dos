@@ -11,6 +11,8 @@ open System.Security.Claims
 open System.Text
 
 open DailyDos.Api.Models
+open DatabaseService
+open UserRequesthandler
 
 // ---------------------------------
 // Models
@@ -113,13 +115,24 @@ module Routing =
 
     let webApp: HttpHandler =
         choose [
+            subRoute
+                "/user"
+                (choose [
+                    GET
+                    >=> choose [
+                            routex "(/?)" >=> UserRequesthandler.get_all_users
+
+                            routef "/%i" get_user_by_id
+                        ]
+                 ])
             GET
             >=> choose [
                     route "/ping" >=> json {| online = true |}
                     route "/authping"
                     >=> authorize
                     >=> json {| online = true |}
-                ]
+
+                    ]
             POST
             >=> choose [
                     route "/token" >=> handlePostToken
