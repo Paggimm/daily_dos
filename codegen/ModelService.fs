@@ -16,8 +16,8 @@ module ModelService =
 
     // Register Model
     let private RegisterModel =
-        Model.create "Register"
-        |> Model.withProperty { name = "name"; typ = GString }
+        Model.create "RegisterData"
+        |> Model.withProperty { name = "username"; typ = GString }
         |> Model.withProperty { name = "email"; typ = GString }
         |> Model.withProperty { name = "password"; typ = GString }
 
