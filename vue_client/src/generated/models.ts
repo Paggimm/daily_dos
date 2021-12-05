@@ -8,7 +8,7 @@ export interface User {
     name: string;
 }
 
-export interface Register {
+export interface RegisterData {
     name: string;
     email: string;
     password: string;

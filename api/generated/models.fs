@@ -12,7 +12,7 @@ type User = {
 }
 
 [<CLIMutable>]
-type Register = {
+type RegisterData = {
     name: string
     email: string
     password: string
