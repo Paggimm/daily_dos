@@ -2,6 +2,7 @@ namespace DailyDos.Codegen
 
 open System
 open System.IO
+open DailyDos.Codegen.ModelService
 
 module FsGenerator =
     let generateModel model =
@@ -27,13 +28,9 @@ module TsGenerator =
 module Program =
     [<EntryPoint>]
     let main _ =
-        let LoginResponse =
-            Model.create "LoginResponse"
-            |> Model.withProperty { name = "token"; typ = GString }
-
         let writeAllLines file (lines: string list) = File.WriteAllLines(file, lines)
 
-        let models = [ LoginResponse ]
+        let models = ModelService.getModels
 
         [ {| generate = FsGenerator.generateModel
              path = "../api/generated/models.fs"

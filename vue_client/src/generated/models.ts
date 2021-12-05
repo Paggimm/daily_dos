@@ -1,12 +1,15 @@
 
-export interface LoginResponse
-{
-    token: string
+export interface LoginResponse {
+    token: string;
 }
 
-export interface RegisterData
-{
-    email: string
-    password: string
-    username: string
+export interface User {
+    id: number;
+    name: string;
+}
+
+export interface Register {
+    name: string;
+    email: string;
+    password: string;
 }
