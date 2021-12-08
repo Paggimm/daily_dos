@@ -19,8 +19,8 @@
 	"extensions": [
 		"editorconfig.editorconfig",
 		"ybaumes.highlight-trailing-white-spaces",
-		"ms-dotnettools.csharp@1.23.15",
-		"Ionide.Ionide-fsharp@5.7.3",
+		"ms-dotnettools.csharp",
+		"Ionide.Ionide-fsharp",
 		"dbaeumer.vscode-eslint",
 		"octref.vetur",
 		"ecmel.vscode-html-css",
