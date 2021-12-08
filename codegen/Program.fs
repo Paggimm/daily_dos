@@ -4,6 +4,7 @@ open System
 open System.IO
 open DailyDos.Codegen.ModelService
 
+/// Contains everything to generate F# from the definitions
 module FsGenerator =
     let generateModel model =
         [ "[<CLIMutable>]"
@@ -15,6 +16,13 @@ module FsGenerator =
               $"    %s{prop.name}: %s{typ}"
           $"}}" ]
 
+    let instance = {
+        fileHeader = [ "namespace DailyDos.Generated" ]
+        outputPath = "../api/generated/models.fs"
+        generateModel = generateModel
+    }
+
+/// Contains everything to generate TypeScript from the definitions
 module TsGenerator =
     let generateModel model =
         [ $"export interface %s{model.name} {{"
@@ -25,25 +33,28 @@ module TsGenerator =
               $"    %s{prop.name}: %s{typ};"
           $"}}" ]
 
+    let instance = {
+        fileHeader = []
+        outputPath = "../vue_client/src/generated/models.ts"
+        generateModel = generateModel
+    }
+
+/// Contains the entry point of the program
 module Program =
     [<EntryPoint>]
     let main _ =
         let writeAllLines file (lines: string list) = File.WriteAllLines(file, lines)
 
-        let models = ModelService.getModels
-
-        [ {| generate = FsGenerator.generateModel
-             path = "../api/generated/models.fs"
-             header = [ "namespace DailyDos.Generated" ] |}
-          {| generate = TsGenerator.generateModel
-             path = "../vue_client/src/generated/models.ts"
-             header = [] |} ]
-        |> List.iter
-            (fun generator ->
-                models
-                |> List.map generator.generate
-                |> List.append [ generator.header ]
-                |> List.reduce (fun l1 l2 -> [ yield! l1; ""; yield! l2 ])
-                |> writeAllLines generator.path)
+        [ FsGenerator.instance
+          TsGenerator.instance ]
+        // Every generator has to generate everything
+        |> List.iter (fun generator ->
+            // Generate the file contents
+            List.map generator.generateModel ModelDefinitions.get
+            // Add the defined file header
+            |> List.append [ generator.fileHeader ]
+            |> List.reduce (fun l1 l2 -> [ yield! l1; ""; yield! l2 ])
+            // Write it to disk now
+            |> writeAllLines generator.outputPath)
 
         0 // return an integer exit code
