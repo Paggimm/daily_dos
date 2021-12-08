@@ -18,7 +18,7 @@ module FsGenerator =
 
     let instance = {
         fileHeader = [ "namespace DailyDos.Generated" ]
-        outputPath = "../api/generated/models.fs"
+        outputPath = "./api/generated/models.fs"
         generateModel = generateModel
     }
 
@@ -35,7 +35,7 @@ module TsGenerator =
 
     let instance = {
         fileHeader = []
-        outputPath = "../vue_client/src/generated/models.ts"
+        outputPath = "./vue_client/src/generated/models.ts"
         generateModel = generateModel
     }
 

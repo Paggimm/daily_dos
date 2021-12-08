@@ -4,14 +4,17 @@
 
 ## Commands
 
+To use the code generator for shared models:
+```bash
+dotnet run generate
+```
+
 To run the client (Port 8080):
 ```bash
-cd vue_client
-pnpm run serve
+dotnet run client
 ```
 
 To run the server (Port 8085):
 ```bash
-cd api
-dotnet watch run
+dotnet run server
 ```
