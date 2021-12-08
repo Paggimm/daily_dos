@@ -1,5 +1,7 @@
 # daily_dos
 
+[![Last commit](https://img.shields.io/github/last-commit/Paggimm/daily_dos?style=flat-square)](https://github.com/Paggimm/daily_dos/commits/)
+
 ![Visualization](images/diagram.svg)
 
 ## Commands
