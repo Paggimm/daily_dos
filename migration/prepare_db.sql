@@ -1,6 +1,9 @@
-create database dailydos;
-use dailydos;
-create table user(id int auto_increment primary key, name varchar(40), password varchar(20));
-insert into user (name, password) values ('bernie', '123456'),('nico', '654321');
-create User 'admin'@'localhost' identified by 'admin';
-grant all privileges on * to 'admin'@'localhost';
+create table if not exists users (
+	id serial primary key,
+	name varchar(30) unique not null,
+	password varchar(30) not null
+);
+insert into users(id, name, password)
+values 
+	(1, 'bernie', '123456'),
+	(2, 'nico', '654321')

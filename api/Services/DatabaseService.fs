@@ -1,28 +1,25 @@
 namespace DatabaseService
 
-open MySql.Data.MySqlClient
 open Dapper.FSharp
-open Dapper.FSharp.MySQL
+open Dapper.FSharp.PostgreSQL
 open DailyDos.Api.Models
+open Npgsql
 
 module UserDatabaseService =
-    let con: MySqlConnection =
-        let conn_string =
-            "Server=localhost;Database=dailydos;User=admin;Password=admin;"
-
-        new MySqlConnection(conn_string)
+    let db_connection =
+        new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=testdb;User id=postgres;Password=postgres;")
 
     let get_all_users =
-        select { table "user" }
-        |> con.SelectAsync<User>
+        select { table "users" }
+        |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     let get_user_by_id id =
         select {
-            table "user"
+            table "users"
             where (eq "id" id)
         }
-        |> con.SelectAsync<User>
+        |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
         |> Async.RunSynchronously
