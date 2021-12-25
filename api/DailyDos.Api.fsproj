@@ -9,10 +9,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Consts.fs" />
     <Compile Include="Models/Models.fs" />
     <Compile Include="generated/models.fs" />
     <Compile Include="Services/DatabaseService.fs" />
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
+    <Compile Include="Requesthandler/AuthRequesthandler.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

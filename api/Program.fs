@@ -13,6 +13,9 @@ open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.IdentityModel.Tokens
 open System.Text
 
+open DailyDos.Api
+open Consts
+
 module Program =
     // ---------------------------------
     // Error handler
@@ -64,7 +67,7 @@ module Program =
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "jwtwebapp.net",
                         ValidAudience = "jwtwebapp.net",
-                        IssuerSigningKey = SymmetricSecurityKey(Encoding.UTF8.GetBytes(Routing.secret))
+                        IssuerSigningKey = SymmetricSecurityKey(Encoding.UTF8.GetBytes(Consts.secret))
                     ))
         |> ignore
 
