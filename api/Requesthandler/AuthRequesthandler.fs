@@ -9,8 +9,10 @@ open System
 open System.IdentityModel.Tokens.Jwt
 open System.Security.Claims
 open System.Text
+open System.Linq
 
-open DailyDos.Api.Models
+open DailyDos.Generated
+open DatabaseService
 open Consts
 
 /// RequestHandler for Authentication-Purposes
@@ -50,17 +52,26 @@ module AuthRequestHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
+                let user_enumerator = UserDatabaseService.get_loginviewmodel_by_name model.name
 
-                // TODO: add real authentication
-                let result =
-                    match model.email.ToLower(), model.password with
-                    | ("bernie" as name, "123456")
-                    | ("nico" as name, "654321") -> json (generateToken name)
-                    | _ ->
-                        // Invalid login data
-                        setStatusCode 401
+                if user_enumerator.Count() = 0
+                then
+                    let result = setStatusCode 401
+                    return! result next ctx
+                else
+                    let user: LoginViewModel = user_enumerator.First()
+                    let user_name = user.name
+                    let user_password = user.password
 
-                return! result next ctx
+                    // TODO: add real authentication
+                    let result =
+                        match model.name.ToLower(), model.password with
+                        | (user_name, user_password) -> json (generateToken user_name)
+                        | _ ->
+                            // Invalid login data
+                            setStatusCode 401
+
+                    return! result next ctx
             }
     
     /// Trys to Authorize the Present JWT-Token

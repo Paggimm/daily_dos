@@ -9,7 +9,12 @@ export interface User {
 }
 
 export interface RegisterData {
-    username: string;
+    name: string;
     email: string;
+    password: string;
+}
+
+export interface LoginViewModel {
+    name: string;
     password: string;
 }

@@ -55,7 +55,7 @@ export default defineComponent({
       register_data: {
         email: "",
         password: "",
-        username: "",
+        name: "",
       } as RegisterData,
     };
   },

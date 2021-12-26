@@ -11,7 +11,7 @@
               class="input block"
               required="required"
               type="text"
-            >
+            />
             <span class="icon is-small is-left">
               <i class="fas fa-user" />
             </span>
@@ -26,15 +26,12 @@
               class="input block"
               required="required"
               type="password"
-            >
+            />
             <span class="icon is-small is-left">
               <i class="fas fa-lock" />
             </span>
           </div>
-          <p
-            v-if="invalidLogin"
-            class="help is-danger"
-          >
+          <p v-if="invalidLogin" class="help is-danger">
             This login is invalid
           </p>
         </div>
@@ -46,13 +43,8 @@
 
 <script lang="ts">
 import { VueWithStore } from "@/store";
-import { LoginResponse } from "@/generated/models";
+import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { defineComponent } from "vue";
-
-interface TokenRequest {
-  email: string;
-  password: string;
-}
 
 export default defineComponent({
   name: "LoginForm",
@@ -67,9 +59,9 @@ export default defineComponent({
   methods: {
     async submit(): Promise<void> {
       this.invalidLogin = false;
-      await this.getToken({ email: this.username, password: this.password });
+      await this.getToken({ name: this.username, password: this.password });
     },
-    async getToken(request: TokenRequest): Promise<void> {
+    async getToken(request: LoginViewModel): Promise<void> {
       try {
         const response = await fetch("http://localhost:8085/token", {
           body: JSON.stringify(request),

@@ -2,7 +2,7 @@ namespace DatabaseService
 
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
-open DailyDos.Api.Models
+open DailyDos.Generated
 open Npgsql
 
 /// Service Module for User related Querys
@@ -24,5 +24,15 @@ module UserDatabaseService =
             where (eq "id" id)
         }
         |> db_connection.SelectAsync<User>
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+
+    let get_loginviewmodel_by_name name =
+        select {
+        table "users"
+        where (eq "name" name)
+        take 1
+        }
+        |> db_connection.SelectAsync<LoginViewModel>
         |> Async.AwaitTask
         |> Async.RunSynchronously

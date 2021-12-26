@@ -2,6 +2,8 @@ namespace DailyDos.Codegen.ModelService
 
 open DailyDos.Codegen
 
+/// Generates Modeldefinitions
+/// When Generating new Definitions add them to -> get
 module ModelDefinitions =
     let private LoginResponse =
         Model.create "LoginResponse"
@@ -14,11 +16,17 @@ module ModelDefinitions =
 
     let private RegisterModel =
         Model.create "RegisterData"
-        |> Model.withProperty "username" GString
+        |> Model.withProperty "name" GString
         |> Model.withProperty "email" GString
+        |> Model.withProperty "password" GString
+
+    let private LoginViewModel = 
+        Model.create "LoginViewModel"
+        |> Model.withProperty "name" GString
         |> Model.withProperty "password" GString
 
     let get =
         [ LoginResponse
           UserModel
-          RegisterModel ]
+          RegisterModel
+          LoginViewModel ]
