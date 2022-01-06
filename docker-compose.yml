@@ -7,8 +7,9 @@ services:
     volumes:
       - ./:/home/vscode/daily_dos
     network_mode: 'host'
-    command: bash -c "dotnet run --project
-      /home/vscode/daily_dos/api/DailyDos.Api.fsproj"
+    #command: bash -c "dotnet run --project
+    #  /home/vscode/daily_dos/api/DailyDos.Api.fsproj"
+    tty: true
 
   vue_client:
     build: .devcontainer/vue_client

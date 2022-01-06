@@ -14,3 +14,6 @@ paket-files/
 # Ionide stuff
 .fake
 .ionide
+
+# Rider Stuff
+.idea/
