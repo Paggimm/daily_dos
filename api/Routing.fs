@@ -41,6 +41,7 @@ module Routing =
             >=> choose [
                     // Login
                     route "/token" >=> AuthRequestHandler.handlePostToken
+                    route "/register" >=> AuthRequestHandler.registerUser
                 ]
             setStatusCode 404 >=> text "Not Found"
         ]

@@ -13,6 +13,7 @@ open System.Linq
 
 open DailyDos.Generated
 open DatabaseService
+open DailyDos.Api.Services.AuthService
 open Consts
 
 /// RequestHandler for Authentication-Purposes
@@ -73,7 +74,7 @@ module AuthRequestHandler =
 
                     return! result next ctx
             }
-    
+
     /// Trys to Authorize the Present JWT-Token
     let authorize: HttpHandler =
         requiresAuthentication (challenge JwtBearerDefaults.AuthenticationScheme)
@@ -90,3 +91,13 @@ module AuthRequestHandler =
                  + " is authorized to access this resource.")
                 next
                 ctx
+
+    /// Register a new User
+    let registerUser =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! register_data = ctx.BindJsonAsync<RegisterData>()
+                let user: User = {id = 0; name = register_data.name}
+                UserDatabaseService.insert_new_user register_data.name (AuthService.hashPassword user register_data.password)
+                return! next ctx
+        }
