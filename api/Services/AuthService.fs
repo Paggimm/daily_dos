@@ -8,3 +8,13 @@ module AuthService =
         let hashPassword user password =
             let password_hasher = PasswordHasher<User>()
             password_hasher.HashPassword(user, password)
+
+        /// verifies the input password against the hashed password stored in the db
+        let verifyPassword user inputPassword dbPassword =
+            let password_hasher = PasswordHasher<User>()
+            let result = password_hasher.VerifyHashedPassword(user,dbPassword,inputPassword)
+
+            if result.Equals PasswordVerificationResult.Success || result.Equals PasswordVerificationResult.SuccessRehashNeeded then
+                true
+            else
+                false

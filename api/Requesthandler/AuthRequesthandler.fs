@@ -4,6 +4,7 @@ open FSharp.Control.Tasks
 open Giraffe
 open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Http
+open Microsoft.AspNetCore.Identity
 open Microsoft.IdentityModel.Tokens
 open System
 open System.IdentityModel.Tokens.Jwt
@@ -61,15 +62,12 @@ module AuthRequestHandler =
                     return! result next ctx
                 else
                     let user: LoginViewModel = user_enumerator.First()
-                    let user_name = user.name
-                    let user_password = user.password
-
-                    // TODO: add real authentication
+                    let db_user = { id=0; name=user.name }
+                    let password_match = AuthService.verifyPassword db_user model.password user.password;
                     let result =
-                        match model.name.ToLower(), model.password with
-                        | (user_name, user_password) -> json (generateToken user_name)
-                        | _ ->
-                            // Invalid login data
+                        if password_match then
+                            json (generateToken user.name)
+                        else
                             setStatusCode 401
 
                     return! result next ctx
