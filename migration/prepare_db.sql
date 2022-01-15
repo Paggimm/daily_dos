@@ -5,5 +5,5 @@ create table if not exists users (
 );
 insert into users(name, password)
 values
-	('bernie', '123456'),
-	('nico', '654321')
+	('bernie', 'AQAAAAEAACcQAAAAEN6JyCrrWIJ7Hs2rZYK+h+ZBOzp3Jrlo9q4QyI4+fqpmeQsUuiTx2AF/WYhdkyS7vA=='),
+	('nico', 'AQAAAAEAACcQAAAAEGdMk6L4pkIgw3HIgfvzmWB2LrUpOHWwIcPZyoVFn4nraoNuoY9DXIp9M4hUeMjrUw==')

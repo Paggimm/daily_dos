@@ -4,7 +4,6 @@ open FSharp.Control.Tasks
 open Giraffe
 open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Http
-open Microsoft.AspNetCore.Identity
 open Microsoft.IdentityModel.Tokens
 open System
 open System.IdentityModel.Tokens.Jwt
@@ -54,19 +53,20 @@ module AuthRequestHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
-                let user_enumerator = UserDatabaseService.get_loginviewmodel_by_name model.name
+                let user_enumerator = UserDatabaseService.get_login_viewmodel_by_name model.name
 
                 if user_enumerator.Count() = 0
                 then
                     let result = setStatusCode 401
                     return! result next ctx
                 else
-                    let user: LoginViewModel = user_enumerator.First()
-                    let db_user = { id=0; name=user.name }
-                    let password_match = AuthService.verifyPassword db_user model.password user.password;
+                    let database_login_user: LoginViewModel = user_enumerator.First()
+                    // sadly we need a User for identity Password Object
+                    let password_hashing_user = { id=0; name=database_login_user.name }
+                    let password_match = AuthService.verifyPassword password_hashing_user model.password database_login_user.password;
                     let result =
                         if password_match then
-                            json (generateToken user.name)
+                            json (generateToken database_login_user.name)
                         else
                             setStatusCode 401
 

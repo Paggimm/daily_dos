@@ -1,7 +1,10 @@
 namespace UserRequesthandler
 
+open DailyDos.Api.Services.AuthService
+open DailyDos.Generated
 open Giraffe
 open Microsoft.AspNetCore.Http
+open FSharp.Control.Tasks
 
 /// RequestHandler for User-Interactions
 module UserRequesthandler =

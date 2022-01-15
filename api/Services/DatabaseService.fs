@@ -27,7 +27,7 @@ module UserDatabaseService =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
-    let get_loginviewmodel_by_name name =
+    let get_login_viewmodel_by_name name =
         select {
         table "users"
         where (eq "name" name)
