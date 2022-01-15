@@ -1,11 +1,6 @@
 namespace DailyDos.Api
 
 open Giraffe
-open Microsoft.AspNetCore.Authentication.JwtBearer
-open Microsoft.AspNetCore.Http
-open System.Security.Claims
-
-open DatabaseService
 open UserRequesthandler
 open AuthRequestHandler
 
@@ -39,8 +34,10 @@ module Routing =
                     ]
             POST
             >=> choose [
-                    // Login
-                    route "/token" >=> AuthRequestHandler.handlePostToken
+                    // Login - Erzeugt ein JWT-Token
+                    route "/login" >=> AuthRequestHandler.handlePostToken
+                    // Registriere einen neuen User
+                    route "/register" >=> AuthRequestHandler.registerUser
                 ]
             setStatusCode 404 >=> text "Not Found"
         ]
