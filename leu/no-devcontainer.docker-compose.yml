@@ -1,0 +1,22 @@
+version: "3"
+services:
+  api:
+    build: server
+    working_dir: /app/api
+    ports:
+      - 8085:8085
+    volumes:
+      - ../:/app
+    command: dotnet watch run -p DailyDos.Api.fsproj
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  vue_client:
+    build: vue_client
+    user: "node"
+    working_dir: /home/node/app/vue_client
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/home/node/app
+    command: "npm run serve"

@@ -9,6 +9,27 @@ open RunHelpers.BasicShortcuts
 open RunHelpers.FakeHelpers
 open RunHelpers.Templates
 
+let startAsJob errorCode (proc: CreateProcess<ProcessResult<unit>>) =
+    printfn $"> %s{proc.CommandLine}"
+    let task = proc |> Proc.start
+
+    async {
+        let! result = task |> Async.AwaitTask
+
+        return
+            match result.ExitCode with
+            | 0 -> Ok
+            | _ -> Error(errorCode, [])
+    }
+
+let startAsJob' = startAsJob 10
+
+type AsyncJobBuilder() =
+    inherit JobBuilder()
+    member __.YieldFrom x = x |> Async.RunSynchronously
+
+let jobAsync = AsyncJobBuilder()
+
 [<RequireQualifiedAccess>]
 module private Config =
     let codegenProject = "./codegen/codegen.fsproj"
@@ -17,6 +38,8 @@ module private Config =
     let generatedServerPath = "./api/generated"
 
     let clientFolder = "./vue_client/"
+
+    let leuFolder = "./leu"
 
 module private Task =
     let restoreTools () = DotNet.toolRestore ()
@@ -60,18 +83,58 @@ module private Task =
             ]
         }
 
-    let runClient () =
-        CreateProcess.fromRawCommand "pnpm" [ "run"; "serve" ]
-        |> CreateProcess.withWorkingDirectory Config.clientFolder
-        |> Proc.runAsJob 10
+    let leuStartCode () =
+        jobAsync {
+            let x =
+                CreateProcess.fromRawCommand
+                    "docker-compose"
+                    [ "-f"
+                      $"%s{Config.leuFolder}/db.docker-compose.yml"
+                      "up" ]
+                |> startAsJob'
 
-    let runServer () =
-        dotnet [
-            "watch"
-            "run"
-            "-p"
-            Config.serverProject
-        ]
+            let y =
+                CreateProcess.fromRawCommand "pnpm" [ "run"; "serve" ]
+                |> CreateProcess.withWorkingDirectory Config.clientFolder
+                |> startAsJob'
+
+            let z =
+                CreateProcess.fromRawCommand
+                    "dotnet"
+                    [ "watch"
+                      "run"
+                      "-p"
+                      Config.serverProject ]
+                |> startAsJob'
+
+            yield! x
+            yield! y
+            yield! z
+        }
+
+    let leuStartFull () =
+        job {
+            CreateProcess.fromRawCommand
+                "docker-compose"
+                [ "-f"
+                  $"%s{Config.leuFolder}/db.docker-compose.yml"
+                  "-f"
+                  $"%s{Config.leuFolder}/no-devcontainer.docker-compose.yml"
+                  "up" ]
+            |> Proc.runAsJob 10
+        }
+
+    let leuDown () =
+        job {
+            CreateProcess.fromRawCommand
+                "docker-compose"
+                [ "-f"
+                  $"%s{Config.leuFolder}/db.docker-compose.yml"
+                  "-f"
+                  $"%s{Config.leuFolder}/no-devcontainer.docker-compose.yml"
+                  "down" ]
+            |> Proc.runAsJob 10
+        }
 
 module private Command =
     let buildClient () =
@@ -105,8 +168,16 @@ module private Command =
         }
 
     let generate () = Task.generate ()
-    let runClient () = Task.runClient ()
-    let runServer () = Task.runServer ()
+
+    let leuStartCode () =
+        job {
+            buildClient ()
+            buildServer ()
+            Task.leuStartCode ()
+        }
+
+    let leuStartFull () = Task.leuStartFull ()
+    let leuDown () = Task.leuDown ()
 
 [<EntryPoint>]
 let main args =
@@ -120,8 +191,10 @@ let main args =
         | [ "build-server" ] -> Command.buildServer ()
         | [ "lint-client" ] -> Command.lintClient ()
         | [ "generate" ] -> Command.generate ()
-        | [ "client" ] -> Command.runClient ()
-        | [ "server" ] -> Command.runServer ()
+        | [ "start-code" ] -> Command.leuStartCode ()
+        | [ "start-full" ]
+        | [ "start" ] -> Command.leuStartFull ()
+        | [ "down" ] -> Command.leuDown ()
         | _ ->
             let msg =
                 [ "Usage: dotnet run [<command>]"

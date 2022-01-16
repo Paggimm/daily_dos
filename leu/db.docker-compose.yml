@@ -1,25 +1,5 @@
 version: "3"
 services:
-  api:
-    build: .devcontainer/server
-    ports:
-      - 8085:8085
-    volumes:
-      - ./:/home/vscode/daily_dos
-    network_mode: 'host'
-    #command: bash -c "dotnet run --project
-    #  /home/vscode/daily_dos/api/DailyDos.Api.fsproj"
-    tty: true
-
-  vue_client:
-    build: .devcontainer/vue_client
-    ports:
-      - 8080:8080
-    volumes:
-      - ./:/home/vscode/daily_dos
-    network_mode: 'host'
-    command: bash -c "cd /home/vscode/daily_dos/vue_client && pnpm run serve"
-
   postgres:
     image: postgres
     hostname: postgres

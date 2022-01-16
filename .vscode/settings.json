@@ -21,4 +21,5 @@
     },
     "javascript.format.semicolons": "remove",
     "typescript.format.semicolons": "remove",
+    "FSharp.workspacePath": "DailyDos.sln",
 }
