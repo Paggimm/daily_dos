@@ -1,4 +1,4 @@
-namespace DatabaseService
+namespace UserDao
 
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
@@ -6,7 +6,7 @@ open DailyDos.Generated
 open Npgsql
 
 /// Service Module for User related Querys
-module UserDatabaseService =
+module UserDao =
     let private db_connection =
         new NpgsqlConnection("Server=postgres;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
 

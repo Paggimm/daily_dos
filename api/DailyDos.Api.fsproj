@@ -11,10 +11,12 @@
   <ItemGroup>
     <Compile Include="Consts.fs" />
     <Compile Include="generated/models.fs" />
-    <Compile Include="Services/DatabaseService.fs" />
+    <Compile Include="Daos/UserDao.fs" />
+    <Compile Include="Daos/ActivityDao.fs" />
     <Compile Include="Services/AuthService.fs" />
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
     <Compile Include="Requesthandler/AuthRequesthandler.fs" />
+    <Compile Include="Requesthandler/ActivityRequesthandler.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

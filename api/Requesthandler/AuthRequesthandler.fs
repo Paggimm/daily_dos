@@ -12,7 +12,7 @@ open System.Text
 open System.Linq
 
 open DailyDos.Generated
-open DatabaseService
+open UserDao
 open DailyDos.Api.Services.AuthService
 open Consts
 
@@ -53,7 +53,7 @@ module AuthRequestHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
-                let user_enumerator = UserDatabaseService.get_login_viewmodel_by_name model.name
+                let user_enumerator = UserDao.get_login_viewmodel_by_name model.name
 
                 if user_enumerator.Count() = 0
                 then
@@ -96,6 +96,6 @@ module AuthRequestHandler =
             task {
                 let! register_data = ctx.BindJsonAsync<RegisterData>()
                 let user: User = {id = 0; name = register_data.name}
-                UserDatabaseService.insert_new_user register_data.name (AuthService.hashPassword user register_data.password)
+                UserDao.insert_new_user register_data.name (AuthService.hashPassword user register_data.password)
                 return! next ctx
         }
