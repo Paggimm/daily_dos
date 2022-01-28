@@ -37,6 +37,16 @@ module UserDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    let get_user_by_name name =
+        select {
+            table "users"
+            where (eq "name" name)
+            take 1
+        }
+        |> db_connection.SelectAsync<User>
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+
     let insert_new_user (name: string) (password: string) =
         insert {
             table "users"

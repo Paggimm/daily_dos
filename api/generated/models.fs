@@ -23,3 +23,11 @@ type LoginViewModel = {
     name: string
     password: string
 }
+
+[<CLIMutable>]
+type Activity = {
+    id: int
+    user_id: int
+    duration: int
+    name: string
+}

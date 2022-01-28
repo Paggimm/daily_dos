@@ -18,3 +18,10 @@ export interface LoginViewModel {
     name: string;
     password: string;
 }
+
+export interface Activity {
+    id: number;
+    user_id: number;
+    duration: number;
+    name: string;
+}

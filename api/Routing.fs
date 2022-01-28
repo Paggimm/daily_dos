@@ -1,5 +1,6 @@
 namespace DailyDos.Api
 
+open ActivityRequesthandler
 open Giraffe
 open UserRequesthandler
 open AuthRequestHandler
@@ -10,6 +11,7 @@ open AuthRequestHandler
 module Routing =
     let webApp: HttpHandler =
         choose [
+            // USER
             subRoute
                 "/user"
                 (choose [
@@ -22,6 +24,24 @@ module Routing =
                             routef "/%i" UserRequesthandler.get_user_by_id
                         ]
                  ])
+            subRoute
+                "/activity"
+                (choose [
+                    GET
+                    >=> choose [
+                        // get a List of a Users Activity-List
+                        routex "(/?)"
+                        >=> AuthRequestHandler.authorize
+                        >=> ActivityRequesthandler.get_all_activities
+                    ]
+                    POST
+                    >=> choose [
+                        routex "(/?)"
+                        >=> AuthRequestHandler.authorize
+                        >=> ActivityRequesthandler.insert_new_activity
+                    ]
+                ])
+            // SERVER STATUS
             GET
             >=> choose [
                     // Ping Server Status
@@ -32,6 +52,7 @@ module Routing =
                     >=> json {| online = true |}
 
                     ]
+            // AUTH
             POST
             >=> choose [
                     // Login - Erzeugt ein JWT-Token

@@ -1,9 +1,11 @@
 namespace AuthRequestHandler
 
+open Consts.Consts
 open FSharp.Control.Tasks
 open Giraffe
 open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Http
+open Microsoft.IdentityModel.JsonWebTokens
 open Microsoft.IdentityModel.Tokens
 open System
 open System.IdentityModel.Tokens.Jwt
@@ -19,10 +21,10 @@ open Consts
 /// RequestHandler for Authentication-Purposes
 module AuthRequestHandler =
     /// generate a jwt-Token from Input
-    let private generateToken email =
+    let private generateToken (user : User) =
         let claims =
-            [|  Claim(JwtRegisteredClaimNames.Sub, email)
-                Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) |]
+            [|  Claim(CLAIM_TYPES.NAME.ToString(), user.name)
+                Claim(CLAIM_TYPES.ID.ToString(), user.id.ToString()) |]
 
         let expires = Nullable(DateTime.UtcNow.AddHours(1.0))
         let notBefore = Nullable(DateTime.UtcNow)
@@ -66,7 +68,7 @@ module AuthRequestHandler =
                     let password_match = AuthService.verifyPassword password_hashing_user model.password database_login_user.password;
                     let result =
                         if password_match then
-                            json (generateToken database_login_user.name)
+                            json (generateToken ((UserDao.get_user_by_name password_hashing_user.name).First()))
                         else
                             setStatusCode 401
 
