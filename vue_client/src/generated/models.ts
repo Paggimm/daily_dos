@@ -25,3 +25,9 @@ export interface Activity {
     duration: number;
     name: string;
 }
+
+export interface ActivityViewModel {
+    user_id: number;
+    duration: number;
+    name: string;
+}

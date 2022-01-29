@@ -32,9 +32,16 @@ module ModelDefinitions =
         |> Model.withProperty "duration" GInt
         |> Model.withProperty "name" GString
 
+    let private ActivityViewModel =
+        Model.create "ActivityViewModel"
+        |> Model.withProperty "user_id" GInt
+        |> Model.withProperty "duration" GInt
+        |> Model.withProperty "name" GString
+
     let get =
         [ LoginResponse
           UserModel
           RegisterModel
           LoginViewModel
-          Activity ]
+          Activity
+          ActivityViewModel ]

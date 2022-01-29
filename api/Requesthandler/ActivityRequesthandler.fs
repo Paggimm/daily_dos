@@ -1,10 +1,13 @@
 namespace ActivityRequesthandler
 
 open System.Security.Claims
+open System.Threading.Tasks
 open Consts.Consts
+open DailyDos.Generated
 open Giraffe
 open Microsoft.AspNetCore.Http
 open System.Linq
+open FSharp.Control.Tasks
 
 open ActivityDao
 
@@ -17,5 +20,8 @@ module ActivityRequesthandler =
 
     let insert_new_activity: HttpHandler =
         fun (next:HttpFunc) (ctx: HttpContext) ->
-            (let a = "test"
-             json a) next ctx
+            task {
+                let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+                ActivityDao.insert_activity 1 activity_view_model.duration activity_view_model.name
+                return! json "ok" next ctx
+        }

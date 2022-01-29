@@ -27,6 +27,7 @@ module UserDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    /// Return a LoginViewModel by Username
     let get_login_viewmodel_by_name name =
         select {
             table "users"
@@ -37,6 +38,7 @@ module UserDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    /// Return a User by his Username
     let get_user_by_name name =
         select {
             table "users"
@@ -47,6 +49,7 @@ module UserDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    /// Create a new user
     let insert_new_user (name: string) (password: string) =
         insert {
             table "users"
