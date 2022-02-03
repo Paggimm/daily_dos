@@ -7,6 +7,7 @@ open Fake.IO
 open RunHelpers
 open RunHelpers.BasicShortcuts
 open RunHelpers.FakeHelpers
+open RunHelpers.Templates
 
 [<RequireQualifiedAccess>]
 module private Config =
@@ -18,22 +19,22 @@ module private Config =
     let clientFolder = "./vue_client/"
 
 module private Task =
-    let restoreTools () = Template.DotNet.toolRestore ()
+    let restoreTools () = DotNet.toolRestore ()
 
 
     let restoreCodeGen () =
-        Template.DotNet.restore Config.codegenProject
+        DotNet.restore Config.codegenProject
 
     let restoreServer () =
-        Template.DotNet.restore Config.serverProject
+        DotNet.restore Config.serverProject
 
-    let restoreClient () = Template.Pnpm.install ()
+    let restoreClient () = Pnpm.install ()
 
     let buildCodegen () =
-        Template.DotNet.build Config.codegenProject Template.DotNet.Debug
+        DotNet.build Config.codegenProject DotNetConfig.Debug
 
     let buildServer () =
-        Template.DotNet.build Config.serverProject Template.DotNet.Debug
+        DotNet.build Config.serverProject DotNetConfig.Debug
 
     let buildClient () =
         CreateProcess.fromRawCommand "pnpm" [ "run"; "build" ]
