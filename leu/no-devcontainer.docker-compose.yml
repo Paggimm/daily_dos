@@ -5,6 +5,7 @@ services:
     working_dir: /app/api
     ports:
       - 8085:8085
+    network_mode: 'host'
     volumes:
       - ../:/app
     command: dotnet watch run -p DailyDos.Api.fsproj
@@ -20,3 +21,4 @@ services:
     volumes:
       - ../:/home/node/app
     command: "npm run serve"
+    network_mode: 'host'

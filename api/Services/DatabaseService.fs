@@ -8,7 +8,7 @@ open Npgsql
 /// Service Module for User related Querys
 module UserDatabaseService =
     let private db_connection =
-        new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
+        new NpgsqlConnection("Server=localhost;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
 
     /// Return all Users found in the Database
     let get_all_users =
