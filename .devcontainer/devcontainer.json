@@ -3,8 +3,8 @@
 {
 	"name": "F# (.NET)",
 	"dockerComposeFile": [
-		"./docker-compose.yml",
-		"../leu/db.docker-compose.yml"
+		"../lde/devcontainer.docker-compose.yml",
+		"../lde/db.docker-compose.yml"
 	],
 	"service": "dev",
 	"workspaceFolder": "/workspace",

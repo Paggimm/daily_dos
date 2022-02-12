@@ -1,7 +1,11 @@
 version: "3"
 services:
   dev:
-    build: .
+    build:
+      context: devcontainer
+      args:
+        NODE_VERSION: lts/*
+        PNPM_VERSION: 6.30.1
     volumes:
       - ..:/workspace:cached
     network_mode: service:postgres

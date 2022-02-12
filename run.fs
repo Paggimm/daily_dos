@@ -39,17 +39,15 @@ module private Config =
 
     let clientFolder = "./vue_client/"
 
-    let leuFolder = "./leu"
+    let ldeFolder = "./lde"
 
 module private Task =
     let restoreTools () = DotNet.toolRestore ()
 
 
-    let restoreCodeGen () =
-        DotNet.restore Config.codegenProject
+    let restoreCodeGen () = DotNet.restore Config.codegenProject
 
-    let restoreServer () =
-        DotNet.restore Config.serverProject
+    let restoreServer () = DotNet.restore Config.serverProject
 
     let restoreClient () = Pnpm.install ()
 
@@ -83,7 +81,7 @@ module private Task =
             ]
         }
 
-    let leuStartCode () =
+    let ldeStartCode () =
         jobAsync {
             let clientWatch =
                 CreateProcess.fromRawCommand "pnpm" [ "run"; "serve" ]
@@ -103,26 +101,26 @@ module private Task =
             yield! serverWatch
         }
 
-    let leuStartFull () =
+    let ldeStartFull () =
         job {
             CreateProcess.fromRawCommand
                 "docker-compose"
                 [ "-f"
-                  $"%s{Config.leuFolder}/db.docker-compose.yml"
+                  $"%s{Config.ldeFolder}/db.docker-compose.yml"
                   "-f"
-                  $"%s{Config.leuFolder}/no-devcontainer.docker-compose.yml"
+                  $"%s{Config.ldeFolder}/no-devcontainer.docker-compose.yml"
                   "up" ]
             |> Proc.runAsJob 10
         }
 
-    let leuDown () =
+    let ldeDown () =
         job {
             CreateProcess.fromRawCommand
                 "docker-compose"
                 [ "-f"
-                  $"%s{Config.leuFolder}/db.docker-compose.yml"
+                  $"%s{Config.ldeFolder}/db.docker-compose.yml"
                   "-f"
-                  $"%s{Config.leuFolder}/no-devcontainer.docker-compose.yml"
+                  $"%s{Config.ldeFolder}/no-devcontainer.docker-compose.yml"
                   "down" ]
             |> Proc.runAsJob 10
         }
@@ -160,15 +158,15 @@ module private Command =
 
     let generate () = Task.generate ()
 
-    let leuStartCode () =
+    let ldeStartCode () =
         job {
             buildClient ()
             buildServer ()
-            Task.leuStartCode ()
+            Task.ldeStartCode ()
         }
 
-    let leuStartFull () = Task.leuStartFull ()
-    let leuDown () = Task.leuDown ()
+    let ldeStartFull () = Task.ldeStartFull ()
+    let ldeDown () = Task.ldeDown ()
 
 [<EntryPoint>]
 let main args =
@@ -182,10 +180,10 @@ let main args =
         | [ "build-server" ] -> Command.buildServer ()
         | [ "lint-client" ] -> Command.lintClient ()
         | [ "generate" ] -> Command.generate ()
-        | [ "start-code" ] -> Command.leuStartCode ()
+        | [ "start-code" ] -> Command.ldeStartCode ()
         | [ "start-full" ]
-        | [ "start" ] -> Command.leuStartFull ()
-        | [ "down" ] -> Command.leuDown ()
+        | [ "start" ] -> Command.ldeStartFull ()
+        | [ "down" ] -> Command.ldeDown ()
         | _ ->
             let msg =
                 [ "Usage: dotnet run [<command>]"
