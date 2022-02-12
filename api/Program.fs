@@ -32,14 +32,13 @@ module Program =
     // ---------------------------------
     let configureCors (builder: CorsPolicyBuilder) =
         builder
-            .WithOrigins("http://localhost:8080")
+            .WithOrigins("http://localhost:8080", "http://localhost:8081")
             .AllowAnyMethod()
             .AllowAnyHeader()
         |> ignore
 
     let configureApp (app: IApplicationBuilder) =
-        let env =
-            app.ApplicationServices.GetService<IWebHostEnvironment>()
+        let env = app.ApplicationServices.GetService<IWebHostEnvironment>()
 
         (match env.IsDevelopment() with
          | true -> app.UseDeveloperExceptionPage()
@@ -83,7 +82,7 @@ module Program =
             .CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(fun webHostBuilder ->
                 webHostBuilder
-                    .UseUrls("http://localhost:8085")
+                    .UseUrls("http://0.0.0.0:8085")
                     .UseContentRoot(contentRoot)
                     .UseWebRoot(webRoot)
                     .Configure(Action<IApplicationBuilder> configureApp)

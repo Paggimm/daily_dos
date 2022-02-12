@@ -17,12 +17,12 @@ To use the code generator for shared models:
 dotnet run generate
 ```
 
-To run the client (Port 8080):
+To run the devenvironment with database with VScode inside the devcontainer:
 ```bash
-dotnet run client
+dotnet run start-code
 ```
 
-To run the server (Port 8085):
+To run the devenvironment with database outside the devcontainer:
 ```bash
-dotnet run server
+dotnet run start
 ```

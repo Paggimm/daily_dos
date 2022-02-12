@@ -1,0 +1,12 @@
+version: "3"
+services:
+  dev:
+    build:
+      context: devcontainer
+      args:
+        NODE_VERSION: lts/*
+        PNPM_VERSION: 6.30.1
+    volumes:
+      - ..:/workspace:cached
+    # Overrides default command so things don't shut down after the process ends.
+    command: /bin/sh -c "while sleep 1000; do :; done"

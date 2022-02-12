@@ -63,7 +63,7 @@ export default defineComponent({
     },
     async getToken(request: LoginViewModel): Promise<void> {
       try {
-        const response = await fetch("http://localhost:8085/token", {
+        const response = await fetch("http://localhost:8085/login", {
           body: JSON.stringify(request),
           method: "POST",
         });

@@ -1,20 +1,16 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/dotnet-fsharp
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/dotnet-fsharp
 {
 	"name": "F# (.NET)",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Options
-			"INSTALL_NODE": "true",
-			"NODE_VERSION": "lts/*",
-		}
-	},
+	"dockerComposeFile": [
+		"../lde/devcontainer.docker-compose.yml",
+		"../lde/db.docker-compose.yml"
+	],
+	"service": "dev",
+	"workspaceFolder": "/workspace",
+	"shutdownAction": "stopCompose",
 	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"extensions.autoUpdate": "false",
-		"extensions.autoCheckUpdates": false,
-	},
+	"settings": {},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"editorconfig.editorconfig",
@@ -24,17 +20,16 @@
 		"dbaeumer.vscode-eslint",
 		"octref.vetur",
 		"ecmel.vscode-html-css",
-		"rohit-gohri.format-code-action"
+		"rohit-gohri.format-code-action",
+		"ms-azuretools.vscode-docker"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
+		8080,
 		8085
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "dotnet run setup",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-	"containerEnv": {
-		"CHOKIDAR_USEPOLLING": "true"
-	}
 }

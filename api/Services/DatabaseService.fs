@@ -8,7 +8,7 @@ open Npgsql
 /// Service Module for User related Querys
 module UserDatabaseService =
     let private db_connection =
-        new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
+        new NpgsqlConnection("Server=postgres;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
 
     /// Return all Users found in the Database
     let get_all_users =
@@ -29,18 +29,18 @@ module UserDatabaseService =
 
     let get_login_viewmodel_by_name name =
         select {
-        table "users"
-        where (eq "name" name)
-        take 1
+            table "users"
+            where (eq "name" name)
+            take 1
         }
         |> db_connection.SelectAsync<LoginViewModel>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
-    let insert_new_user (name:string) (password:string) =
+    let insert_new_user (name: string) (password: string) =
         insert {
             table "users"
-            value {name=name; password=password}
+            value { name = name; password = password }
         }
         |> db_connection.InsertAsync
         |> Async.AwaitTask
