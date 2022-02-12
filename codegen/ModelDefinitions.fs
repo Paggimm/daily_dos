@@ -29,14 +29,24 @@ module ModelDefinitions =
         Model.create "Activity"
         |> Model.withProperty "id" GInt
         |> Model.withProperty "user_id" GInt
-        |> Model.withProperty "duration" GInt
         |> Model.withProperty "name" GString
+        |> Model.withProperty "min_duration" GInt
+        |> Model.withProperty "max_duration" GInt
+        |> Model.withProperty "weekday_constraint" GInt
+        |> Model.withProperty "recurring_type" GString
+        |> Model.withProperty "recurring_interval" GInt
+        |> Model.withProperty "create_time" GInt
 
     let private ActivityViewModel =
         Model.create "ActivityViewModel"
         |> Model.withProperty "user_id" GInt
-        |> Model.withProperty "duration" GInt
         |> Model.withProperty "name" GString
+        |> Model.withProperty "min_duration" GInt
+        |> Model.withProperty "max_duration" GInt
+        |> Model.withProperty "weekday_constraint" GInt
+        |> Model.withProperty "recurring_type" GString
+        |> Model.withProperty "recurring_interval" GInt
+        |> Model.withProperty "create_time" GInt
 
     let get =
         [ LoginResponse

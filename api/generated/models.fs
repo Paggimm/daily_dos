@@ -19,11 +19,21 @@ type LoginViewModel = { name: string; password: string }
 type Activity =
     { id: int
       user_id: int
-      duration: int
-      name: string }
+      name: string
+      min_duration: int
+      max_duration: int
+      weekday_constraint: int
+      recurring_type: string
+      recurring_interval: int
+      create_time: int }
 
 [<CLIMutable>]
 type ActivityViewModel =
     { user_id: int
-      duration: int
-      name: string }
+      name: string
+      min_duration: int
+      max_duration: int
+      weekday_constraint: int
+      recurring_type: string
+      recurring_interval: int
+      create_time: int }

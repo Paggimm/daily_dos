@@ -22,4 +22,16 @@
     "javascript.format.semicolons": "remove",
     "typescript.format.semicolons": "remove",
     "FSharp.workspacePath": "DailyDos.sln",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "postgres",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "dailydos",
+            "database": "dailydos",
+            "username": "postgres",
+            "password": "postgres"
+        }
+    ],
 }
