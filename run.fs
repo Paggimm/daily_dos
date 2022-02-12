@@ -85,20 +85,12 @@ module private Task =
 
     let leuStartCode () =
         jobAsync {
-            let x =
-                CreateProcess.fromRawCommand
-                    "docker-compose"
-                    [ "-f"
-                      $"%s{Config.leuFolder}/db.docker-compose.yml"
-                      "up" ]
-                |> startAsJob'
-
-            let y =
+            let clientWatch =
                 CreateProcess.fromRawCommand "pnpm" [ "run"; "serve" ]
                 |> CreateProcess.withWorkingDirectory Config.clientFolder
                 |> startAsJob'
 
-            let z =
+            let serverWatch =
                 CreateProcess.fromRawCommand
                     "dotnet"
                     [ "watch"
@@ -107,9 +99,8 @@ module private Task =
                       Config.serverProject ]
                 |> startAsJob'
 
-            yield! x
-            yield! y
-            yield! z
+            yield! clientWatch
+            yield! serverWatch
         }
 
     let leuStartFull () =
