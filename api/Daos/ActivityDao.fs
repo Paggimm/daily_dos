@@ -6,10 +6,9 @@ open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open System
 
-module ActivityDao =
-    let private db_connection =
-        new NpgsqlConnection("Server=postgres;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
+open BaseDao
 
+module ActivityDao =
     /// Return all Activities from a User
     let get_all_activities_by_user_id (id: int) =
         select {
@@ -33,10 +32,7 @@ module ActivityDao =
                   weekday_constraint = activity_view_model.weekday_constraint
                   recurring_type = activity_view_model.recurring_type
                   recurring_interval = activity_view_model.recurring_interval
-                  create_time =
-                    (DateTime.Now.Subtract(new DateTime(1970, 1, 1)))
-                        .TotalSeconds
-                    |> int }
+                  create_time = DateTime.Now.ToUniversalTime() }
         }
         |> db_connection.InsertAsync
         |> Async.AwaitTask

@@ -21,16 +21,15 @@ open Consts
 /// RequestHandler for Authentication-Purposes
 module AuthRequestHandler =
     /// generate a jwt-Token from Input
-    let private generateToken (user : User) =
+    let private generateToken (user: User) =
         let claims =
-            [|  Claim(CLAIM_TYPES.NAME.ToString(), user.name)
-                Claim(CLAIM_TYPES.ID.ToString(), user.id.ToString()) |]
+            [| Claim(CLAIM_TYPES.NAME.ToString(), user.name)
+               Claim(CLAIM_TYPES.ID.ToString(), user.id.ToString()) |]
 
-        let expires = Nullable(DateTime.UtcNow.AddHours(1.0))
+        let expires = Nullable(DateTime.UtcNow.AddHours(168.0))
         let notBefore = Nullable(DateTime.UtcNow)
 
-        let securityKey =
-            SymmetricSecurityKey(Encoding.UTF8.GetBytes(Consts.secret))
+        let securityKey = SymmetricSecurityKey(Encoding.UTF8.GetBytes(Consts.secret))
 
         let signingCredentials =
             SigningCredentials(key = securityKey, algorithm = SecurityAlgorithms.HmacSha256)
@@ -45,8 +44,7 @@ module AuthRequestHandler =
                 signingCredentials = signingCredentials
             )
 
-        let tokenResult =
-            { token = JwtSecurityTokenHandler().WriteToken(token) }
+        let tokenResult = { token = JwtSecurityTokenHandler().WriteToken(token) }
 
         tokenResult
 
@@ -57,18 +55,27 @@ module AuthRequestHandler =
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
                 let user_enumerator = UserDao.get_login_viewmodel_by_name model.name
 
-                if user_enumerator.Count() = 0
-                then
+                if user_enumerator.Count() = 0 then
                     let result = setStatusCode 401
                     return! result next ctx
                 else
                     let database_login_user: LoginViewModel = user_enumerator.First()
                     // sadly we need a User for identity Password Object
-                    let password_hashing_user = { id=0; name=database_login_user.name }
-                    let password_match = AuthService.verifyPassword password_hashing_user model.password database_login_user.password;
+                    let password_hashing_user =
+                        { id = 0
+                          name = database_login_user.name }
+
+                    let password_match =
+                        AuthService.verifyPassword password_hashing_user model.password database_login_user.password
+
                     let result =
                         if password_match then
-                            json (generateToken ((UserDao.get_user_by_name password_hashing_user.name).First()))
+                            json (
+                                generateToken (
+                                    (UserDao.get_user_by_name password_hashing_user.name)
+                                        .First()
+                                )
+                            )
                         else
                             setStatusCode 401
 
@@ -82,8 +89,7 @@ module AuthRequestHandler =
     ///
     let handleGetSecured =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let email =
-                ctx.User.FindFirst ClaimTypes.NameIdentifier
+            let email = ctx.User.FindFirst ClaimTypes.NameIdentifier
 
             text
                 ("User "
@@ -97,7 +103,7 @@ module AuthRequestHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! register_data = ctx.BindJsonAsync<RegisterData>()
-                let user: User = {id = 0; name = register_data.name}
+                let user: User = { id = 0; name = register_data.name }
                 UserDao.insert_new_user register_data.name (AuthService.hashPassword user register_data.password)
                 return! next ctx
-        }
+            }

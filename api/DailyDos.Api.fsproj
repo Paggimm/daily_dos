@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="Consts.fs" />
     <Compile Include="generated/models.fs" />
+    <Compile Include="Daos/BaseDao.fs" />
     <Compile Include="Daos/UserDao.fs" />
     <Compile Include="Daos/ActivityDao.fs" />
     <Compile Include="Services/AuthService.fs" />

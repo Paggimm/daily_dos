@@ -35,7 +35,7 @@ module ModelDefinitions =
         |> Model.withProperty "weekday_constraint" GInt
         |> Model.withProperty "recurring_type" GString
         |> Model.withProperty "recurring_interval" GInt
-        |> Model.withProperty "create_time" GInt
+        |> Model.withProperty "create_time" GDate
 
     let private ActivityViewModel =
         Model.create "ActivityViewModel"
@@ -46,7 +46,7 @@ module ModelDefinitions =
         |> Model.withProperty "weekday_constraint" GInt
         |> Model.withProperty "recurring_type" GString
         |> Model.withProperty "recurring_interval" GInt
-        |> Model.withProperty "create_time" GInt
+        |> Model.withProperty "create_time" GDate
 
     let get =
         [ LoginResponse

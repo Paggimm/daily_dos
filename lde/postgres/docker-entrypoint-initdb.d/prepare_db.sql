@@ -1,5 +1,3 @@
-/* RECURRING TYPE ENUM */
-create type recurring_type as enum ('daily', 'weekly', 'monthly');
 /* USER TABLE */
 create table if not exists users (
 	id serial primary key,
@@ -14,7 +12,7 @@ create table if not exists activities (
 	min_duration integer,
 	max_duration integer,
 	weekday_constraint integer,
-	recurring_type recurring_type,
+	recurring_type VARCHAR(10),
 	recurring_interval integer,
 	create_time timestamp
 );

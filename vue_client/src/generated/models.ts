@@ -28,7 +28,7 @@ export interface Activity {
     weekday_constraint: number;
     recurring_type: string;
     recurring_interval: number;
-    create_time: number;
+    create_time: Date;
 }
 
 export interface ActivityViewModel {
@@ -39,5 +39,5 @@ export interface ActivityViewModel {
     weekday_constraint: number;
     recurring_type: string;
     recurring_interval: number;
-    create_time: number;
+    create_time: Date;
 }

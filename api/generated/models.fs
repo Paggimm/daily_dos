@@ -1,5 +1,7 @@
 namespace DailyDos.Generated
 
+open System
+
 [<CLIMutable>]
 type LoginResponse = { token: string }
 
@@ -25,7 +27,7 @@ type Activity =
       weekday_constraint: int
       recurring_type: string
       recurring_interval: int
-      create_time: int }
+      create_time: DateTime }
 
 [<CLIMutable>]
 type ActivityViewModel =
@@ -36,4 +38,4 @@ type ActivityViewModel =
       weekday_constraint: int
       recurring_type: string
       recurring_interval: int
-      create_time: int }
+      create_time: DateTime }

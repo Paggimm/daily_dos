@@ -5,11 +5,10 @@ open Dapper.FSharp.PostgreSQL
 open DailyDos.Generated
 open Npgsql
 
+open BaseDao
+
 /// Service Module for User related Querys
 module UserDao =
-    let private db_connection =
-        new NpgsqlConnection("Server=postgres;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
-
     /// Return all Users found in the Database
     let get_all_users =
         select { table "users" }
