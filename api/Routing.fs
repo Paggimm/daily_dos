@@ -24,23 +24,22 @@ module Routing =
                             routef "/%i" UserRequesthandler.get_user_by_id
                         ]
                  ])
-            subRoute
-                "/activity"
-                (choose [
-                    GET
-                    >=> choose [
-                        // get a List of a Users Activity-List
-                        routex "(/?)"
-                        >=> AuthRequestHandler.authorize
-                        >=> ActivityRequesthandler.get_all_activities
-                    ]
-                    POST
-                    >=> choose [
-                        routex "(/?)"
-                        >=> AuthRequestHandler.authorize
-                        >=> ActivityRequesthandler.insert_new_activity
-                    ]
-                ])
+            subRoute "/activity" AuthRequestHandler.authorize
+            >=> (choose [
+                     GET
+                     >=> choose [
+                             // get a List of a Users Activity-List
+                             routex "(/?)"
+                             >=> ActivityRequesthandler.get_all_activities
+
+                             routef "/%i" ActivityRequesthandler.get_activity
+                         ]
+                     POST
+                     >=> choose [
+                             routex "(/?)"
+                             >=> ActivityRequesthandler.insert_new_activity
+                         ]
+                 ])
             // SERVER STATUS
             GET
             >=> choose [
@@ -56,9 +55,11 @@ module Routing =
             POST
             >=> choose [
                     // Login - Erzeugt ein JWT-Token
-                    route "/login" >=> AuthRequestHandler.handlePostToken
+                    route "/login"
+                    >=> AuthRequestHandler.handlePostToken
                     // Registriere einen neuen User
-                    route "/register" >=> AuthRequestHandler.registerUser
+                    route "/register"
+                    >=> AuthRequestHandler.registerUser
                 ]
             setStatusCode 404 >=> text "Not Found"
         ]

@@ -36,3 +36,13 @@ module ActivityRequesthandler =
                 ActivityDao.insert_activity id activity_view_model
                 return! json "ok" next ctx
             }
+
+    let get_activity id : HttpHandler =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            let activity_enumerator = ActivityDao.get_activity_by_id id
+
+            if (activity_enumerator.Count() = 0) then
+                ctx.SetStatusCode 404
+                json "no activity found" next ctx
+            else
+                json (activity_enumerator.First()) next ctx

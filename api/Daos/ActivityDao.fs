@@ -1,7 +1,6 @@
 namespace ActivityDao
 
 open DailyDos.Generated
-open Npgsql
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open System
@@ -38,3 +37,13 @@ module ActivityDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
+
+    /// Return specific Activity
+    let get_activity_by_id (id: int) =
+        select {
+            table "activities"
+            where (eq "id" id)
+        }
+        |> db_connection.SelectAsync<Activity>
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
