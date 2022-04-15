@@ -23,7 +23,7 @@ module ActivityRequesthandler =
                 next
                 ctx
 
-    let insert_new_activity: HttpHandler =
+    let post_activity: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
@@ -61,3 +61,17 @@ module ActivityRequesthandler =
             | _ ->
                 ctx.SetStatusCode 500
                 json "an error occured" next ctx
+
+    let patch_activity id : HttpHandler =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+
+                let id_claim =
+                    ctx.User.Claims
+                    |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
+
+                let user_id = id_claim.Value |> int
+                ActivityDao.update_activity id user_id activity_view_model
+                return! json "successfully updated activity" next ctx
+            }

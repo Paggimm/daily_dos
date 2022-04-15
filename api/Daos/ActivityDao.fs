@@ -48,6 +48,7 @@ module ActivityDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    /// Delete specific Activity
     let delete_activity_by_id (id: int) =
         delete {
             table "activities"
@@ -56,3 +57,24 @@ module ActivityDao =
         |> db_connection.DeleteAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
+
+    /// Update specific Activity
+    let update_activity activity_id user_id activity_view_model =
+        update {
+            table "activities"
+            where (eq "id" activity_id)
+
+            set
+                { user_id = user_id
+                  name = activity_view_model.name
+                  max_duration = activity_view_model.max_duration
+                  min_duration = activity_view_model.min_duration
+                  weekday_constraint = activity_view_model.weekday_constraint
+                  recurring_type = activity_view_model.recurring_type
+                  recurring_interval = activity_view_model.recurring_interval
+                  create_time = DateTime.Now.ToUniversalTime() }
+        }
+        |> db_connection.UpdateAsync
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+        |> ignore

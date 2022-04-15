@@ -37,11 +37,15 @@ module Routing =
                      POST
                      >=> choose [
                              routex "(/?)"
-                             >=> ActivityRequesthandler.insert_new_activity
+                             >=> ActivityRequesthandler.post_activity
                          ]
                      DELETE
                      >=> choose [
                              routef "/%i" ActivityRequesthandler.delete_activity
+                         ]
+                     PATCH
+                     >=> choose [
+                             routef "/%i" ActivityRequesthandler.patch_activity
                          ]
                  ])
             // SERVER STATUS
