@@ -47,3 +47,12 @@ module ActivityDao =
         |> db_connection.SelectAsync<Activity>
         |> Async.AwaitTask
         |> Async.RunSynchronously
+
+    let delete_activity_by_id (id: int) =
+        delete {
+            table "activities"
+            where (eq "id" id)
+        }
+        |> db_connection.DeleteAsync
+        |> Async.AwaitTask
+        |> Async.RunSynchronously

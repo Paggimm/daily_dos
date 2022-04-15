@@ -30,10 +30,10 @@ module ActivityRequesthandler =
 
                 let id_claim =
                     ctx.User.Claims
-                    |> Seq.find (fun c -> c.Type = CLAIM_TYPES.ID.ToString())
+                    |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
 
-                let id = id_claim.Value |> int
-                ActivityDao.insert_activity id activity_view_model
+                let user_id = id_claim.Value |> int
+                ActivityDao.insert_activity user_id activity_view_model
                 return! json "ok" next ctx
             }
 
@@ -46,3 +46,18 @@ module ActivityRequesthandler =
                 json "no activity found" next ctx
             else
                 json (activity_enumerator.First()) next ctx
+
+    let delete_activity id : HttpHandler =
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            let result = ActivityDao.delete_activity_by_id id
+
+            match result with
+            | 0 ->
+                ctx.SetStatusCode 404
+                json "activity not found " next ctx
+            | 1 ->
+                ctx.SetStatusCode 200
+                json "activity succesfully deleted" next ctx
+            | _ ->
+                ctx.SetStatusCode 500
+                json "an error occured" next ctx

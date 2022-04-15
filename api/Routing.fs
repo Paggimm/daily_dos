@@ -39,6 +39,10 @@ module Routing =
                              routex "(/?)"
                              >=> ActivityRequesthandler.insert_new_activity
                          ]
+                     DELETE
+                     >=> choose [
+                             routef "/%i" ActivityRequesthandler.delete_activity
+                         ]
                  ])
             // SERVER STATUS
             GET
