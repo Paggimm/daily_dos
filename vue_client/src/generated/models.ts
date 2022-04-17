@@ -25,7 +25,7 @@ export interface Activity {
     name: string;
     min_duration: number;
     max_duration: number;
-    weekday_constraint: number;
+    weekday_constraint: string;
     recurring_type: string;
     recurring_interval: number;
     create_time: Date;
@@ -36,7 +36,7 @@ export interface ActivityViewModel {
     name: string;
     min_duration: number;
     max_duration: number;
-    weekday_constraint: number;
+    weekday_constraint: string;
     recurring_type: string;
     recurring_interval: number;
     create_time: Date;

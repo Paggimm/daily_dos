@@ -11,7 +11,7 @@ create table if not exists activities (
 	name varchar(30) not null,
 	min_duration integer,
 	max_duration integer,
-	weekday_constraint integer,
+	weekday_constraint VARCHAR(7),
 	recurring_type VARCHAR(10),
 	recurring_interval integer,
 	create_time timestamp

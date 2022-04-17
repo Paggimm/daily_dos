@@ -1,6 +1,10 @@
 namespace DailyDos.Api.Services.AuthService
 
 open Microsoft.AspNetCore.Identity
+open System.Security.Claims
+open Microsoft.AspNetCore.Http
+
+open Consts.Consts
 open DailyDos.Generated
 
 module AuthService =
@@ -21,3 +25,11 @@ module AuthService =
             true
         else
             false
+
+    /// returns the user_id from the current user
+    let get_user_id_from_context (ctx: HttpContext) =
+        let id_claim: Claim =
+            ctx.User.Claims
+            |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
+
+        id_claim.Value |> int

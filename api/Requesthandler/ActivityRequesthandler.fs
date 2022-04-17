@@ -1,40 +1,34 @@
 namespace ActivityRequesthandler
 
-open System.Security.Claims
-open System.Threading.Tasks
-open Consts.Consts
-open DailyDos.Generated
 open Giraffe
 open Microsoft.AspNetCore.Http
 open System.Linq
 open FSharp.Control.Tasks
 
+open DailyDos.Generated
+open DailyDos.Validator.ActivityValidator
 open ActivityDao
+open DailyDos.Api.Services.AuthService
 
 module ActivityRequesthandler =
     let get_all_activities: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            (let id_claim =
-                ctx.User.Claims
-                |> Seq.find (fun c -> c.Type = CLAIM_TYPES.ID.ToString())
-
-             let activities = ActivityDao.get_all_activities_by_user_id (id_claim.Value |> int)
-             json activities)
-                next
-                ctx
+            let user_id = AuthService.get_user_id_from_context ctx
+            let activities = ActivityDao.get_all_activities_by_user_id user_id
+            json activities next ctx
 
     let post_activity: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+                let user_id = AuthService.get_user_id_from_context ctx
 
-                let id_claim =
-                    ctx.User.Claims
-                    |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
-
-                let user_id = id_claim.Value |> int
-                ActivityDao.insert_activity user_id activity_view_model
-                return! json "ok" next ctx
+                if ActivityInputValidator.validate_actitivy_input activity_view_model then
+                    ActivityDao.insert_activity user_id activity_view_model
+                    return! json "ok" next ctx
+                else
+                    ctx.SetStatusCode 400
+                    return! json "refused" next ctx
             }
 
     let get_activity id : HttpHandler =
@@ -49,29 +43,41 @@ module ActivityRequesthandler =
 
     let delete_activity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let result = ActivityDao.delete_activity_by_id id
+            let old_activity = ActivityDao.get_activity_by_id id
 
-            match result with
-            | 0 ->
-                ctx.SetStatusCode 404
-                json "activity not found " next ctx
-            | 1 ->
-                ctx.SetStatusCode 200
-                json "activity succesfully deleted" next ctx
-            | _ ->
-                ctx.SetStatusCode 500
-                json "an error occured" next ctx
+            if (old_activity.Count() > 0
+                && old_activity.First().user_id = AuthService.get_user_id_from_context ctx) then
+                let result = ActivityDao.delete_activity_by_id id
+
+                match result with
+                | 0 ->
+                    ctx.SetStatusCode 404
+                    json "activity not found " next ctx
+                | 1 ->
+                    ctx.SetStatusCode 200
+                    json "activity succesfully deleted" next ctx
+                | _ ->
+                    ctx.SetStatusCode 500
+                    json "an error occured" next ctx
+            else
+                ctx.SetStatusCode 403
+                json "refused" next ctx
 
     let patch_activity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+                let user_id = AuthService.get_user_id_from_context ctx
+                let old_activity = ActivityDao.get_activity_by_id id
 
-                let id_claim =
-                    ctx.User.Claims
-                    |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
-
-                let user_id = id_claim.Value |> int
-                ActivityDao.update_activity id user_id activity_view_model
-                return! json "successfully updated activity" next ctx
+                if old_activity.Count() > 0
+                   && ActivityInputValidator.validate_activity_patch_input
+                       activity_view_model
+                       (old_activity.First())
+                       user_id then
+                    ActivityDao.update_activity id user_id activity_view_model
+                    return! json "successfully updated activity" next ctx
+                else
+                    ctx.SetStatusCode 400
+                    return! json "refused to patch activity" next ctx
             }
