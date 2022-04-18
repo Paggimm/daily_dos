@@ -30,14 +30,3 @@ export interface Activity {
     recurring_interval: number;
     create_time: Date;
 }
-
-export interface ActivityViewModel {
-    user_id: number;
-    name: string;
-    min_duration: number;
-    max_duration: number;
-    weekday_constraint: string;
-    recurring_type: string;
-    recurring_interval: number;
-    create_time: Date;
-}

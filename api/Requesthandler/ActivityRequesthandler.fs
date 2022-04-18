@@ -20,11 +20,11 @@ module ActivityRequesthandler =
     let post_activity: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+                let! input_activity = ctx.BindJsonAsync<Activity>()
                 let user_id = AuthService.get_user_id_from_context ctx
 
-                if ActivityInputValidator.validate_actitivy_input activity_view_model then
-                    ActivityDao.insert_activity user_id activity_view_model
+                if ActivityInputValidator.validate_actitivy_input input_activity then
+                    ActivityDao.insert_activity user_id input_activity
                     return! json "ok" next ctx
                 else
                     ctx.SetStatusCode 400
@@ -66,16 +66,13 @@ module ActivityRequesthandler =
     let patch_activity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! activity_view_model = ctx.BindJsonAsync<ActivityViewModel>()
+                let! activity = ctx.BindJsonAsync<Activity>()
                 let user_id = AuthService.get_user_id_from_context ctx
                 let old_activity = ActivityDao.get_activity_by_id id
 
                 if old_activity.Count() > 0
-                   && ActivityInputValidator.validate_activity_patch_input
-                       activity_view_model
-                       (old_activity.First())
-                       user_id then
-                    ActivityDao.update_activity id user_id activity_view_model
+                   && ActivityInputValidator.validate_activity_patch_input activity (old_activity.First()) user_id then
+                    ActivityDao.update_activity id user_id activity
                     return! json "successfully updated activity" next ctx
                 else
                     ctx.SetStatusCode 400

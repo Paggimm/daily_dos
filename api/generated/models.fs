@@ -28,14 +28,3 @@ type Activity =
       recurring_type: string
       recurring_interval: int
       create_time: DateTime }
-
-[<CLIMutable>]
-type ActivityViewModel =
-    { user_id: int
-      name: string
-      min_duration: int
-      max_duration: int
-      weekday_constraint: string
-      recurring_type: string
-      recurring_interval: int
-      create_time: DateTime }

@@ -26,14 +26,14 @@ module UserDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
-    /// Return a LoginViewModel by Username
-    let get_login_viewmodel_by_name name =
+    /// Return a Users Password
+    let get_user_password user_name =
         select {
             table "users"
-            where (eq "name" name)
+            where (eq "name" user_name)
             take 1
         }
-        |> db_connection.SelectAsync<LoginViewModel>
+        |> db_connection.SelectAsync<{| password: string |}>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 

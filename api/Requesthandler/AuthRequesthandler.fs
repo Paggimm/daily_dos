@@ -53,20 +53,18 @@ module AuthRequestHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
-                let user_enumerator = UserDao.get_login_viewmodel_by_name model.name
+                let user_password_result = UserDao.get_user_password model.name
 
-                if user_enumerator.Count() = 0 then
+                if user_password_result.Count() = 0 then
                     let result = setStatusCode 401
                     return! result next ctx
                 else
-                    let database_login_user: LoginViewModel = user_enumerator.First()
+                    let user_password = user_password_result.First()
                     // sadly we need a User for identity Password Object
-                    let password_hashing_user =
-                        { id = 0
-                          name = database_login_user.name }
+                    let password_hashing_user = { id = 0; name = model.name }
 
                     let password_match =
-                        AuthService.verifyPassword password_hashing_user model.password database_login_user.password
+                        AuthService.verifyPassword password_hashing_user model.password user_password.password
 
                     let result =
                         if password_match then

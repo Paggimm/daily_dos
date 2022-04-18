@@ -37,21 +37,9 @@ module ModelDefinitions =
         |> Model.withProperty "recurring_interval" GInt
         |> Model.withProperty "create_time" GDate
 
-    let private ActivityViewModel =
-        Model.create "ActivityViewModel"
-        |> Model.withProperty "user_id" GInt
-        |> Model.withProperty "name" GString
-        |> Model.withProperty "min_duration" GInt
-        |> Model.withProperty "max_duration" GInt
-        |> Model.withProperty "weekday_constraint" GString
-        |> Model.withProperty "recurring_type" GString
-        |> Model.withProperty "recurring_interval" GInt
-        |> Model.withProperty "create_time" GDate
-
     let get =
         [ LoginResponse
           UserModel
           RegisterModel
           LoginViewModel
-          Activity
-          ActivityViewModel ]
+          Activity ]

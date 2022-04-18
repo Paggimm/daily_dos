@@ -34,24 +34,24 @@ module ActivityInputValidator =
         valid
 
     /// validates a given ActivityViewModel
-    let validate_actitivy_input (activity_view_model: ActivityViewModel) : bool =
-        let name_valid = check_input_string activity_view_model.name
+    let validate_actitivy_input (activity: Activity) : bool =
+        let name_valid = check_input_string activity.name
 
         let duration_valid =
-            validate_acitivity_duration activity_view_model.min_duration activity_view_model.max_duration
+            validate_acitivity_duration activity.min_duration activity.max_duration
 
         let recurring_type_valid =
-            match activity_view_model.recurring_type with
+            match activity.recurring_type with
             | "daily"
             | "weekly"
             | "monthly" -> true
             | _ -> false
 
-        let recurring_interval_valid = activity_view_model.recurring_interval >= 0
+        let recurring_interval_valid = activity.recurring_interval >= 0
 
 
         let weekday_constraint_valid =
-            validate_activity_weekday_constraint activity_view_model.weekday_constraint
+            validate_activity_weekday_constraint activity.weekday_constraint
 
         name_valid
         && duration_valid
@@ -59,7 +59,7 @@ module ActivityInputValidator =
         && recurring_type_valid
         && weekday_constraint_valid
 
-    let validate_activity_patch_input (activity_view_model: ActivityViewModel) (activity: Activity) user_id : bool =
+    let validate_activity_patch_input (new_activity: Activity) (activity: Activity) user_id : bool =
         let owner_valid = activity.user_id = user_id
-        let view_model_valid = validate_actitivy_input activity_view_model
+        let view_model_valid = validate_actitivy_input new_activity
         owner_valid && view_model_valid

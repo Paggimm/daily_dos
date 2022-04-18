@@ -18,35 +18,36 @@ module ActivityDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
-    /// Create a new Activity
-    let insert_activity id activity_view_model =
-        insert {
-            table "activities"
-
-            value
-                { user_id = id
-                  name = activity_view_model.name
-                  max_duration = activity_view_model.max_duration
-                  min_duration = activity_view_model.min_duration
-                  weekday_constraint = activity_view_model.weekday_constraint
-                  recurring_type = activity_view_model.recurring_type
-                  recurring_interval = activity_view_model.recurring_interval
-                  create_time = DateTime.Now.ToUniversalTime() }
-        }
-        |> db_connection.InsertAsync
-        |> Async.AwaitTask
-        |> Async.RunSynchronously
-        |> ignore
-
     /// Return specific Activity
     let get_activity_by_id (id: int) =
         select {
             table "activities"
             where (eq "id" id)
+            take 1
         }
         |> db_connection.SelectAsync<Activity>
         |> Async.AwaitTask
         |> Async.RunSynchronously
+
+    /// Create a new Activity
+    let insert_activity user_id activity =
+        insert {
+            table "activities"
+
+            value
+                {| user_id = user_id
+                   name = activity.name
+                   max_duration = activity.max_duration
+                   min_duration = activity.min_duration
+                   weekday_constraint = activity.weekday_constraint
+                   recurring_type = activity.recurring_type
+                   recurring_interval = activity.recurring_interval
+                   create_time = DateTime.Now.ToUniversalTime() |}
+        }
+        |> db_connection.InsertAsync
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+        |> ignore
 
     /// Delete specific Activity
     let delete_activity_by_id (id: int) =
@@ -59,20 +60,20 @@ module ActivityDao =
         |> Async.RunSynchronously
 
     /// Update specific Activity
-    let update_activity activity_id user_id activity_view_model =
+    let update_activity activity_id user_id activity =
         update {
             table "activities"
             where (eq "id" activity_id)
 
             set
-                { user_id = user_id
-                  name = activity_view_model.name
-                  max_duration = activity_view_model.max_duration
-                  min_duration = activity_view_model.min_duration
-                  weekday_constraint = activity_view_model.weekday_constraint
-                  recurring_type = activity_view_model.recurring_type
-                  recurring_interval = activity_view_model.recurring_interval
-                  create_time = DateTime.Now.ToUniversalTime() }
+                {| user_id = user_id
+                   name = activity.name
+                   max_duration = activity.max_duration
+                   min_duration = activity.min_duration
+                   weekday_constraint = activity.weekday_constraint
+                   recurring_type = activity.recurring_type
+                   recurring_interval = activity.recurring_interval
+                   create_time = DateTime.Now.ToUniversalTime() |}
         }
         |> db_connection.UpdateAsync
         |> Async.AwaitTask
