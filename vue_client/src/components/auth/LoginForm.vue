@@ -11,7 +11,7 @@
               class="input block"
               required="required"
               type="text"
-            />
+            >
             <span class="icon is-small is-left">
               <i class="fas fa-user" />
             </span>
@@ -26,12 +26,15 @@
               class="input block"
               required="required"
               type="password"
-            />
+            >
             <span class="icon is-small is-left">
               <i class="fas fa-lock" />
             </span>
           </div>
-          <p v-if="invalidLogin" class="help is-danger">
+          <p
+            v-if="invalidLogin"
+            class="help is-danger"
+          >
             This login is invalid
           </p>
         </div>
@@ -42,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { VueWithStore } from "@/store";
+import { VuexHandler } from "@/store/store";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { defineComponent } from "vue";
 
@@ -53,7 +56,7 @@ export default defineComponent({
       username: "",
       password: "",
       invalidLogin: false,
-      vueStore: new VueWithStore(),
+      vuexHandler: new VuexHandler(),
     };
   },
   methods: {
@@ -71,7 +74,7 @@ export default defineComponent({
           case 200:
             {
               const body: LoginResponse = await response.json();
-              this.vueStore.mutations.setToken(body.token);
+              this.vuexHandler.mutations.setToken(body.token);
             }
             break;
           case 401:

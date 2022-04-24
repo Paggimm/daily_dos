@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts">
-import { VueWithStore } from "./../../store";
-import { fetchWithTimeout } from "./../../utils";
+import { VuexHandler } from "../../store/store";
+import { fetchRequest } from "./../../utils";
 import { defineComponent } from "vue";
 
 // TODO: generate? Move into own file?
@@ -30,7 +30,7 @@ export default defineComponent({
       online: false,
       authenticated: false,
       intervalPid: undefined as number | undefined,
-      vueStore: new VueWithStore(),
+      vuexHandler: new VuexHandler(),
     };
   },
   mounted() {
@@ -48,22 +48,13 @@ export default defineComponent({
       await this.ping(true);
     },
     async ping(check_auth: boolean): Promise<void> {
-      const headers = new Headers();
-      headers.append("pragma", "no-cache");
-      headers.append("cache-control", "no-cache");
-      headers.append("Authorization", `Bearer ${this.vueStore.state.token}`);
-
-      const myInit = {
-        method: "GET",
-        headers: headers,
-      };
-
       let result: boolean;
       try {
-        const response = await fetchWithTimeout(
+        const response = await fetchRequest(
           "http://localhost:8085/" + (check_auth ? "authping" : "ping"),
-          myInit,
-          5000
+          "",
+          "GET",
+          this.vuexHandler.state.token
         );
         if (response.status === 200) {
           const body: PingResponse = await response.json();
