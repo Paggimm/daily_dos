@@ -1,5 +1,6 @@
 namespace DailyDos.Api
 
+open ActivityRequesthandler
 open Giraffe
 open UserRequesthandler
 open AuthRequestHandler
@@ -10,6 +11,7 @@ open AuthRequestHandler
 module Routing =
     let webApp: HttpHandler =
         choose [
+            // USER
             subRoute
                 "/user"
                 (choose [
@@ -22,6 +24,31 @@ module Routing =
                             routef "/%i" UserRequesthandler.get_user_by_id
                         ]
                  ])
+            subRoute "/activity" AuthRequestHandler.authorize
+            >=> (choose [
+                     GET
+                     >=> choose [
+                             // get a List of a Users Activity-List
+                             routex "(/?)"
+                             >=> ActivityRequesthandler.get_all_activities
+
+                             routef "/%i" ActivityRequesthandler.get_activity
+                         ]
+                     POST
+                     >=> choose [
+                             routex "(/?)"
+                             >=> ActivityRequesthandler.post_activity
+                         ]
+                     DELETE
+                     >=> choose [
+                             routef "/%i" ActivityRequesthandler.delete_activity
+                         ]
+                     PATCH
+                     >=> choose [
+                             routef "/%i" ActivityRequesthandler.patch_activity
+                         ]
+                 ])
+            // SERVER STATUS
             GET
             >=> choose [
                     // Ping Server Status
@@ -32,12 +59,15 @@ module Routing =
                     >=> json {| online = true |}
 
                     ]
+            // AUTH
             POST
             >=> choose [
                     // Login - Erzeugt ein JWT-Token
-                    route "/login" >=> AuthRequestHandler.handlePostToken
+                    route "/login"
+                    >=> AuthRequestHandler.handlePostToken
                     // Registriere einen neuen User
-                    route "/register" >=> AuthRequestHandler.registerUser
+                    route "/register"
+                    >=> AuthRequestHandler.registerUser
                 ]
             setStatusCode 404 >=> text "Not Found"
         ]

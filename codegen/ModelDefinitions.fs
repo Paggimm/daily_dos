@@ -20,13 +20,26 @@ module ModelDefinitions =
         |> Model.withProperty "email" GString
         |> Model.withProperty "password" GString
 
-    let private LoginViewModel = 
+    let private LoginViewModel =
         Model.create "LoginViewModel"
         |> Model.withProperty "name" GString
         |> Model.withProperty "password" GString
+
+    let private Activity =
+        Model.create "Activity"
+        |> Model.withProperty "id" GInt
+        |> Model.withProperty "user_id" GInt
+        |> Model.withProperty "name" GString
+        |> Model.withProperty "min_duration" GInt
+        |> Model.withProperty "max_duration" GInt
+        |> Model.withProperty "weekday_constraint" GString
+        |> Model.withProperty "recurring_type" GString
+        |> Model.withProperty "recurring_interval" GInt
+        |> Model.withProperty "create_time" GDate
 
     let get =
         [ LoginResponse
           UserModel
           RegisterModel
-          LoginViewModel ]
+          LoginViewModel
+          Activity ]

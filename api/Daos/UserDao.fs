@@ -1,15 +1,14 @@
-namespace DatabaseService
+namespace UserDao
 
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open DailyDos.Generated
 open Npgsql
 
-/// Service Module for User related Querys
-module UserDatabaseService =
-    let private db_connection =
-        new NpgsqlConnection("Server=postgres;Port=5432;Database=dailydos;User id=postgres;Password=postgres;")
+open BaseDao
 
+/// Service Module for User related Querys
+module UserDao =
     /// Return all Users found in the Database
     let get_all_users =
         select { table "users" }
@@ -27,16 +26,29 @@ module UserDatabaseService =
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
-    let get_login_viewmodel_by_name name =
+    /// Return a Users Password
+    let get_user_password user_name =
+        select {
+            table "users"
+            where (eq "name" user_name)
+            take 1
+        }
+        |> db_connection.SelectAsync<{| password: string |}>
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
+
+    /// Return a User by his Username
+    let get_user_by_name name =
         select {
             table "users"
             where (eq "name" name)
             take 1
         }
-        |> db_connection.SelectAsync<LoginViewModel>
+        |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
+    /// Create a new user
     let insert_new_user (name: string) (password: string) =
         insert {
             table "users"

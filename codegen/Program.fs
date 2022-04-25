@@ -10,34 +10,30 @@ module FsGenerator =
         [ "[<CLIMutable>]"
           $"type %s{model.name} = {{"
           for prop in model.properties do
-              let typ =
-                  FsType.fromGenType prop.typ |> FsType.toFs
+              let typ = FsType.fromGenType prop.typ |> FsType.toFs
 
               $"    %s{prop.name}: %s{typ}"
           $"}}" ]
 
-    let instance = {
-        fileHeader = [ "namespace DailyDos.Generated" ]
-        outputPath = "./api/generated/models.fs"
-        generateModel = generateModel
-    }
+    let instance =
+        { fileHeader = [ "namespace DailyDos.Generated \nopen System" ]
+          outputPath = "./api/generated/models.fs"
+          generateModel = generateModel }
 
 /// Contains everything to generate TypeScript from the definitions
 module TsGenerator =
     let generateModel model =
         [ $"export interface %s{model.name} {{"
           for prop in model.properties do
-              let typ =
-                  TsType.fromGenType prop.typ |> TsType.toTs
+              let typ = TsType.fromGenType prop.typ |> TsType.toTs
 
               $"    %s{prop.name}: %s{typ};"
           $"}}" ]
 
-    let instance = {
-        fileHeader = []
-        outputPath = "./vue_client/src/generated/models.ts"
-        generateModel = generateModel
-    }
+    let instance =
+        { fileHeader = []
+          outputPath = "./vue_client/src/generated/models.ts"
+          generateModel = generateModel }
 
 /// Contains the entry point of the program
 module Program =

@@ -1,7 +1,14 @@
 import { MutationTree, Store } from 'vuex'
-import { MutationTypes } from './mutation-types'
-import { State, store } from '../store'
+import { State, store } from './store'
 
+enum MutationTypes
+{
+    SET_TOKEN = 'SET_TOKEN'
+}
+
+/**
+ * sontains every store-mutation definition
+ */
 export const mutations: MutationTree<State> = {
     [MutationTypes.SET_TOKEN](state, token: string)
     {
@@ -10,9 +17,12 @@ export const mutations: MutationTree<State> = {
     }
 }
 
+/**
+ * wrapperclass for smoother Access to vuex mutations
+ */
 export class Mutations
 {
-    private store
+    protected store
 
     public constructor(store: Store<State>)
     {

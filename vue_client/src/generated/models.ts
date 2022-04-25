@@ -18,3 +18,15 @@ export interface LoginViewModel {
     name: string;
     password: string;
 }
+
+export interface Activity {
+    id: number;
+    user_id: number;
+    name: string;
+    min_duration: number;
+    max_duration: number;
+    weekday_constraint: string;
+    recurring_type: string;
+    recurring_interval: number;
+    create_time: Date;
+}

@@ -9,6 +9,7 @@ type GeneratorType =
     | GInt
     | GFloat
     | GString
+    | GDate
     | GList of GeneratorType
 
 /// Supported types in F#
@@ -16,6 +17,7 @@ type FsType =
     | FsInt
     | FsFloat
     | FsString
+    | FsDate
     | FsList of FsType
 
 /// Contains helper functions for FsType type
@@ -28,6 +30,7 @@ module FsType =
             | GFloat -> wrapper FsFloat
             | GString -> wrapper FsString
             | GList listType -> helper (wrapper >> FsList) listType
+            | GDate -> wrapper FsDate
 
         helper id typ
 
@@ -39,6 +42,7 @@ module FsType =
             | FsFloat -> "float"
             | FsString -> "string"
             | FsList listType -> helper (wrapper >> (fun s -> s + " list")) listType
+            | FsDate -> "DateTime"
 
         helper id typ
 
@@ -46,6 +50,7 @@ module FsType =
 type TsType =
     | TsNumber
     | TsString
+    | TsDate
     | TsList of TsType
 
 /// Contains helper functions for the TsType type
@@ -57,6 +62,7 @@ module TsType =
             | GInt -> wrapper TsNumber
             | GFloat -> wrapper TsNumber
             | GString -> wrapper TsString
+            | GDate -> wrapper TsDate
             | GList listType -> helper (wrapper >> TsList) listType
 
         helper id typ
@@ -67,6 +73,7 @@ module TsType =
             match typ with
             | TsNumber -> "number"
             | TsString -> "string"
+            | TsDate -> "Date"
             | TsList listType -> helper (wrapper >> (fun s -> s + "[]")) listType
 
         helper id typ
@@ -87,13 +94,11 @@ module Model =
     /// Returns a new model with given property added
     let withProperty name typ model =
         let property = { name = name; typ = typ }
-        { model with
-              properties = List.append model.properties [ property ] }
+        { model with properties = List.append model.properties [ property ] }
 
 /// Everything you need to use a generator. Contains the generator itself and
 /// stuff you need to configure
-type Generator = {
-    fileHeader: Line list
-    outputPath: string
-    generateModel: Model -> Line list
-}
+type Generator =
+    { fileHeader: Line list
+      outputPath: string
+      generateModel: Model -> Line list }

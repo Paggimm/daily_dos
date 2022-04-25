@@ -1,25 +1,30 @@
 namespace DailyDos.Generated
 
-[<CLIMutable>]
-type LoginResponse = {
-    token: string
-}
+open System
 
 [<CLIMutable>]
-type User = {
-    id: int
-    name: string
-}
+type LoginResponse = { token: string }
 
 [<CLIMutable>]
-type RegisterData = {
-    name: string
-    email: string
-    password: string
-}
+type User = { id: int; name: string }
 
 [<CLIMutable>]
-type LoginViewModel = {
-    name: string
-    password: string
-}
+type RegisterData =
+    { name: string
+      email: string
+      password: string }
+
+[<CLIMutable>]
+type LoginViewModel = { name: string; password: string }
+
+[<CLIMutable>]
+type Activity =
+    { id: int
+      user_id: int
+      name: string
+      min_duration: int
+      max_duration: int
+      weekday_constraint: string
+      recurring_type: string
+      recurring_interval: int
+      create_time: DateTime }

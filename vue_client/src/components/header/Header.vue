@@ -9,22 +9,52 @@
     </h1>
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
+      <router-link
+        v-if="!loggedIn"
+        to="/login"
+      >
+        Login
+      </router-link> |
+      <router-link
+        v-if="!loggedIn"
+        to="/register"
+      >
+        Register
+      </router-link> |
       <router-link to="/about">About</router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import { VuexHandler } from "@/store/store";
 
-export default defineComponent({});
+export default defineComponent({
+  setup() {
+    const vuexHandler = new VuexHandler();
+    let loggedIn = false;
+
+    function isLoggedIn() {
+      const token = vuexHandler.state.token;
+      if (token !== undefined) {
+        return true;
+      }
+      return false;
+    }
+
+    onMounted(() => {
+      loggedIn = isLoggedIn();
+    });
+
+    return { loggedIn };
+  },
+});
 </script>
 
 <style>
 .header-container {
-  height: 18vw;
+  height: 7vw;
   position: relative;
 }
 .header-container .banner-img {
@@ -34,8 +64,8 @@ export default defineComponent({});
 }
 .header-container #nav {
   position: absolute;
-  right: 10%;
-  top: 10%;
+  right: 2vw;
+  top: 4vw;
 }
 
 #nav a {
@@ -50,9 +80,9 @@ export default defineComponent({});
 
 .nav-headline {
   position: absolute;
-  top: 20%;
-  left: 40%;
+  top: 0vw;
+  left: 2vw;
   font-weight: bold;
-  font-size: 6vw;
+  font-size: 5vw;
 }
 </style>

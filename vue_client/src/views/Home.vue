@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <HelloWorld initmsg="Diese Message wurde weiter gereicht" />
+    <!-- wait for it -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "Home",
-  components: {
-    HelloWorld,
+  components: {},
+  setup() {
+    // wait for it
   },
-};
+});
 </script>
