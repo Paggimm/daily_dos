@@ -1,6 +1,6 @@
 <template>
   <div>
-    <file-pond
+    <FilePond
       ref="pond"
       name="test"
       label-idle="Drop files here..."
@@ -13,8 +13,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, defineComponent } from "vue";
+<script setup lang="ts">
+import { Component } from "vue";
 
 // Import Vue FilePond + Plugins and Styles
 import vueFilePond from "vue-filepond";
@@ -29,19 +29,9 @@ const FilePond = vueFilePond(
   FilePondPluginImagePreview
 ) as Component;
 
-export default defineComponent({
-  name: "ImageUpload",
+function handleFilePondInit(): void {
+  console.log("FilePond has initialized");
 
-  components: {
-    FilePond,
-  },
-
-  methods: {
-    handleFilePondInit(): void {
-      console.log("FilePond has initialized");
-
-      // FilePond instance methods are available on `this.$refs.pond`
-    },
-  },
-});
+  // FilePond instance methods are available on `this.$refs.pond`
+}
 </script>

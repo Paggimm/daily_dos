@@ -9,47 +9,24 @@
     </h1>
     <nav id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link
-        v-if="!loggedIn"
-        to="/login"
-      >
-        Login
-      </router-link> |
-      <router-link
-        v-if="!loggedIn"
-        to="/register"
-      >
-        Register
-      </router-link> |
+      <template v-if="!loggedIn">
+        <router-link to="/login">
+          Login
+        </router-link> |
+        <router-link to="/register">
+          Register
+        </router-link> |
+      </template>
       <router-link to="/about">About</router-link>
     </nav>
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from "vue";
+<script setup lang="ts">
 import { VuexHandler } from "@/store/store";
 
-export default defineComponent({
-  setup() {
-    const vuexHandler = new VuexHandler();
-    let loggedIn = false;
-
-    function isLoggedIn() {
-      const token = vuexHandler.state.token;
-      if (token !== undefined) {
-        return true;
-      }
-      return false;
-    }
-
-    onMounted(() => {
-      loggedIn = isLoggedIn();
-    });
-
-    return { loggedIn };
-  },
-});
+const vuexHandler = new VuexHandler();
+const loggedIn = vuexHandler.getters.isLoggedIn;
 </script>
 
 <style>

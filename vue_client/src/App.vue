@@ -1,19 +1,14 @@
 <template>
   <div>
-    <header-component />
+    <Header />
+    <ServerStatus />
     <router-view />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import Header from "./components/header/Header.vue";
-
-export default defineComponent({
-  components: {
-    "header-component": Header,
-  },
-});
+import ServerStatus from "./components/server/ServerStatus.vue";
 </script>
 
 <style>

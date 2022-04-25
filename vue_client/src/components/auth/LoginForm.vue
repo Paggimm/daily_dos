@@ -12,7 +12,7 @@
               v-model="username"
               :class="invalidLogin ? 'is-danger' : ''"
               class="input block"
-              required="required"
+              required
               type="text"
             >
             <span class="icon is-small is-left">
@@ -27,7 +27,7 @@
               v-model="password"
               :class="invalidLogin ? 'is-danger' : ''"
               class="input block"
-              required="required"
+              required
               type="password"
             >
             <span class="icon is-small is-left">

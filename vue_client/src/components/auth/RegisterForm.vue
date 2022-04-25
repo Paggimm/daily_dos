@@ -1,14 +1,14 @@
 <template>
   <div class="register-container">
-    <image-upload />
+    <ImageUpload />
     <form @submit.prevent="submit">
       <div class="field">
         <label class="label">Username</label>
         <div class="control">
           <input
-            v-model="register_data.username"
+            v-model="register_data.name"
             class="input block"
-            required="required"
+            required
             type="text"
           >
         </div>
@@ -19,7 +19,7 @@
           <input
             v-model="register_data.email"
             class="input block"
-            required="required"
+            required
             type="text"
           >
         </div>
@@ -30,7 +30,7 @@
           <input
             v-model="register_data.password"
             class="input block"
-            required="required"
+            required
             type="password"
           >
         </div>
@@ -40,35 +40,23 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { RegisterData } from "@/generated/models";
-import { defineComponent } from "vue";
 import ImageUpload from "../input/ImageUpload.vue";
 
-export default defineComponent({
-  components: {
-    ImageUpload,
-  },
+const register_data: RegisterData = {
+  email: "",
+  password: "",
+  name: "",
+};
 
-  data() {
-    return {
-      register_data: {
-        email: "",
-        password: "",
-        name: "",
-      } as RegisterData,
-    };
-  },
+async function register(register_data: RegisterData): Promise<void> {
+  console.log("tried to register with the following data:", register_data);
+}
 
-  methods: {
-    async submit() {
-      this.register(this.register_data);
-    },
-    async register(register_data: RegisterData): Promise<void> {
-      console.log("tried to register with the following data:" + register_data);
-    },
-  },
-});
+async function submit() {
+  register(register_data);
+}
 </script>
 
 <style>

@@ -1,19 +1,12 @@
 <template>
   <h1 class="title">Register</h1>
   <div class="register-form">
-    <register-form />
+    <RegisterForm />
   </div>
 </template>
 
-<script lang="ts">
-import RegisterForm from "@/components/auth/RegisterForm.vue";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  components: {
-    "register-form": RegisterForm,
-  },
-});
+<script setup lang="ts">
+import RegisterForm from "../components/auth/RegisterForm.vue";
 </script>
 <style>
 .register-form {
