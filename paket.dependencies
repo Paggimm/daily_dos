@@ -1,9 +1,12 @@
 source https://api.nuget.org/v3/index.json
 storage: none
 
-framework: net5.0
+framework: auto-detect
 
-nuget FSharp.Core ~> 5.0
-nuget Giraffe ~> 5.0
-nuget Microsoft.AspNetCore.Authentication.JwtBearer ~> 5.0
-nuget Ply ~> 0.3
+nuget FSharp.Core
+
+nuget Dapper.FSharp ~> 2
+nuget Giraffe
+nuget Microsoft.AspNetCore.Authentication.JwtBearer
+nuget npgsql
+nuget Ply

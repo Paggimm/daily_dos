@@ -1,4 +1,6 @@
 FSharp.Core
+Dapper.FSharp
 Giraffe
 Microsoft.AspNetCore.Authentication.JwtBearer
+npgsql
 Ply
