@@ -32,20 +32,19 @@ async function ping(check_auth: boolean): Promise<void> {
   let result: boolean;
   try {
     const response = await fetchRequest(
-      "http://localhost:8085/" + (check_auth ? "authping" : "ping"),
-      "",
+      check_auth ? "authping" : "ping",
+      undefined,
       "GET",
       vuexHandler.state.token
     );
     if (response.status === 200) {
       const body: PingResponse = await response.json();
       result = body.online === true;
-      //console.log("Update!");
     } else {
       result = false;
     }
   } catch (e) {
-    //console.log("Timeout!");
+    console.warn(e);
     result = false;
   }
 
@@ -56,15 +55,15 @@ async function ping(check_auth: boolean): Promise<void> {
   }
 }
 
-await ping(false);
-await ping(true);
+void ping(false);
+void ping(true);
 
 onMounted(() => {
   // For Hotreload: Delete old Interval before we add a new one
   clearInterval(intervalPid.value);
   intervalPid.value = setInterval(async () => {
-    await ping(false);
-    await ping(true);
+    void ping(false);
+    void ping(true);
   }, 10000);
-});
+})
 </script>
