@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <header class="header-container">
     <img
       class="banner-img"
       src="../../../../images/test_banner.jpg"
@@ -7,7 +7,7 @@
     <h1 class="nav-headline">
       DailyDos
     </h1>
-    <div id="nav">
+    <nav id="nav">
       <router-link to="/">Home</router-link> |
       <router-link
         v-if="!loggedIn"
@@ -22,8 +22,8 @@
         Register
       </router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-  </div>
+    </nav>
+  </header>
 </template>
 
 <script lang="ts">
