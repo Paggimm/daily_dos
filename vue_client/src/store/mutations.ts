@@ -7,7 +7,7 @@ enum MutationTypes
 }
 
 /**
- * sontains every store-mutation definition
+ * contains every store-mutation definition
  */
 export const mutations: MutationTree<State> = {
     [MutationTypes.SET_TOKEN](state, token: string)
@@ -22,7 +22,7 @@ export const mutations: MutationTree<State> = {
  */
 export class Mutations
 {
-    protected store
+    protected readonly store
 
     public constructor(store: Store<State>)
     {

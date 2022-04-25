@@ -1,7 +1,10 @@
 <template>
   <div class="columns">
     <div class="column is-one-third is-offset-one-third">
-      <form @submit.prevent="submit">
+      <form
+        v-if="!loggedIn"
+        @submit.prevent="submit"
+      >
         <div class="field">
           <label class="label">Username</label>
           <div class="control has-icons-left">
@@ -40,51 +43,47 @@
         </div>
         <button class="button is-primary">Submit</button>
       </form>
+      <p v-else>You are logged in.</p>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { VuexHandler } from "@/store/store";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
-import { defineComponent } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "LoginForm",
-  data() {
-    return {
-      username: "",
-      password: "",
-      invalidLogin: false,
-      vuexHandler: new VuexHandler(),
-    };
-  },
-  methods: {
-    async submit(): Promise<void> {
-      this.invalidLogin = false;
-      await this.getToken({ name: this.username, password: this.password });
-    },
-    async getToken(request: LoginViewModel): Promise<void> {
-      try {
-        const response = await fetch("http://localhost:8085/login", {
-          body: JSON.stringify(request),
-          method: "POST",
-        });
-        switch (response.status) {
-          case 200:
-            {
-              const body: LoginResponse = await response.json();
-              this.vuexHandler.mutations.setToken(body.token);
-            }
-            break;
-          case 401:
-            this.invalidLogin = true;
-            break;
+const username = ref("");
+const password = ref("");
+const invalidLogin = ref(false);
+const vuexHandler = new VuexHandler();
+
+const loggedIn = vuexHandler.getters.isLoggedIn;
+
+async function getToken(request: LoginViewModel): Promise<void> {
+  try {
+    const response = await fetch("http://localhost:8085/login", {
+      body: JSON.stringify(request),
+      method: "POST",
+    });
+    switch (response.status) {
+      case 200:
+        {
+          const body: LoginResponse = await response.json();
+          vuexHandler.mutations.setToken(body.token);
         }
-      } catch (e) {
-        console.log(e);
-      }
-    },
-  },
-});
+        break;
+      case 401:
+        invalidLogin.value = true;
+        break;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function submit(): Promise<void> {
+  invalidLogin.value = false;
+  await getToken({ name: username.value, password: password.value });
+}
 </script>

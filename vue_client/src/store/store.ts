@@ -1,5 +1,6 @@
 import * as Vue from 'vue'
 import { createStore, useStore as baseUseStore, Store as VuexStore } from 'vuex'
+import { Getters, getters } from './getters'
 import { Mutations, mutations } from './mutations'
 
 
@@ -16,6 +17,7 @@ export const key: Vue.InjectionKey<VuexStore<State>> = Symbol()
  * initializes a store with default values
  */
 export const store = createStore<State>({
+    getters: getters,
     mutations: mutations,
     state: {
         token: undefined
@@ -34,7 +36,8 @@ function useStore(): VuexStore<State>
  */
 export class VuexHandler
 {
-    private readonly store = useStore()
+    public readonly store = useStore()
     public readonly state = store.state
-    public mutations = new Mutations(store)
+    public readonly getters = new Getters(store)
+    public readonly mutations = new Mutations(store)
 }
