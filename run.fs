@@ -71,7 +71,7 @@ module private Task =
         job {
             dotnet [
                 "run"
-                "-p"
+                "--project"
                 Config.codegenProject
             ]
             // Format generated F# code
@@ -93,7 +93,7 @@ module private Task =
                     "dotnet"
                     [ "watch"
                       "run"
-                      "-p"
+                      "--project"
                       Config.serverProject ]
                 |> startAsJob'
 
