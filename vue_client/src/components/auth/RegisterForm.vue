@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { RegisterData } from "@/generated/models";
-import ImageUpload from "../input/ImageUpload.vue";
+import ImageUpload from "@/components/input/ImageUpload.vue";
 
 const register_data: RegisterData = {
   email: "",

@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from "../../store/AuthStore";
+import { useAuthStore } from "@/store/AuthStore";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { ref } from "vue";
 

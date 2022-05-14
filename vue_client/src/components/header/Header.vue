@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from "../../store/AuthStore";
+import { useAuthStore } from "@/store/AuthStore";
 
 const authStore = useAuthStore();
 const loggedIn = authStore.isLoggedIn;

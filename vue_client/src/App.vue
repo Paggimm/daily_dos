@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import Header from "./components/header/Header.vue";
-import ServerStatus from "./components/server/ServerStatus.vue";
+import Header from "@/components/header/Header.vue";
+import ServerStatus from "@/components/server/ServerStatus.vue";
 </script>
 
 <style>

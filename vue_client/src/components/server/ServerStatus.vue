@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from "../../store/AuthStore";
-import { fetchRequest } from "./../../utils";
+import { useAuthStore } from "@/store/AuthStore";
+import { fetchRequest } from "@/utils";
 import { onMounted, ref } from "vue";
 
 // TODO: generate? Move into own file?
