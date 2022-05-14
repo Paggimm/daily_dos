@@ -49,16 +49,16 @@
 </template>
 
 <script setup lang="ts">
-import { VuexHandler } from "@/store/store";
+import { useAuthStore } from "../../store/AuthStore";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { ref } from "vue";
 
 const username = ref("");
 const password = ref("");
 const invalidLogin = ref(false);
-const vuexHandler = new VuexHandler();
+const authStore = useAuthStore();
 
-const loggedIn = vuexHandler.getters.isLoggedIn;
+const loggedIn = authStore.isLoggedIn;
 
 async function getToken(request: LoginViewModel): Promise<void> {
   try {
@@ -70,7 +70,7 @@ async function getToken(request: LoginViewModel): Promise<void> {
       case 200:
         {
           const body: LoginResponse = await response.json();
-          vuexHandler.mutations.setToken(body.token);
+          authStore.setToken(body.token);
         }
         break;
       case 401:

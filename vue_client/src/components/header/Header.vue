@@ -23,10 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { VuexHandler } from "@/store/store";
+import { useAuthStore } from "../../store/AuthStore";
 
-const vuexHandler = new VuexHandler();
-const loggedIn = vuexHandler.getters.isLoggedIn;
+const authStore = useAuthStore();
+const loggedIn = authStore.isLoggedIn;
 </script>
 
 <style>

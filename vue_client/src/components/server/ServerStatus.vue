@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { VuexHandler } from "../../store/store";
+import { useAuthStore } from "../../store/AuthStore";
 import { fetchRequest } from "./../../utils";
 import { onMounted, ref } from "vue";
 
@@ -26,7 +26,7 @@ interface PingResponse {
 const intervalPid = ref<number>();
 const online = ref(false);
 const authenticated = ref(false);
-const vuexHandler = new VuexHandler();
+const authStore = useAuthStore();
 
 async function ping(check_auth: boolean): Promise<void> {
   let result: boolean;
@@ -35,7 +35,7 @@ async function ping(check_auth: boolean): Promise<void> {
       check_auth ? "authping" : "ping",
       undefined,
       "GET",
-      vuexHandler.state.token
+      authStore.getToken
     );
     if (response.status === 200) {
       const body: PingResponse = await response.json();
@@ -65,5 +65,5 @@ onMounted(() => {
     void ping(false);
     void ping(true);
   }, 10000);
-})
+});
 </script>
