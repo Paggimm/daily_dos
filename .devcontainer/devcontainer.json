@@ -18,13 +18,13 @@
 		"ms-dotnettools.csharp",
 		"Ionide.Ionide-fsharp",
 		"dbaeumer.vscode-eslint",
-		"octref.vetur",
 		"ecmel.vscode-html-css",
 		"rohit-gohri.format-code-action",
 		"ms-azuretools.vscode-docker",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg",
-		"mhutchie.git-graph"
+		"mhutchie.git-graph",
+		"vue.volar"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
