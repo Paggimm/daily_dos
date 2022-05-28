@@ -1,15 +1,17 @@
 <template>
   <div class="server-status-container">
-    Server:
-    <span
-      :class="online ? 'has-text-success' : 'has-text-danger'"
-      v-text="online ? 'online' : 'offline'"
-    />
-    | Authenticated:
-    <span
-      :class="authenticated ? 'has-text-success' : 'has-text-danger'"
-      v-text="authenticated ? 'yes' : 'no'"
-    />
+    <div class="server-status-content">
+      Server:
+      <span
+        :class="online ? 'has-text-success' : 'has-text-danger'"
+        v-text="online ? 'online' : 'offline'"
+      />
+      | Authenticated:
+      <span
+        :class="authenticated ? 'has-text-success' : 'has-text-danger'"
+        v-text="authenticated ? 'yes' : 'no'"
+      />
+    </div>
   </div>
 </template>
 
@@ -67,3 +69,18 @@ onMounted(() => {
   }, 10000);
 });
 </script>
+<style scoped>
+.server-status-container {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+}
+
+.server-status-content {
+  background-color: aliceblue;
+  position: relative;
+  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>

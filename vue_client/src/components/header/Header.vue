@@ -7,26 +7,44 @@
     <h1 class="nav-headline">
       DailyDos
     </h1>
+    <!-- router links -->
     <nav id="nav">
-      <router-link to="/">Home</router-link> |
-      <template v-if="!loggedIn">
-        <router-link to="/login">
-          Login
-        </router-link> |
-        <router-link to="/register">
-          Register
-        </router-link> |
-      </template>
+      <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
+      <router-link
+        v-if="!loggedIn"
+        to="/login"
+      >
+        Login
+      </router-link>
+      <router-link
+        v-if="!loggedIn"
+        to="/register"
+      >
+        Register
+      </router-link>
+      <router-link
+        v-if="loggedIn"
+        to="/about"
+      >
+        MeinAccount
+      </router-link>
+      <router-link
+        v-if="loggedIn"
+        to="/about"
+      >
+        Logout
+      </router-link>
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from "@/store/AuthStore";
+import { computed } from "vue";
 
 const authStore = useAuthStore();
-const loggedIn = authStore.isLoggedIn;
+const loggedIn = computed((): boolean => authStore.isLoggedIn);
 </script>
 
 <style>
@@ -49,6 +67,7 @@ const loggedIn = authStore.isLoggedIn;
   font-weight: bold;
   color: #2c3e50;
   font-size: 1.5vw;
+  margin-right: 0.6vw;
 }
 
 #nav a.router-link-exact-active {
