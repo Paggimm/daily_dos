@@ -13,5 +13,6 @@ export const useAuthStore = defineStore('authStore', {
         {
             this.token = token
         }
-    }
+    },
+    persist: true,
 })

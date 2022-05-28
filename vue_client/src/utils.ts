@@ -37,5 +37,5 @@ export async function fetchRequest(uri: string, body: string | FormData | undefi
         body,
     }
 
-    return fetchWithTimeout("http://localhost:8085/" + uri, requestInit, 5000)
+    return fetchWithTimeout("http://localhost:8085/" + uri, requestInit, 15000)
 }
