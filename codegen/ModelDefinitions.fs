@@ -28,14 +28,14 @@ module ModelDefinitions =
     let private Activity =
         Model.create "Activity"
         |> Model.withProperty "id" GInt
-        |> Model.withProperty "user_id" GInt
+        |> Model.withProperty "userId" GInt
         |> Model.withProperty "name" GString
-        |> Model.withProperty "min_duration" GInt
-        |> Model.withProperty "max_duration" GInt
-        |> Model.withProperty "weekday_constraint" GString
-        |> Model.withProperty "recurring_type" GString
-        |> Model.withProperty "recurring_interval" GInt
-        |> Model.withProperty "create_time" GDate
+        |> Model.withProperty "minDuration" GInt
+        |> Model.withProperty "maxDuration" GInt
+        |> Model.withProperty "weekdayConstraint" GString
+        |> Model.withProperty "recurringType" GString
+        |> Model.withProperty "recurringInterval" GInt
+        |> Model.withProperty "createTime" GDate
 
     let get =
         [ LoginResponse

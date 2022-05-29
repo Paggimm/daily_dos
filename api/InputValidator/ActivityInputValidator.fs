@@ -38,20 +38,20 @@ module ActivityInputValidator =
         let nameValid = CheckInputString activity.name
 
         let durationValid =
-            ValidateActivityDuration activity.min_duration activity.max_duration
+            ValidateActivityDuration activity.minDuration activity.maxDuration
 
         let recurringTypeValid =
-            match activity.recurring_type with
+            match activity.recurringType with
             | "daily"
             | "weekly"
             | "monthly" -> true
             | _ -> false
 
-        let recurringIntervalValid = activity.recurring_interval >= 0
+        let recurringIntervalValid = activity.recurringInterval >= 0
 
 
         let weekdayConstraintValid =
-            ValidateActivityWeekdayConstraint activity.weekday_constraint
+            ValidateActivityWeekdayConstraint activity.weekdayConstraint
 
         nameValid
         && durationValid
@@ -59,7 +59,7 @@ module ActivityInputValidator =
         && recurringTypeValid
         && weekdayConstraintValid
 
-    let ValidateActivityPatchInput (newActivity: Activity) (activity: Activity) user_id : bool =
-        let ownerValid = activity.user_id = user_id
+    let ValidateActivityPatchInput (newActivity: Activity) (activity: Activity) userId : bool =
+        let ownerValid = activity.userId = userId
         let viewModelValid = ValidateActivityInput newActivity
         ownerValid && viewModelValid

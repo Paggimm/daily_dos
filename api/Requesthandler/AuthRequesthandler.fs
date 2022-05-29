@@ -22,13 +22,13 @@ module AuthRequestHandler =
     /// generate a jwt-Token from Input
     let private GenerateToken (user: User) =
         let claims =
-            [| Claim(CLAIM_TYPES.NAME.ToString(), user.name)
-               Claim(CLAIM_TYPES.ID.ToString(), user.id.ToString()) |]
+            [| Claim(ClaimType.Name.ToString(), user.name)
+               Claim(ClaimType.Id.ToString(), user.id.ToString()) |]
 
         let expires = Nullable(DateTime.UtcNow.AddHours(168.0))
         let notBefore = Nullable(DateTime.UtcNow)
 
-        let securityKey = SymmetricSecurityKey(Encoding.UTF8.GetBytes(Consts.secret))
+        let securityKey = SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
 
         let signingCredentials =
             SigningCredentials(key = securityKey, algorithm = SecurityAlgorithms.HmacSha256)

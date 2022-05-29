@@ -21,12 +21,12 @@ export interface LoginViewModel {
 
 export interface Activity {
     id: number;
-    user_id: number;
+    userId: number;
     name: string;
-    min_duration: number;
-    max_duration: number;
-    weekday_constraint: string;
-    recurring_type: string;
-    recurring_interval: number;
-    create_time: Date;
+    minDuration: number;
+    maxDuration: number;
+    weekdayConstraint: string;
+    recurringType: string;
+    recurringInterval: number;
+    createTime: Date;
 }

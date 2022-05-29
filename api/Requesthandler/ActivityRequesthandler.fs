@@ -46,7 +46,7 @@ module ActivityRequesthandler =
             let oldActivity = ActivityDao.GetActivityById id
 
             if (oldActivity.Count() > 0
-                && oldActivity.First().user_id = AuthService.GetUserIdFromContext ctx) then
+                && oldActivity.First().userId = AuthService.GetUserIdFromContext ctx) then
                 let result = ActivityDao.DeleteActivityById id
 
                 match result with

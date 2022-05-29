@@ -12,7 +12,7 @@ module ActivityDao =
     let GetAllActivitiesByUserId (id: int) =
         select {
             table "activities"
-            where (eq "user_id" id)
+            where (eq "userId" id)
         }
         |> db_connection.SelectAsync<Activity>
         |> Async.AwaitTask
@@ -35,14 +35,14 @@ module ActivityDao =
             table "activities"
 
             value
-                {| user_id = userId
+                {| userId = userId
                    name = activity.name
-                   max_duration = activity.max_duration
-                   min_duration = activity.min_duration
-                   weekday_constraint = activity.weekday_constraint
-                   recurring_type = activity.recurring_type
-                   recurring_interval = activity.recurring_interval
-                   create_time = DateTime.Now.ToUniversalTime() |}
+                   maxDuration = activity.maxDuration
+                   minDuration = activity.minDuration
+                   weekdayConstraint = activity.weekdayConstraint
+                   recurringType = activity.recurringType
+                   recurringInterval = activity.recurringInterval
+                   createTime = DateTime.Now.ToUniversalTime() |}
         }
         |> db_connection.InsertAsync
         |> Async.AwaitTask
@@ -66,14 +66,14 @@ module ActivityDao =
             where (eq "id" activityId)
 
             set
-                {| user_id = userId
+                {| userId = userId
                    name = activity.name
-                   max_duration = activity.max_duration
-                   min_duration = activity.min_duration
-                   weekday_constraint = activity.weekday_constraint
-                   recurring_type = activity.recurring_type
-                   recurring_interval = activity.recurring_interval
-                   create_time = DateTime.Now.ToUniversalTime() |}
+                   maxDuration = activity.maxDuration
+                   minDuration = activity.minDuration
+                   weekdayConstraint = activity.weekdayConstraint
+                   recurringType = activity.recurringType
+                   recurringInterval = activity.recurringInterval
+                   createTime = DateTime.Now.ToUniversalTime() |}
         }
         |> db_connection.UpdateAsync
         |> Async.AwaitTask

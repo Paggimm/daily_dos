@@ -28,8 +28,8 @@ module AuthService =
 
     /// returns the user_id from the current user
     let GetUserIdFromContext (ctx: HttpContext) =
-        let id_claim: Claim =
+        let idClaim: Claim =
             ctx.User.Claims
-            |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())
+            |> Seq.find (fun claim -> claim.Type = ClaimType.Id.ToString())
 
-        id_claim.Value |> int
+        idClaim.Value |> int

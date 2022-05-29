@@ -1,20 +1,20 @@
 /* USER TABLE */
 create table if not exists users (
-	id serial primary key,
-	name varchar(30) unique not null,
-	password varchar(100) not null
+	"id" serial primary key,
+	"name" varchar(30) unique not null,
+	"password" varchar(100) not null
 );
 /* ACTIVITIES TABLE */
 create table if not exists activities (
-	id serial primary key,
-	user_id integer references users(id),
-	name varchar(30) not null,
-	min_duration integer,
-	max_duration integer,
-	weekday_constraint VARCHAR(7),
-	recurring_type VARCHAR(10),
-	recurring_interval integer,
-	create_time timestamp
+	"id" serial primary key,
+	"userId" integer references users(id),
+	"name" varchar(30) not null,
+	"minDuration" integer,
+	"maxDuration" integer,
+	"weekdayConstraint" VARCHAR(7),
+	"recurringType" VARCHAR(10),
+	"recurringInterval" integer,
+	"createTime" timestamp
 );
 /* USER DATA */
 insert into users(name, password)
