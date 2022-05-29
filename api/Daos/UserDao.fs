@@ -10,14 +10,14 @@ open BaseDao
 /// Service Module for User related Querys
 module UserDao =
     /// Return all Users found in the Database
-    let get_all_users =
+    let GetAllUsers =
         select { table "users" }
         |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// Return a User specified by his ID
-    let get_user_by_id id =
+    let GetUserById id =
         select {
             table "users"
             where (eq "id" id)
@@ -27,10 +27,10 @@ module UserDao =
         |> Async.RunSynchronously
 
     /// Return a Users Password
-    let get_user_password user_name =
+    let GetUserPassword userName =
         select {
             table "users"
-            where (eq "name" user_name)
+            where (eq "name" userName)
             take 1
         }
         |> db_connection.SelectAsync<{| password: string |}>
@@ -38,7 +38,7 @@ module UserDao =
         |> Async.RunSynchronously
 
     /// Return a User by his Username
-    let get_user_by_name name =
+    let GetUserByName name =
         select {
             table "users"
             where (eq "name" name)
@@ -49,7 +49,7 @@ module UserDao =
         |> Async.RunSynchronously
 
     /// Create a new user
-    let insert_new_user (name: string) (password: string) =
+    let InsertNewUser (name: string) (password: string) =
         insert {
             table "users"
             value { name = name; password = password }

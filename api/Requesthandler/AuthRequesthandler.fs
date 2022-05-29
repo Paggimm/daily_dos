@@ -5,7 +5,6 @@ open FSharp.Control.Tasks
 open Giraffe
 open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Http
-open Microsoft.IdentityModel.JsonWebTokens
 open Microsoft.IdentityModel.Tokens
 open System
 open System.IdentityModel.Tokens.Jwt
@@ -21,7 +20,7 @@ open Consts
 /// RequestHandler for Authentication-Purposes
 module AuthRequestHandler =
     /// generate a jwt-Token from Input
-    let private generateToken (user: User) =
+    let private GenerateToken (user: User) =
         let claims =
             [| Claim(CLAIM_TYPES.NAME.ToString(), user.name)
                Claim(CLAIM_TYPES.ID.ToString(), user.id.ToString()) |]
@@ -49,28 +48,28 @@ module AuthRequestHandler =
         tokenResult
 
     /// Login Requesthandler
-    let handlePostToken =
+    let HandlePostToken =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! model = ctx.BindJsonAsync<LoginViewModel>()
-                let user_password_result = UserDao.get_user_password model.name
+                let userPasswordResult = UserDao.GetUserPassword model.name
 
-                if user_password_result.Count() = 0 then
+                if userPasswordResult.Count() = 0 then
                     let result = setStatusCode 401
                     return! result next ctx
                 else
-                    let user_password = user_password_result.First()
+                    let userPassword = userPasswordResult.First()
                     // sadly we need a User for identity Password Object
-                    let password_hashing_user = { id = 0; name = model.name }
+                    let passwordHashingUser = { id = 0; name = model.name }
 
-                    let password_match =
-                        AuthService.verifyPassword password_hashing_user model.password user_password.password
+                    let passwordMatch =
+                        AuthService.VerifyPassword passwordHashingUser model.password userPassword.password
 
                     let result =
-                        if password_match then
+                        if passwordMatch then
                             json (
-                                generateToken (
-                                    (UserDao.get_user_by_name password_hashing_user.name)
+                                GenerateToken(
+                                    (UserDao.GetUserByName passwordHashingUser.name)
                                         .First()
                                 )
                             )
@@ -81,11 +80,11 @@ module AuthRequestHandler =
             }
 
     /// Trys to Authorize the Present JWT-Token
-    let authorize: HttpHandler =
+    let Authorize: HttpHandler =
         requiresAuthentication (challenge JwtBearerDefaults.AuthenticationScheme)
 
     ///
-    let handleGetSecured =
+    let HandleGetSecured =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             let email = ctx.User.FindFirst ClaimTypes.NameIdentifier
 
@@ -97,11 +96,11 @@ module AuthRequestHandler =
                 ctx
 
     /// Register a new User
-    let registerUser =
+    let RegisterUser =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! register_data = ctx.BindJsonAsync<RegisterData>()
-                let user: User = { id = 0; name = register_data.name }
-                UserDao.insert_new_user register_data.name (AuthService.hashPassword user register_data.password)
+                let! registerData = ctx.BindJsonAsync<RegisterData>()
+                let user: User = { id = 0; name = registerData.name }
+                UserDao.InsertNewUser registerData.name (AuthService.HashPassword user registerData.password)
                 return! next ctx
             }

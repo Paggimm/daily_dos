@@ -9,7 +9,7 @@ open BaseDao
 
 module ActivityDao =
     /// Return all Activities from a User
-    let get_all_activities_by_user_id (id: int) =
+    let GetAllActivitiesByUserId (id: int) =
         select {
             table "activities"
             where (eq "user_id" id)
@@ -19,7 +19,7 @@ module ActivityDao =
         |> Async.RunSynchronously
 
     /// Return specific Activity
-    let get_activity_by_id (id: int) =
+    let GetActivityById (id: int) =
         select {
             table "activities"
             where (eq "id" id)
@@ -30,12 +30,12 @@ module ActivityDao =
         |> Async.RunSynchronously
 
     /// Create a new Activity
-    let insert_activity user_id activity =
+    let InsertActivity userId activity =
         insert {
             table "activities"
 
             value
-                {| user_id = user_id
+                {| user_id = userId
                    name = activity.name
                    max_duration = activity.max_duration
                    min_duration = activity.min_duration
@@ -50,7 +50,7 @@ module ActivityDao =
         |> ignore
 
     /// Delete specific Activity
-    let delete_activity_by_id (id: int) =
+    let DeleteActivityById (id: int) =
         delete {
             table "activities"
             where (eq "id" id)
@@ -60,13 +60,13 @@ module ActivityDao =
         |> Async.RunSynchronously
 
     /// Update specific Activity
-    let update_activity activity_id user_id activity =
+    let UpdateActivity activityId userId activity =
         update {
             table "activities"
-            where (eq "id" activity_id)
+            where (eq "id" activityId)
 
             set
-                {| user_id = user_id
+                {| user_id = userId
                    name = activity.name
                    max_duration = activity.max_duration
                    min_duration = activity.min_duration

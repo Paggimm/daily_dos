@@ -11,43 +11,43 @@ open ActivityDao
 open DailyDos.Api.Services.AuthService
 
 module ActivityRequesthandler =
-    let get_all_activities: HttpHandler =
+    let GetAllActivities: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let user_id = AuthService.get_user_id_from_context ctx
-            let activities = ActivityDao.get_all_activities_by_user_id user_id
+            let userId = AuthService.GetUserIdFromContext ctx
+            let activities = ActivityDao.GetAllActivitiesByUserId userId
             json activities next ctx
 
-    let post_activity: HttpHandler =
+    let PostActivity: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! input_activity = ctx.BindJsonAsync<Activity>()
-                let user_id = AuthService.get_user_id_from_context ctx
+                let! inputActivity = ctx.BindJsonAsync<Activity>()
+                let userId = AuthService.GetUserIdFromContext ctx
 
-                if ActivityInputValidator.validate_actitivy_input input_activity then
-                    ActivityDao.insert_activity user_id input_activity
+                if ActivityInputValidator.ValidateActivityInput inputActivity then
+                    ActivityDao.InsertActivity userId inputActivity
                     return! json "ok" next ctx
                 else
                     ctx.SetStatusCode 400
                     return! json "refused" next ctx
             }
 
-    let get_activity id : HttpHandler =
+    let GetActivity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let activity_enumerator = ActivityDao.get_activity_by_id id
+            let activityEnumerator = ActivityDao.GetActivityById id
 
-            if (activity_enumerator.Count() = 0) then
+            if (activityEnumerator.Count() = 0) then
                 ctx.SetStatusCode 404
                 json "no activity found" next ctx
             else
-                json (activity_enumerator.First()) next ctx
+                json (activityEnumerator.First()) next ctx
 
-    let delete_activity id : HttpHandler =
+    let DeleteActivity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let old_activity = ActivityDao.get_activity_by_id id
+            let oldActivity = ActivityDao.GetActivityById id
 
-            if (old_activity.Count() > 0
-                && old_activity.First().user_id = AuthService.get_user_id_from_context ctx) then
-                let result = ActivityDao.delete_activity_by_id id
+            if (oldActivity.Count() > 0
+                && oldActivity.First().user_id = AuthService.GetUserIdFromContext ctx) then
+                let result = ActivityDao.DeleteActivityById id
 
                 match result with
                 | 0 ->
@@ -63,16 +63,16 @@ module ActivityRequesthandler =
                 ctx.SetStatusCode 403
                 json "refused" next ctx
 
-    let patch_activity id : HttpHandler =
+    let PatchActivity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! activity = ctx.BindJsonAsync<Activity>()
-                let user_id = AuthService.get_user_id_from_context ctx
-                let old_activity = ActivityDao.get_activity_by_id id
+                let userId = AuthService.GetUserIdFromContext ctx
+                let oldActivity = ActivityDao.GetActivityById id
 
-                if old_activity.Count() > 0
-                   && ActivityInputValidator.validate_activity_patch_input activity (old_activity.First()) user_id then
-                    ActivityDao.update_activity id user_id activity
+                if oldActivity.Count() > 0
+                   && ActivityInputValidator.ValidateActivityPatchInput activity (oldActivity.First()) userId then
+                    ActivityDao.UpdateActivity id userId activity
                     return! json "successfully updated activity" next ctx
                 else
                     ctx.SetStatusCode 400

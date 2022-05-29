@@ -9,16 +9,16 @@ open DailyDos.Generated
 
 module AuthService =
     /// returns the hashed Value of a given password
-    let hashPassword user password =
-        let password_hasher = PasswordHasher<User>()
-        password_hasher.HashPassword(user, password)
+    let HashPassword user password =
+        let passwordHasher = PasswordHasher<User>()
+        passwordHasher.HashPassword(user, password)
 
     /// verifies the input password against the hashed password stored in the db
-    let verifyPassword user provided_password stored_password =
-        let password_hasher = PasswordHasher<User>()
+    let VerifyPassword user providedPassword storedPassword =
+        let passwordHasher = PasswordHasher<User>()
 
         let result =
-            password_hasher.VerifyHashedPassword(user, stored_password, provided_password)
+            passwordHasher.VerifyHashedPassword(user, storedPassword, providedPassword)
 
         if result.Equals PasswordVerificationResult.Success
            || result.Equals PasswordVerificationResult.SuccessRehashNeeded then
@@ -27,7 +27,7 @@ module AuthService =
             false
 
     /// returns the user_id from the current user
-    let get_user_id_from_context (ctx: HttpContext) =
+    let GetUserIdFromContext (ctx: HttpContext) =
         let id_claim: Claim =
             ctx.User.Claims
             |> Seq.find (fun claim -> claim.Type = CLAIM_TYPES.ID.ToString())

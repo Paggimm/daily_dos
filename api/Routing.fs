@@ -18,34 +18,34 @@ module Routing =
                     GET
                     >=> choose [
                             // get a List of all Users
-                            routex "(/?)" >=> UserRequesthandler.get_all_users
+                            routex "(/?)" >=> UserRequesthandler.GetAllUsers
 
                             // get specific User
-                            routef "/%i" UserRequesthandler.get_user_by_id
+                            routef "/%i" UserRequesthandler.GetUserById
                         ]
                  ])
-            subRoute "/activity" AuthRequestHandler.authorize
+            subRoute "/activity" AuthRequestHandler.Authorize
             >=> (choose [
                      GET
                      >=> choose [
                              // get a List of a Users Activity-List
                              routex "(/?)"
-                             >=> ActivityRequesthandler.get_all_activities
+                             >=> ActivityRequesthandler.GetAllActivities
 
-                             routef "/%i" ActivityRequesthandler.get_activity
+                             routef "/%i" ActivityRequesthandler.GetActivity
                          ]
                      POST
                      >=> choose [
                              routex "(/?)"
-                             >=> ActivityRequesthandler.post_activity
+                             >=> ActivityRequesthandler.PostActivity
                          ]
                      DELETE
                      >=> choose [
-                             routef "/%i" ActivityRequesthandler.delete_activity
+                             routef "/%i" ActivityRequesthandler.DeleteActivity
                          ]
                      PATCH
                      >=> choose [
-                             routef "/%i" ActivityRequesthandler.patch_activity
+                             routef "/%i" ActivityRequesthandler.PatchActivity
                          ]
                  ])
             // SERVER STATUS
@@ -55,7 +55,7 @@ module Routing =
                     route "/ping" >=> json {| online = true |}
                     // Ping Auth Status
                     route "/authping"
-                    >=> AuthRequestHandler.authorize
+                    >=> AuthRequestHandler.Authorize
                     >=> json {| online = true |}
 
                     ]
@@ -64,10 +64,10 @@ module Routing =
             >=> choose [
                     // Login - Erzeugt ein JWT-Token
                     route "/login"
-                    >=> AuthRequestHandler.handlePostToken
+                    >=> AuthRequestHandler.HandlePostToken
                     // Registriere einen neuen User
                     route "/register"
-                    >=> AuthRequestHandler.registerUser
+                    >=> AuthRequestHandler.RegisterUser
                 ]
             setStatusCode 404 >=> text "Not Found"
         ]
