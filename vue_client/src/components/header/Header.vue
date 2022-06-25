@@ -25,13 +25,13 @@
       </router-link>
       <router-link
         v-if="loggedIn"
-        to="/about"
+        to="/my"
       >
         MeinAccount
       </router-link>
       <router-link
         v-if="loggedIn"
-        to="/about"
+        to="/logout"
       >
         Logout
       </router-link>
