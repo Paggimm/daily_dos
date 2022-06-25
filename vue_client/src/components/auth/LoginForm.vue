@@ -52,11 +52,15 @@
 import { useAuthStore } from "@/store/AuthStore";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router"
 
 const username = ref("");
 const password = ref("");
 const invalidLogin = ref(false);
+
 const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute();
 
 const loggedIn = authStore.isLoggedIn;
 
@@ -71,6 +75,7 @@ async function getToken(request: LoginViewModel): Promise<void> {
         {
           const body: LoginResponse = await response.json();
           authStore.setToken(body.token);
+          router.push({name: "Home"});
         }
         break;
       case 401:

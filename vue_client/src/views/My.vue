@@ -1,5 +1,5 @@
 <template>
-  <div class="logout-container">
+  <div class="my-container">
     <h1>
       Mein Bereich
     </h1>
@@ -16,5 +16,5 @@ import { useAuthStore } from '@/store/AuthStore'
 const authStore = useAuthStore()
 
 </script>
-<style scoped lang="less">
+<style scoped>
 </style>

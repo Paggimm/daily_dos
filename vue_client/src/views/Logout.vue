@@ -9,6 +9,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import router from '@/router'
 import { useAuthStore } from '@/store/AuthStore'
 
 const authStore = useAuthStore()
@@ -16,8 +17,9 @@ const authStore = useAuthStore()
 function logout()
 {
     authStore.setToken('')
+    router.push({name: "Login"});
 }
 
 </script>
-<style scoped lang="less">
+<style scoped>
 </style>
