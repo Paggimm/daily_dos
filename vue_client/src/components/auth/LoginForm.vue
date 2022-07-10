@@ -52,15 +52,13 @@
 import { useAuthStore } from "@/store/AuthStore";
 import { LoginResponse, LoginViewModel } from "@/generated/models";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router"
+import router from "@/router"
 
 const username = ref("");
 const password = ref("");
 const invalidLogin = ref(false);
 
 const authStore = useAuthStore();
-const router = useRouter();
-const route = useRoute();
 
 const loggedIn = authStore.isLoggedIn;
 
