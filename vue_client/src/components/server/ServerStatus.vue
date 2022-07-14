@@ -78,9 +78,9 @@ onMounted(() => {
 
 .server-status-content {
   background-color: aliceblue;
-  position: relative;
+  position: fixed;
+  bottom: 0;
   width: 25%;
-  margin-right: auto;
-  margin-left: auto;
+  margin-left: 37.5%;
 }
 </style>
