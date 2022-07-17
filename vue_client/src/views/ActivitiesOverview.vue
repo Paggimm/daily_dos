@@ -53,7 +53,7 @@ import NewActivityForm from '@/components/activities/NewActivityForm.vue';
         margin: 1vw;
         aspect-ratio: 5;
         width: 40%;
-        background-color: aquamarine;
+        background-color: var(--background-information-surface);
         justify-content: center;
         display: flex;
         align-items: center;

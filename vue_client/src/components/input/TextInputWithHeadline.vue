@@ -44,8 +44,14 @@ const updateValue = (event: Event) => {
   border-top: 1.5px solid #dbdbdb;
   border-left: 1.5px solid #dbdbdb;
   border-right: 1.5px solid #dbdbdb;
-  border-radius: 4px;
+  border-radius: 5px 5px 0 0;
   text-align: center;
   font-size: x-small;
+  background-color: var(--background-information-surface);
+}
+
+.input-with-headline > input {
+  background-color: var(--background-interactable-surface);
+  border-radius: 0 0 5px 5px;
 }
 </style>

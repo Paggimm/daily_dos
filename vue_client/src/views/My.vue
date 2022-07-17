@@ -1,13 +1,6 @@
 <template>
   <div class="my-container">
-    <h1>
-      Mein Bereich
-    </h1>
-    <section>
-      <p>
-        t.b.i.
-      </p>
-    </section>
+    <h1>MY PROFILE</h1>
   </div>
 </template>
 <script lang="ts" setup>

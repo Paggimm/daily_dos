@@ -1,14 +1,9 @@
 <template>
-  <div>
+  <div id="app">
     <Header />
-    <SideNavi
-      v-if="authStore.isLoggedIn"
-    />
-
     <div class="router-view">
       <router-view />
     </div>
-
     <ServerStatus />
   </div>
 </template>
@@ -16,22 +11,23 @@
 <script setup lang="ts">
 import Header from "@/components/header/Header.vue"
 import ServerStatus from "@/components/server/ServerStatus.vue"
-import SideNavi from "@/components/sidenavi/SideNavi.vue";
 import { useAuthStore } from "./store/AuthStore";
+import {RouterView} from "vue-router";
 
 const authStore = useAuthStore();
 </script>
 
 <style>
+@import "css/colors.css";
+@import "css/measures.css";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-.router-view {
-  margin-left: 15vw;
+  background-color: var(--background-surface-bright);
+  padding-bottom: 5vw;
 }
 </style>

@@ -1,0 +1,11 @@
+:root {
+    --background-surface: #669EFF;
+    --background-surface-bright: #F2F7FF;
+    --background-surface-dark: #004ED5;
+
+    --background-information-surface: #A6C6FF;
+
+    --background-interactable-surface: #ffffff;
+    --background-interactable-surface-focused: #D9E7FF;
+
+}

@@ -6,6 +6,7 @@
     <!-- Selected Value -->
     <div
       class="dropdown-selected-value"
+      :class="{'closed': !showSelectionOptions}"
       @click="toogleDropdown"
     >
       <p> {{ selectionValue }}</p>
@@ -81,12 +82,23 @@ function updateModelValue() {
 }
 
 .dropdown-selected-value {
-    background-color: brown;
+    background-color: var(--background-interactable-surface);
     display: flex;
-    align-items: flex-start;
     padding-left: 1vw;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.dropdown-selected-value:hover {
+  cursor: pointer;
+}
+
+.dropdown-selected-value.closed {
+  border-radius: 10px;
 }
 .dropdown-option-container {
     display: flex;
@@ -94,11 +106,21 @@ function updateModelValue() {
     position: absolute;
     width: 100%;
     align-items: flex-start;
+    z-index: 20;
+}
+
+.dropdown-option-container:hover {
+  cursor: pointer;
 }
 
 .dropdown-option {
-    background-color: rgb(170, 170, 170);
+    background-color: var(--background-interactable-surface);
     width: 100%;
+    border: 1px solid black;
+}
+
+.dropdown-option:hover {
+  background-color: var(--background-interactable-surface-focused);
 }
 
 </style>

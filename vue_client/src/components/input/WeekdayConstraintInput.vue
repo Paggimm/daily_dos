@@ -58,9 +58,15 @@ function toggleWeekday(index: number) {
     aspect-ratio: 1;
     width: 16%;
     border-radius: 10px;
-    background-color: bisque;
+    background-color: var(--background-interactable-surface);
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
+}
+
+.weekday-constraint-input-item:hover {
+  cursor: pointer;
+  background-color: var(--background-interactable-surface-focused);
 }
 
 .weekday-constraint-input-item:not(:last-child) {
@@ -68,7 +74,7 @@ function toggleWeekday(index: number) {
 }
 
 .selected {
-    background-color: blueviolet;
+    background-color: var(--background-interactable-surface-focused);
 }
 
 </style>

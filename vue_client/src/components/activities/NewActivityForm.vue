@@ -130,7 +130,6 @@ async function submit() {
 
 </script>
 <style scoped>
-
 .new-activity-form-container {
     margin-left: 2vw;
     margin-right: 2vw;

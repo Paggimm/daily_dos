@@ -44,6 +44,6 @@ const authStore = useAuthStore()
     }
 
     .sidenavi-items {
-        background-color: #9BF4FF21;
+        background-color: var(--background-information-surface);
     }
 </style>
