@@ -1,47 +1,53 @@
 <template>
   <header class="header-container">
-    <img
-      class="banner-img"
-      src="../../../../images/test_banner.jpg"
-    >
-    <h1 class="nav-headline">
-      DailyDos
-    </h1>
-    <!-- router links -->
-    <nav id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link
-        v-if="!loggedIn"
-        to="/login"
-      >
-        Login
-      </router-link>
-      <router-link
-        v-if="!loggedIn"
-        to="/register"
-      >
-        Register
-      </router-link>
-      <router-link
-        v-if="loggedIn"
-        to="/my"
-      >
-        MeinAccount
-      </router-link>
-      <router-link
-        v-if="loggedIn"
-        to="/logout"
-      >
-        Logout
-      </router-link>
-    </nav>
+    <div class="header-main">
+      <h1 class="nav-headline">
+        DailyDos
+      </h1>
+      <!-- router links -->
+      <nav id="nav">
+        <router-link :to=RouterDefinitions.HOME>
+          Home
+        </router-link>
+        <router-link :to=RouterDefinitions.ABOUT>
+          About
+        </router-link>
+        <router-link
+            v-if="!loggedIn"
+            :to=RouterDefinitions.LOGIN
+        >
+          Login
+        </router-link>
+        <router-link
+            v-if="!loggedIn"
+            :to=RouterDefinitions.REGISTER
+        >
+          Register
+        </router-link>
+        <router-link
+            v-if="loggedIn"
+            :to="RouterDefinitions.My"
+        >
+          MeinAccount
+        </router-link>
+        <router-link
+            v-if="loggedIn"
+            :to="RouterDefinitions.LOGOUT"
+        >
+          Logout
+        </router-link>
+      </nav>
+    </div>
+    <HeaderNavi/>
   </header>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from "@/store/AuthStore";
 import { computed } from "vue";
+import {RouterLink} from "vue-router";
+import HeaderNavi from "@/components/header/HeaderNavi.vue";
+import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
 const authStore = useAuthStore();
 const loggedIn = computed((): boolean => authStore.isLoggedIn);
@@ -49,15 +55,17 @@ const loggedIn = computed((): boolean => authStore.isLoggedIn);
 
 <style>
 .header-container {
-  height: 7vw;
+  background-color: var(--background-surface);
+  display: flex;
+  flex-direction: column;
+}
+.header-main {
   position: relative;
+  height: 7vw;
+  display: flex;
 }
-.header-container .banner-img {
-  object-fit: fill;
-  height: 100%;
-  width: 100%;
-}
-.header-container #nav {
+
+.header-main #nav {
   position: absolute;
   right: 2vw;
   top: 4vw;
@@ -74,7 +82,7 @@ const loggedIn = computed((): boolean => authStore.isLoggedIn);
   color: #42b983;
 }
 
-.nav-headline {
+.header-main .nav-headline {
   position: absolute;
   top: 0vw;
   left: 2vw;

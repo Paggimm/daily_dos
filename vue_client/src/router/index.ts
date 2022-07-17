@@ -1,42 +1,40 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue')
+    path: '/home',
+    name: RouterDefinitions.HOME,
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
+    name: RouterDefinitions.LOGIN,
+    component: () => import('@/views/Login.vue')
   },
   {
     path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
+    name: RouterDefinitions.REGISTER,
+    component: () => import('@/views/Register.vue')
   },
   {
     path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    name: RouterDefinitions.ABOUT,
+    component: () => import('@/views/About.vue')
   },
   {
     path: '/logout',
-    name: 'Logout',
-    component: () => import('../views/Logout.vue')
+    name: RouterDefinitions.LOGOUT,
+    component: () => import('@/views/Logout.vue')
   },
   {
     path: '/my',
-    name: 'My',
-    component: () => import('../views/My.vue')
+    name: RouterDefinitions.My,
+    component: () => import('@/views/My.vue')
   },
   {
     path: '/activities',
-    name: 'Activities',
+    name: RouterDefinitions.ACTIVITIES,
     component: () => import('@/views/ActivitiesOverview.vue')
   }
 ]

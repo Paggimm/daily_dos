@@ -11,13 +11,14 @@
 <script lang="ts" setup>
 import router from '@/router'
 import { useAuthStore } from '@/store/AuthStore'
+import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
 const authStore = useAuthStore()
 
 function logout()
 {
     authStore.setToken('')
-    router.push({name: "Login"});
+    router.push({name: RouterDefinitions.LOGIN});
 }
 
 </script>

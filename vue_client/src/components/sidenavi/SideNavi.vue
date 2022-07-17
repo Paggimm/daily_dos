@@ -6,7 +6,7 @@
     <div class="sidenavi-items">
       <SideNaviItemVue
         text="ACTIVITIES"
-        route-target="Activities"
+        :route-target="RouterDefinitions.ACTIVITIES"
       />
     </div>
   </div>
@@ -14,6 +14,7 @@
 <script lang="ts" setup>
 import { useAuthStore } from '@/store/AuthStore'
 import SideNaviItemVue from './SideNaviItem.vue';
+import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
 const authStore = useAuthStore()
 

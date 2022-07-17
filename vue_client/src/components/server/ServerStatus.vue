@@ -52,6 +52,10 @@ async function ping(check_auth: boolean): Promise<void> {
 
   if (check_auth) {
     authenticated.value = result;
+
+    if(!result) {
+      authStore.setToken('')
+    }
   } else {
     online.value = result;
   }
