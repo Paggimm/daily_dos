@@ -9,7 +9,7 @@
           <label class="label">Username</label>
           <div class="control has-icons-left">
             <input
-              v-model="username"
+              v-model="loginFeature.username.value"
               :class="invalidLogin ? 'is-danger' : ''"
               class="input block"
               required
@@ -24,7 +24,7 @@
           <label class="label">Password</label>
           <div class="control has-icons-left">
             <input
-              v-model="password"
+              v-model="loginFeature.password.value"
               :class="invalidLogin ? 'is-danger' : ''"
               class="input block"
               required
@@ -50,44 +50,28 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "@/store/AuthStore";
-import { LoginResponse, LoginViewModel } from "@/generated/models";
-import { ref } from "vue";
+import {computed, ref} from "vue";
 import router from "@/router"
 import {RouterDefinitions} from "@/enums/RouterDefinitions";
+import useLoginFeature from "@/composables/LoginHook";
 
-const username = ref("");
-const password = ref("");
 const invalidLogin = ref(false);
+const loginFeature = useLoginFeature();
 
 const authStore = useAuthStore();
-
-const loggedIn = authStore.isLoggedIn;
-
-async function getToken(request: LoginViewModel): Promise<void> {
-  try {
-    const response = await fetch("http://localhost:8085/login", {
-      body: JSON.stringify(request),
-      method: "POST",
-    });
-    switch (response.status) {
-      case 200:
-        {
-          const body: LoginResponse = await response.json();
-          authStore.setToken(body.token);
-          await router.push({name: RouterDefinitions.HOME});
-        }
-        break;
-      case 401:
-        invalidLogin.value = true;
-        break;
-    }
-  } catch (e) {
-    console.log(e);
-  }
-}
+const loggedIn = computed(()=> authStore.isLoggedIn);
 
 async function submit(): Promise<void> {
   invalidLogin.value = false;
-  await getToken({ name: username.value, password: password.value });
+  const loginResponse = await loginFeature.login();
+  console.log(loginResponse)
+
+  if(loginResponse.token !== "") {
+    authStore.setToken(loginResponse.token);
+    await router.push({name: RouterDefinitions.HOME});
+  }
+  else {
+    invalidLogin.value = true;
+  }
 }
 </script>
