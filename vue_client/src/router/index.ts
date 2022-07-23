@@ -3,7 +3,7 @@ import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/home',
+    path: '/',
     name: RouterDefinitions.HOME,
     component: () => import('@/views/Home.vue')
   },

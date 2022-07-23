@@ -6,33 +6,33 @@
       </h1>
       <!-- router links -->
       <nav id="nav">
-        <router-link :to=RouterDefinitions.HOME>
+        <router-link :to="{name: RouterDefinitions.HOME}">
           Home
         </router-link>
-        <router-link :to=RouterDefinitions.ABOUT>
+        <router-link :to="{name: RouterDefinitions.ABOUT}">
           About
         </router-link>
         <router-link
             v-if="!loggedIn"
-            :to=RouterDefinitions.LOGIN
+            :to="{name: RouterDefinitions.LOGIN}"
         >
           Login
         </router-link>
         <router-link
             v-if="!loggedIn"
-            :to=RouterDefinitions.REGISTER
+            :to="{name: RouterDefinitions.REGISTER}"
         >
           Register
         </router-link>
         <router-link
             v-if="loggedIn"
-            :to="RouterDefinitions.My"
+            :to="{name: RouterDefinitions.My}"
         >
           MeinAccount
         </router-link>
         <router-link
             v-if="loggedIn"
-            :to="RouterDefinitions.LOGOUT"
+            :to="{name: RouterDefinitions.LOGOUT}"
         >
           Logout
         </router-link>
