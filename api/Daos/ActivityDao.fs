@@ -60,19 +60,19 @@ module ActivityDao =
         |> Async.RunSynchronously
 
     /// Update specific Activity
-    let UpdateActivity activityId userId activity =
+    let UpdateActivity activityId userId activityInput =
         update {
             table "activities"
             where (eq "id" activityId)
 
             set
                 {| userId = userId
-                   name = activity.name
-                   maxDuration = activity.maxDuration
-                   minDuration = activity.minDuration
-                   weekdayConstraint = activity.weekdayConstraint
-                   recurringType = activity.recurringType
-                   recurringInterval = activity.recurringInterval
+                   name = activityInput.name
+                   maxDuration = activityInput.maxDuration
+                   minDuration = activityInput.minDuration
+                   weekdayConstraint = activityInput.weekdayConstraint
+                   recurringType = activityInput.recurringType
+                   recurringInterval = activityInput.recurringInterval
                    createTime = DateTime.Now.ToUniversalTime() |}
         }
         |> db_connection.UpdateAsync

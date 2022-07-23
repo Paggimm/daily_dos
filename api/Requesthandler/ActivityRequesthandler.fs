@@ -20,7 +20,7 @@ module ActivityRequesthandler =
     let PostActivity: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! inputActivity = ctx.BindJsonAsync<Activity>()
+                let! inputActivity = ctx.BindJsonAsync<ActivityInput>()
                 let userId = AuthService.GetUserIdFromContext ctx
 
                 if ActivityInputValidator.ValidateActivityInput inputActivity then
@@ -66,7 +66,7 @@ module ActivityRequesthandler =
     let PatchActivity id : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                let! activity = ctx.BindJsonAsync<Activity>()
+                let! activity = ctx.BindJsonAsync<ActivityInput>()
                 let userId = AuthService.GetUserIdFromContext ctx
                 let oldActivity = ActivityDao.GetActivityById id
 

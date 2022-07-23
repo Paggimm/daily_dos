@@ -37,9 +37,19 @@ module ModelDefinitions =
         |> Model.withProperty "recurringInterval" GInt
         |> Model.withProperty "createTime" GDate
 
+    let private ActivityInput =
+        Model.create "ActivityInput"
+        |> Model.withProperty "name" GString
+        |> Model.withProperty "minDuration" GInt
+        |> Model.withProperty "maxDuration" GInt
+        |> Model.withProperty "weekdayConstraint" GString
+        |> Model.withProperty "recurringType" GString
+        |> Model.withProperty "recurringInterval" GInt
+
     let get =
         [ LoginResponse
           UserModel
           RegisterModel
           LoginViewModel
-          Activity ]
+          Activity
+          ActivityInput ]

@@ -28,3 +28,12 @@ type Activity =
       recurringType: string
       recurringInterval: int
       createTime: DateTime }
+
+[<CLIMutable>]
+type ActivityInput =
+    { name: string
+      minDuration: int
+      maxDuration: int
+      weekdayConstraint: string
+      recurringType: string
+      recurringInterval: int }

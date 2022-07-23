@@ -6,15 +6,14 @@ open DailyDos.Generated
 module ActivityInputValidator =
     /// Validates if a given string only contains letters, numbers, underscore or space
     let private CheckInputString input : bool =
-        let result = Regex("[^\\w|\\s]").Match(input)
+        let result = Regex("[^\\p{L}\\s]").Match(input)
         result.Success = false
 
     /// true, if duration 0 or both greater than 0 and min < max
     let private ValidateActivityDuration minDuration maxDuration =
-        (minDuration = 0 && maxDuration = 0)
-        || (minDuration > 0
-            && maxDuration > 0
-            && (minDuration < maxDuration))
+        let minDurationValid = minDuration >= 0
+        let maxDurationValid = maxDuration = 0 || maxDuration > minDuration
+        minDurationValid && maxDurationValid
 
     /// validates length and content of weekday_constraint
     let private ValidateActivityWeekdayConstraint (weekdayConstraint: string) =
@@ -34,7 +33,7 @@ module ActivityInputValidator =
         valid
 
     /// validates a given ActivityViewModel
-    let ValidateActivityInput (activity: Activity) : bool =
+    let ValidateActivityInput (activity: ActivityInput) : bool =
         let nameValid = CheckInputString activity.name
 
         let durationValid =
@@ -49,7 +48,6 @@ module ActivityInputValidator =
 
         let recurringIntervalValid = activity.recurringInterval >= 0
 
-
         let weekdayConstraintValid =
             ValidateActivityWeekdayConstraint activity.weekdayConstraint
 
@@ -59,7 +57,7 @@ module ActivityInputValidator =
         && recurringTypeValid
         && weekdayConstraintValid
 
-    let ValidateActivityPatchInput (newActivity: Activity) (activity: Activity) userId : bool =
+    let ValidateActivityPatchInput (newActivity: ActivityInput) (activity: Activity) userId : bool =
         let ownerValid = activity.userId = userId
         let viewModelValid = ValidateActivityInput newActivity
         ownerValid && viewModelValid

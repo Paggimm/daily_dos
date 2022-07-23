@@ -69,16 +69,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import NumberInputWithHeadline from '../input/NumberInputWithHeadline.vue'
 import TextInputWithHeadline from '../input/TextInputWithHeadline.vue'
 import WeekdayConstraintInput from '../input/WeekdayConstraintInput.vue'
-import { createAvailableRecurringTypes, RecurringType } from '@/enums/RecurringType'
+import {createAvailableRecurringTypes, RecurringType} from '@/enums/RecurringType'
 import Dropdown from '../input/Dropdown.vue'
-import { fetchRequest } from '@/utils'
-import { useAuthStore } from '@/store/AuthStore'
+import {fetchRequest} from '@/utils'
+import {useAuthStore} from '@/store/AuthStore'
+import {ActivityInput} from "@/generated/models";
+import {validateActivityInput} from "@/validators/ActivityInputValidator";
 
-const recurring = ref(true);
+const recurring = ref(false);
 const flexibleDuration = ref(false);
 const authStore = useAuthStore();
 
@@ -116,16 +118,21 @@ function getDurationInputText(){
 
 async function submit() {
     const weekdays = weekdayConstraints.value.join('');
-    const requestBody = {
-        name: activityName.value,
-        minDuration: durationMin.value,
-        maxDuration: durationMax.value,
-        recurringType: recurringType.value,
-        recurringInterval: recurringInterval.value,
-        weekdayConstraint: weekdays,
+
+    const activityInput: ActivityInput = {
+      name: activityName.value,
+      minDuration: durationMin.value,
+      maxDuration: durationMax.value,
+      recurringType: recurring.value ? recurringType.value : RecurringType.NO,
+      recurringInterval: recurringInterval.value,
+      weekdayConstraint: weekdays,
     }
 
-    await fetchRequest('activity', JSON.stringify(requestBody), 'POST', authStore.getToken);
+    if(validateActivityInput(activityInput)) {
+      await fetchRequest('activity', JSON.stringify(activityInput), 'POST', authStore.getToken);
+    } else {
+      throw new Error("Not implemented yet")
+    }
 }
 
 </script>

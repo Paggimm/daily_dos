@@ -86,6 +86,18 @@ export default {
   //   "json",
   //   "node"
   // ],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest",
+  },
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "vue",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},

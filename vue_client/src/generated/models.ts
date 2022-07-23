@@ -30,3 +30,12 @@ export interface Activity {
     recurringInterval: number;
     createTime: Date;
 }
+
+export interface ActivityInput {
+    name: string;
+    minDuration: number;
+    maxDuration: number;
+    weekdayConstraint: string;
+    recurringType: string;
+    recurringInterval: number;
+}
