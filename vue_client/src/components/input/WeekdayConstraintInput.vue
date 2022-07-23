@@ -67,6 +67,8 @@ function toggleWeekday(index: number) {
 .weekday-constraint-input-item:hover {
   cursor: pointer;
   background-color: var(--background-interactable-surface-focused);
+
+  animation: pulse 1.5s infinite ease-out;
 }
 
 .weekday-constraint-input-item:not(:last-child) {
@@ -75,6 +77,12 @@ function toggleWeekday(index: number) {
 
 .selected {
     background-color: var(--background-interactable-surface-focused);
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 0 0 rgba(0,0,0,0.7)}
+  70% { box-shadow: 0 0 0 5px rgba(0,0,0,0)}
+  to { box-shadow: 0 0 0 0 rgba(0,0,0,0)}
 }
 
 </style>
