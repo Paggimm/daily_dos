@@ -49,7 +49,7 @@ module private Task =
 
     let restoreServer () = DotNet.restore Config.serverProject
 
-    let restoreClient () = Pnpm.install ()
+    let restoreClient () = Npm.install
 
     let buildCodegen () =
         DotNet.build Config.codegenProject DotNetConfig.Debug
@@ -58,12 +58,12 @@ module private Task =
         DotNet.build Config.serverProject DotNetConfig.Debug
 
     let buildClient () =
-        CreateProcess.fromRawCommand "pnpm" [ "run"; "build" ]
+        CreateProcess.fromRawCommand "npm" [ "run"; "build" ]
         |> CreateProcess.withWorkingDirectory Config.clientFolder
         |> Proc.runAsJob 10
 
     let lintClient () =
-        CreateProcess.fromRawCommand "pnpm" [ "run"; "lint" ]
+        CreateProcess.fromRawCommand "npm" [ "run"; "lint" ]
         |> CreateProcess.withWorkingDirectory Config.clientFolder
         |> Proc.runAsJob 10
 
@@ -84,7 +84,7 @@ module private Task =
     let ldeStartCode () =
         jobAsync {
             let clientWatch =
-                CreateProcess.fromRawCommand "pnpm" [ "run"; "serve" ]
+                CreateProcess.fromRawCommand "npm" [ "run"; "serve" ]
                 |> CreateProcess.withWorkingDirectory Config.clientFolder
                 |> startAsJob'
 

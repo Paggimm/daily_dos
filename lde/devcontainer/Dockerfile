@@ -10,6 +10,4 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # [Optional] Uncomment this line to install global node packages.
-ARG PNPM_VERSION
-RUN test -n "$PNPM_VERSION"
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g pnpm@${PNPM_VERSION} @vue/cli" 2>&1 && npm install -g jest && pnpm install ts-node
+RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g @vue/cli" 2>&1

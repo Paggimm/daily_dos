@@ -1,43 +1,49 @@
 {
-  "name": "dailydos_vue_client",
+  "name": "dailydos-client-web",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@types/node": "*",
-    "babel-jest": "28",
-    "core-js": "^3.6.5",
+    "core-js": "^3.8.3",
+    "eslint-plugin-no-null": "^1.0.2",
     "filepond": "^4.30.3",
     "filepond-plugin-file-validate-type": "^1.2.6",
     "filepond-plugin-image-preview": "^4.6.10",
-    "jest": "28",
-    "npm-watch": "^0.11.0",
-    "pinia": "^2.0.14",
-    "pinia-plugin-persistedstate": "^1.6.1",
-    "regenerator-runtime": "^0.13.9",
-    "ts-node": "^10.9.1",
-    "vue": "^3.0.0",
+    "pinia": "^2.0.17",
+    "pinia-plugin-persistedstate": "^1.6.3",
+    "vue": "^3.2.13",
     "vue-filepond": "^7.0.2",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.6",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "^4.5.13",
-    "@vue/cli-plugin-typescript": "^4.5.13",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/vue3-jest": "28"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@types/jest": "^27.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-standard": "^6.1.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-vue": "^8.7.1",
+    "jest": "^27.0.5",
+    "less": "^4.0.0",
+    "less-loader": "^8.0.0",
+    "ts-jest": "^27.0.4",
+    "typescript": "~4.5.5"
+  }
 }
