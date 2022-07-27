@@ -1,10 +1,10 @@
 <template>
   <div class="home-action-overview-container">
     <HomeActionCard
-        v-for="(action, index) in homeActions"
-        v-bind:key="index"
-        class="home-action-card"
-        :action-card-properties="action"
+      v-for="(action, index) in homeActions"
+      :key="index"
+      class="home-action-card"
+      :action-card-properties="action"
     />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="activities-overview-container">
-    <RecentActivityList :activity-list="activityList"/>
+    <RecentActivityList :activity-list="activityList" />
     <NewActivityForm />
   </div>
 </template>

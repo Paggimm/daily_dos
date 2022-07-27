@@ -7,10 +7,10 @@
     <!-- last Activities -->
     <div class="existing-activity-container">
       <activity-info-card
-          v-for="(activity, index) in activityList"
-          :key="index"
-          :activity="activity"
-          class="existing-activity"
+        v-for="(activity, index) in activityList"
+        :key="index"
+        :activity="activity"
+        class="existing-activity"
       >
         <p>{{ activity.name }}</p>
       </activity-info-card>

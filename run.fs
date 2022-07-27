@@ -49,7 +49,7 @@ module private Task =
 
     let restoreServer () = DotNet.restore Config.serverProject
 
-    let restoreClient () = Npm.install
+    let restoreClient () = Npm.install()
 
     let buildCodegen () =
         DotNet.build Config.codegenProject DotNetConfig.Debug

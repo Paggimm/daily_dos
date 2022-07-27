@@ -1,5 +1,5 @@
-import {validateActivityInput} from "../../validators/ActivityInputValidator";
-import {RecurringType} from "../../enums/RecurringType";
+import {validateActivityInput} from "@/validators/ActivityInputValidator";
+import {RecurringType} from "@/enums/RecurringType";
 
 test("test a correct ActivityInput", () => {
     expect(validateActivityInput({

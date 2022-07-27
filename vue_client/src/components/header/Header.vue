@@ -13,32 +13,32 @@
           About
         </router-link>
         <router-link
-            v-if="!loggedIn"
-            :to="{name: RouterDefinitions.LOGIN}"
+          v-if="!loggedIn"
+          :to="{name: RouterDefinitions.LOGIN}"
         >
           Login
         </router-link>
         <router-link
-            v-if="!loggedIn"
-            :to="{name: RouterDefinitions.REGISTER}"
+          v-if="!loggedIn"
+          :to="{name: RouterDefinitions.REGISTER}"
         >
           Register
         </router-link>
         <router-link
-            v-if="loggedIn"
-            :to="{name: RouterDefinitions.My}"
+          v-if="loggedIn"
+          :to="{name: RouterDefinitions.My}"
         >
           MeinAccount
         </router-link>
         <router-link
-            v-if="loggedIn"
-            :to="{name: RouterDefinitions.LOGOUT}"
+          v-if="loggedIn"
+          :to="{name: RouterDefinitions.LOGOUT}"
         >
           Logout
         </router-link>
       </nav>
     </div>
-    <HeaderNavi/>
+    <HeaderNavi />
   </header>
 </template>
 

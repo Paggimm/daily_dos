@@ -1,6 +1,6 @@
 <template>
   <div
-      class="activity-info-card-container"
+    class="activity-info-card-container"
   >
     <p>{{ activity.name }}</p>
   </div>

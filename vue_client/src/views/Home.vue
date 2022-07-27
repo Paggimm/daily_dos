@@ -2,7 +2,7 @@
   <div class="home-container">
     <h1>MY ACTIONS</h1>
   </div>
-  <HomeActionOverview/>
+  <HomeActionOverview />
 </template>
 
 <script setup lang="ts">

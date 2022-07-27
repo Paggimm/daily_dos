@@ -1,4 +1,4 @@
-import {createRecurringTypeFromString, RecurringType, validRecurringType} from "../enums/RecurringType";
+import {createRecurringTypeFromString, RecurringType, validRecurringType} from "@/enums/RecurringType";
 
 test("test a valid RecurringType-string", () => {
     expect(validRecurringType('daily')).toBeTruthy();

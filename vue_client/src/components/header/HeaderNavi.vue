@@ -1,15 +1,14 @@
 <template>
   <div class="header-navigation">
     <div
-        v-for="(item, index) in headerItems"
-        v-bind:key="index"
-        class="header-navigation-item"
-        @click="toActivity"
+      v-for="(item, index) in headerItems"
+      :key="index"
+      class="header-navigation-item"
+      @click="toActivity"
     >
-      {{item}}
+      {{ item }}
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
