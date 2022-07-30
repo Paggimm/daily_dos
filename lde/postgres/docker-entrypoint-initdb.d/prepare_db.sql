@@ -16,6 +16,16 @@ create table if not exists activities (
 	"recurringInterval" integer,
 	"createTime" timestamp
 );
+/* PLANS TABLE */
+create table if not exists activities (
+    "id" serial primary key,
+    "userId" integer references users(id),
+    "activityId" integer references activities(id),
+    "duration" integer,
+    "date" timestamp,
+    "repeatable" VARCHAR(10),
+    "createTime" timestamp
+);
 /* USER DATA */
 insert into users(name, password)
 values

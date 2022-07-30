@@ -32,6 +32,11 @@ module Routing =
                 >=> choose [
                     routex "(/?)"
                     >=> PlanRequesthandler.GetAllPlans
+                    ]
+                POST
+                >=> choose [
+                    routex "/?"
+                    >=> PlanRequesthandler.PostPlan
                 ]
             ])
             // ACTIVITY

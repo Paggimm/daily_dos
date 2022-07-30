@@ -47,3 +47,10 @@ type Plan =
       date: DateTime
       repeatable: string
       createTime: DateTime }
+
+[<CLIMutable>]
+type PlanInput =
+    { activityId: int
+      duration: int
+      date: DateTime
+      repeatable: string }

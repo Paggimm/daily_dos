@@ -49,3 +49,10 @@ export interface Plan {
     repeatable: string;
     createTime: Date;
 }
+
+export interface PlanInput {
+    activityId: number;
+    duration: number;
+    date: Date;
+    repeatable: string;
+}

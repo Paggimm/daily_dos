@@ -38,6 +38,7 @@ module ModelDefinitions =
         |> Model.withProperty "recurringInterval" GInt ""
         |> Model.withProperty "createTime" GDate ""
 
+    /// input model for post requests
     let private ActivityInput =
         Model.create "ActivityInput"
         |> Model.withProperty "name" GString ""
@@ -57,11 +58,21 @@ module ModelDefinitions =
         |> Model.withProperty "repeatable" GString ""
         |> Model.withProperty "createTime" GDate ""
 
-    let get =
-        [ LoginResponse
+    /// input model for post requests
+    let private PlanInput =
+        Model.create "PlanInput"
+        |> Model.withProperty "activityId" GInt ""
+        |> Model.withProperty "duration" GInt ""
+        |> Model.withProperty "date" GDate ""
+        |> Model.withProperty "repeatable" GString ""
+
+    let get = [
+          LoginResponse
           UserModel
           RegisterModel
           LoginViewModel
           Activity
           ActivityInput
-          Plan ]
+          Plan
+          PlanInput
+    ]
