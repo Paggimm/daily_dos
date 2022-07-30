@@ -4,6 +4,7 @@ open ActivityRequesthandler
 open Giraffe
 open UserRequesthandler
 open AuthRequestHandler
+open PlanRequesthandler
 
 // ---------------------------------
 // Web app
@@ -24,6 +25,16 @@ module Routing =
                             routef "/%i" UserRequesthandler.GetUserById
                         ]
                  ])
+            // PLAN
+            subRoute "/plan" AuthRequestHandler.Authorize
+            >=> (choose [
+                GET
+                >=> choose [
+                    routex "(/?)"
+                    >=> PlanRequesthandler.GetAllPlans
+                ]
+            ])
+            // ACTIVITY
             subRoute "/activity" AuthRequestHandler.Authorize
             >=> (choose [
                      GET

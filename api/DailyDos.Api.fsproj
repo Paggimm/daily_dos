@@ -19,6 +19,7 @@
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
     <Compile Include="Requesthandler/AuthRequesthandler.fs" />
     <Compile Include="Requesthandler/ActivityRequesthandler.fs" />
+    <Compile Include="Requesthandler/PlanRequesthandler.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
