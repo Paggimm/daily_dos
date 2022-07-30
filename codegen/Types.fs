@@ -1,5 +1,7 @@
 namespace DailyDos.Codegen
 
+open System.Data
+
 /// Type alias to clarify when a string is a line of a file
 type Line = string
 
@@ -10,6 +12,7 @@ type GeneratorType =
     | GFloat
     | GString
     | GDate
+    | GCustom
     | GList of GeneratorType
 
 /// Supported types in F#
@@ -18,6 +21,7 @@ type FsType =
     | FsFloat
     | FsString
     | FsDate
+    | FsCustom
     | FsList of FsType
 
 /// Contains helper functions for FsType type
@@ -29,6 +33,7 @@ module FsType =
             | GInt -> wrapper FsInt
             | GFloat -> wrapper FsFloat
             | GString -> wrapper FsString
+            | GCustom -> wrapper FsCustom
             | GList listType -> helper (wrapper >> FsList) listType
             | GDate -> wrapper FsDate
 
@@ -43,6 +48,7 @@ module FsType =
             | FsString -> "string"
             | FsList listType -> helper (wrapper >> (fun s -> s + " list")) listType
             | FsDate -> "DateTime"
+            | _ -> raise (new InvalidConstraintException("tried to generate invalid type"))
 
         helper id typ
 
@@ -51,6 +57,7 @@ type TsType =
     | TsNumber
     | TsString
     | TsDate
+    | TsCustom
     | TsList of TsType
 
 /// Contains helper functions for the TsType type
@@ -63,6 +70,7 @@ module TsType =
             | GFloat -> wrapper TsNumber
             | GString -> wrapper TsString
             | GDate -> wrapper TsDate
+            | GCustom -> wrapper TsCustom
             | GList listType -> helper (wrapper >> TsList) listType
 
         helper id typ
@@ -75,11 +83,12 @@ module TsType =
             | TsString -> "string"
             | TsDate -> "Date"
             | TsList listType -> helper (wrapper >> (fun s -> s + "[]")) listType
+            | _ -> raise (new InvalidConstraintException("tried to generate invalid type"))
 
         helper id typ
 
 /// A simple property of a model definition in the generator
-type Property = { name: string; typ: GeneratorType }
+type Property = { name: string; typ: GeneratorType; customType: string }
 
 /// A simple definition for a model to be generated
 type Model =
@@ -92,8 +101,8 @@ module Model =
     let create name = { name = name; properties = [] }
 
     /// Returns a new model with given property added
-    let withProperty name typ model =
-        let property = { name = name; typ = typ }
+    let withProperty name typ customType model =
+        let property = { name = name; typ = typ; customType = customType}
         { model with properties = List.append model.properties [ property ] }
 
 /// Everything you need to use a generator. Contains the generator itself and

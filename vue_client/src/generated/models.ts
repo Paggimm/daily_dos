@@ -39,3 +39,13 @@ export interface ActivityInput {
     recurringType: string;
     recurringInterval: number;
 }
+
+export interface Plan {
+    id: number;
+    userId: number;
+    activity: Activity;
+    duration: number;
+    date: Date;
+    repeatable: string;
+    createTime: Date;
+}

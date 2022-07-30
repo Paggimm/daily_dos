@@ -37,3 +37,13 @@ type ActivityInput =
       weekdayConstraint: string
       recurringType: string
       recurringInterval: int }
+
+[<CLIMutable>]
+type Plan =
+    { id: int
+      userId: int
+      activity: Activity
+      duration: int
+      date: DateTime
+      repeatable: string
+      createTime: DateTime }

@@ -10,7 +10,11 @@ module FsGenerator =
         [ "[<CLIMutable>]"
           $"type %s{model.name} = {{"
           for prop in model.properties do
-              let typ = FsType.fromGenType prop.typ |> FsType.toFs
+              let typ =
+                  if (prop.typ = GCustom) then
+                    prop.customType
+                  else
+                    FsType.fromGenType prop.typ |> FsType.toFs
 
               $"    %s{prop.name}: %s{typ}"
           $"}}" ]
@@ -25,7 +29,11 @@ module TsGenerator =
     let generateModel model =
         [ $"export interface %s{model.name} {{"
           for prop in model.properties do
-              let typ = TsType.fromGenType prop.typ |> TsType.toTs
+              let typ =
+                  if (prop.typ = GCustom) then
+                    prop.customType
+                  else
+                    TsType.fromGenType prop.typ |> TsType.toTs
 
               $"    %s{prop.name}: %s{typ};"
           $"}}" ]
