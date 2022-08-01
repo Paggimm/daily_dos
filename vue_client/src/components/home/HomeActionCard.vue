@@ -5,7 +5,7 @@
   >
     <img
       class="home-action-card-image"
-      src="../../../../images/activity-action2.jpeg"
+      src="../../../images/activity-action2.jpeg"
       alt="activity action"
     >
     <p>{{ actionCardProperties.title }}</p>

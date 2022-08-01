@@ -1,0 +1,44 @@
+version: "3"
+services:
+  api:
+    build: server
+    working_dir: /app/api
+    ports:
+      - 8085:8085
+    volumes:
+      - ../:/app
+    command: dotnet run -p DailyDos.Api.fsproj
+
+  nginx:
+    build: ../vue_client
+    ports:
+      - 80:80
+    tty: true
+
+  postgres:
+    image: postgres:14.2
+    hostname: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dailydos
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - .postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:6.5
+    depends_on:
+      - postgres
+    ports:
+      - 5555:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.de
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: unless-stopped
+
+volumes:
+  postgres-data: null

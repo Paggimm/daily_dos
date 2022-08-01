@@ -32,7 +32,7 @@ module Program =
     // ---------------------------------
     let configureCors (builder: CorsPolicyBuilder) =
         builder
-            .WithOrigins("http://localhost:8080", "http://localhost:8081")
+            .WithOrigins("http://localhost:8080", "http://localhost:8081", "http://localhost")
             .AllowAnyMethod()
             .AllowAnyHeader()
         |> ignore
