@@ -1,16 +1,16 @@
 <template>
   <div class="new-activity-form-container">
     <h2>CREATE NEW ACTIVITY</h2>
-    <div class="new-acitivty-form">
+    <div class="new-activity-form">
       <!-- name -->
       <TextInputWithHeadline
         v-model="activityName"
-        class="block"
+        class="activity-name"
         title="NAME"
       />
       <!-- duration -->
       <div
-        class="duration-container block"
+        class="duration-container"
         @change="checkDurationInput"
       >
         <NumberInputWithHeadline
@@ -45,7 +45,7 @@
       </div>
       <div
         v-if="recurring"
-        class="recurring-form-container block"
+        class="recurring-form-container"
       >
         <Dropdown
           v-model="recurringType"
@@ -136,54 +136,66 @@ async function submit() {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
 .new-activity-form-container {
     margin-left: 2vw;
     margin-right: 2vw;
-}
 
-.duration-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+  .activity-name {
+    margin-bottom: 1vw;
+  }
 
-.duration-container > * {
-    width: 35.5vw;
-}
+    .duration-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 1vw;
+      width: 100%;
 
-.duration-container > .duration-flexible-checkbox {
-    width: 5vw;
-}
+      * {
+        width: 45.5%;
+      }
 
-.duration-container > *:not(:last-child) {
-    margin-right: 2vw;
-}
+      *:not(:last-child) {
+        margin-right: 2vw;
+      }
 
-.recurring-form-container {
-    display: flex;
-}
+      .duration-flexible-checkbox {
+        width: 5vw;
 
-.recurring-form-container > * {
-    width: 48%;
-}
-
-.recurring-form-container > *:not(:last-child) {
-    margin-right: 2%;
-}
-
-.recurring-checkbox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        p, input {
+          width: 5vw;
+        }
+      }
     }
 
-.recurring-checkbox > * {
-    margin-right: 0.5vw;
-}
+    .recurring-form-container {
+      display: flex;
+      margin-bottom: 1vw;
+      * {
+        width: 49%;
+      }
 
-.submit-button {
+      & > *:not(:last-child) {
+        margin-right: 2%;
+      }
+    }
+    .recurring-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      * {
+        margin-right: 0.5vw;
+      }
+  }
+
+  .submit-button {
     width: 100%;
+    height: 4vw;
+    border-radius: var(--default-border-radius);
+    border: 1.5px solid #dbdbdb;
+    cursor: pointer;
+  }
 }
-
 </style>

@@ -28,7 +28,7 @@ function toRouterLink() {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
 .home-action-card-container {
   aspect-ratio: 2;
   border-radius: var(--default-border-radius);
@@ -36,18 +36,21 @@ function toRouterLink() {
   display: grid;
   grid-template-areas: "main";
   overflow: hidden;
-}
 
-.home-action-card-image {
-  grid-area: main;
-  opacity: 0.65;
-}
+  &:hover {
+    background-color: var(--background-interactable-surface-focused);
+    cursor: pointer;
+  }
 
-.home-action-card-container p {
-  grid-area: main;
-}
+  .home-action-card-image {
+    grid-area: main;
+    opacity: 0.65;
+    width: 100%;
+    height: 100%;
 
-.home-action-card-container:hover {
-  background-color: var(--background-interactable-surface-focused);
+    p {
+      grid-area: main;
+    }
+  }
 }
 </style>

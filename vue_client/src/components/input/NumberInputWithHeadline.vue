@@ -54,24 +54,31 @@ function validateInput(input: HTMLInputElement) {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
 .input-with-headline {
   display: flex;
   flex-direction: column;
-}
+  height: 5vw;
 
-.input-with-headline > p {
-  border-top: 1.5px solid #dbdbdb;
-  border-left: 1.5px solid #dbdbdb;
-  border-right: 1.5px solid #dbdbdb;
-  border-radius: 5px 5px 0 0;
-  text-align: center;
-  font-size: x-small;
-  background-color: var(--background-information-surface);
-}
-
-.input-with-headline > input {
-  background-color: var(--background-interactable-surface);
-  border-radius: 0 0 5px 5px;
+  p {
+    border-top: 1.5px solid #dbdbdb;
+    border-left: 1.5px solid #dbdbdb;
+    border-right: 1.5px solid #dbdbdb;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    font-size: x-small;
+    background-color: var(--background-information-surface);
+    margin: 0;
+    width: 100%;
+    height: 40%;
+  }
+  input {
+    background-color: var(--background-interactable-surface);
+    border-radius: 0 0 5px 5px;
+    height: 60%;
+    width: 100%;
+    padding: 0;
+    border: 1.5px solid #dbdbdb;
+  }
 }
 </style>

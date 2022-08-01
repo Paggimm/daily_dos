@@ -73,15 +73,14 @@ function updateModelValue() {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
 
 .dropdown-container {
     position: relative;
     width: 100%;
     border-radius: 10px;
-}
 
-.dropdown-selected-value {
+  .dropdown-selected-value {
     background-color: var(--background-interactable-surface);
     display: flex;
     padding-left: 1vw;
@@ -90,37 +89,39 @@ function updateModelValue() {
     height: 100%;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-}
+    border: 1px solid #dbdbdb;
 
-.dropdown-selected-value:hover {
-  cursor: pointer;
-}
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-.dropdown-selected-value.closed {
-  border-radius: 10px;
-}
-.dropdown-option-container {
+  .dropdown-selected-value.closed {
+    border-radius: 10px;
+  }
+
+  .dropdown-option-container {
     display: flex;
     flex-direction: column;
     position: absolute;
     width: 100%;
     align-items: flex-start;
     z-index: 20;
-}
 
-.dropdown-option-container:hover {
-  cursor: pointer;
-}
+    &:hover {
+      cursor: pointer;
+    }
 
-.dropdown-option {
-    background-color: var(--background-interactable-surface);
-    width: 100%;
-    border: 1px solid black;
-}
+    .dropdown-option {
+      background-color: var(--background-interactable-surface);
+      width: 100%;
+      border: 1px solid #dbdbdb;
 
-.dropdown-option:hover {
-  background-color: var(--background-interactable-surface-focused);
+      &:hover {
+        background-color: var(--background-interactable-surface-focused);
+      }
+    }
+  }
 }
 
 </style>

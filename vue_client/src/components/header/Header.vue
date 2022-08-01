@@ -61,7 +61,7 @@ const loggedIn = computed((): boolean => authStore.isLoggedIn);
 }
 .header-main {
   position: relative;
-  height: 7vw;
+  height: 10vw;
   display: flex;
 }
 
@@ -79,12 +79,12 @@ const loggedIn = computed((): boolean => authStore.isLoggedIn);
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--background-interactable-surface-focused);
 }
 
 .header-main .nav-headline {
   position: absolute;
-  top: 0vw;
+  top: 0;
   left: 2vw;
   font-weight: bold;
   font-size: 5vw;

@@ -34,24 +34,30 @@ const updateValue = (event: Event) => {
 };
 
 </script>
-<style scoped>
+<style scoped lang="less">
 .input-with-headline {
   display: flex;
   flex-direction: column;
-}
+  height: 5vw;
 
-.input-with-headline > p {
-  border-top: 1.5px solid #dbdbdb;
-  border-left: 1.5px solid #dbdbdb;
-  border-right: 1.5px solid #dbdbdb;
-  border-radius: 5px 5px 0 0;
-  text-align: center;
-  font-size: x-small;
-  background-color: var(--background-information-surface);
-}
+  p {
+    border-top: 1.5px solid #dbdbdb;
+    border-left: 1.5px solid #dbdbdb;
+    border-right: 1.5px solid #dbdbdb;
+    border-radius: 5px 5px 0 0;
+    margin: 0;
+    height: 40%;
+    text-align: center;
+    font-size: x-small;
+    background-color: var(--background-information-surface);
+  }
 
-.input-with-headline > input {
-  background-color: var(--background-interactable-surface);
-  border-radius: 0 0 5px 5px;
+  input {
+    background-color: var(--background-interactable-surface);
+    border-radius: 0 0 5px 5px;
+    height: 60%;
+    padding: 0;
+    border: 1.5px solid #dbdbdb;
+  }
 }
 </style>
