@@ -37,5 +37,14 @@ export async function fetchRequest(uri: string, body: string | FormData | undefi
         body,
     }
 
-    return fetchWithTimeout("http://localhost:8085/" + uri, requestInit, 15000)
+    return fetchWithTimeout(getBaseUrl() + uri, requestInit, 15000)
+}
+
+function getBaseUrl(): string {
+    if (process.env.NODE_ENV === "development") {
+        return "http://localhost:8085/";
+    }
+    else {
+        return "https://bernsky.de:5000/"
+    }
 }
