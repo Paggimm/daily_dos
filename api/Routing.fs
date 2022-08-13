@@ -30,13 +30,21 @@ module Routing =
             >=> (choose [
                 GET
                 >=> choose [
-                    routex "(/?)"
-                    >=> PlanRequesthandler.GetAllPlans
+                    routex "(/?)" >=> PlanRequesthandler.GetAllPlans
+                    routef "/%i" PlanRequesthandler.GetPlan
                     ]
                 POST
                 >=> choose [
                     routex "/?"
                     >=> PlanRequesthandler.PostPlan
+                ]
+                DELETE
+                >=> choose [
+                    routef "/%i" PlanRequesthandler.DeletePlan
+                ]
+                PATCH
+                >=> choose [
+                    routef "/%i" PlanRequesthandler.UpdatePlan
                 ]
             ])
             // ACTIVITY

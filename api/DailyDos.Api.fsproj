@@ -14,6 +14,7 @@
     <Compile Include="Daos/BaseDao.fs" />
     <Compile Include="Daos/UserDao.fs" />
     <Compile Include="Daos/ActivityDao.fs" />
+    <Compile Include="Daos\PlanDao.fs" />
     <Compile Include="Services/AuthService.fs" />
     <Compile Include="InputValidator/ActivityInputValidator.fs" />
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
