@@ -33,7 +33,6 @@ module ActivityDao =
     let InsertActivity userId activity =
         insert {
             table "activities"
-
             value
                 {| userId = userId
                    name = activity.name
@@ -64,7 +63,6 @@ module ActivityDao =
         update {
             table "activities"
             where (eq "id" activityId)
-
             set
                 {| userId = userId
                    name = activityInput.name

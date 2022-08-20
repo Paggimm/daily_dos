@@ -11,10 +11,11 @@
   <ItemGroup>
     <Compile Include="Consts.fs" />
     <Compile Include="generated/models.fs" />
+    <Compile Include="Models/ModelDTO.fs" />
     <Compile Include="Daos/BaseDao.fs" />
     <Compile Include="Daos/UserDao.fs" />
     <Compile Include="Daos/ActivityDao.fs" />
-    <Compile Include="Daos\PlanDao.fs" />
+    <Compile Include="Daos/PlanDao.fs" />
     <Compile Include="Services/AuthService.fs" />
     <Compile Include="InputValidator/ActivityInputValidator.fs" />
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
@@ -30,5 +31,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+  <Import Project="../.paket/Paket.Restore.targets" />
 </Project>

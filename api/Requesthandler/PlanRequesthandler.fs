@@ -7,38 +7,42 @@ open Giraffe
 open Microsoft.AspNetCore.Http
 open System.Linq
 
+// TODO: Input and Ownership Validation!!!
 module PlanRequesthandler =
     let GetAllPlans: HttpHandler =
-        fun (next: HttpFunc) (ctx: HttpContext) -> json "tried to get all plans for user" next ctx
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            let userId = AuthService.GetUserIdFromContext ctx
+            let planMap = PlanDao.GetAllPlansByUserId userId
+            json planMap.Values next ctx
 
     let GetPlan (id: int32) : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            let planEnumerator =
+            let plan =
                 PlanDao.GetPlanById id
-            printf "Plan: %i" (planEnumerator.Count())
-
-            if (planEnumerator.Count() = 0) then
-                ctx.SetStatusCode 404
-                json "no plan found" next ctx
-            else
-                json (planEnumerator.First()) next ctx
+            json (plan) next ctx
 
 
     let PostPlan: HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
                 let! planInput = ctx.BindJsonAsync<PlanInput>()
-
                 let userId =
                     AuthService.GetUserIdFromContext ctx
-
                 PlanDao.InsertPlan planInput userId
-
                 return! json "ok" next ctx
             }
 
     let UpdatePlan (id: int32) : HttpHandler =
-        fun (next: HttpFunc) (ctx: HttpContext) -> task { return! json $"tried to update plan {id}" next ctx }
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                let! planInput = ctx.BindJsonAsync<PlanInput>()
+                PlanDao.UpdatePlan planInput id
+                return! json "ok" next ctx
+            }
 
     let DeletePlan (id: int32) : HttpHandler =
-        fun (next: HttpFunc) (ctx: HttpContext) -> task { return! json $"tried to delete plan {id}" next ctx }
+        fun (next: HttpFunc) (ctx: HttpContext) ->
+            task {
+                PlanDao.DeletePlanById id
+                return! json "ok" next ctx
+            }
