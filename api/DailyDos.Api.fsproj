@@ -18,6 +18,7 @@
     <Compile Include="Daos/PlanDao.fs" />
     <Compile Include="Services/AuthService.fs" />
     <Compile Include="InputValidator/ActivityInputValidator.fs" />
+    <Compile Include="InputValidator/PlanInputValidator.fs" />
     <Compile Include="Requesthandler/UserRequesthandler.fs" />
     <Compile Include="Requesthandler/AuthRequesthandler.fs" />
     <Compile Include="Requesthandler/ActivityRequesthandler.fs" />

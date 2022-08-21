@@ -2,7 +2,7 @@ module DailyDos.Api.Daos.PlanDao
 
 open System
 open System.Linq
-open ActivityDao
+open DailyDos.Api.Daos.ActivityDao
 open DailyDos.Api.Models.ModelDTO
 open DailyDos.Generated
 open Dapper.FSharp
@@ -104,7 +104,7 @@ module PlanDao =
             |> Async.RunSynchronously
             |> ignore
 
-    /// Delete specific Activity
+    /// Delete specific plan
     let DeletePlanById (id: int) =
         delete {
             table "plans"

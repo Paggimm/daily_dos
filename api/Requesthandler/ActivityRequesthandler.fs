@@ -7,7 +7,7 @@ open FSharp.Control.Tasks
 
 open DailyDos.Generated
 open DailyDos.Validator.ActivityValidator
-open ActivityDao
+open DailyDos.Api.Daos.ActivityDao
 open DailyDos.Api.Services.AuthService
 
 module ActivityRequesthandler =

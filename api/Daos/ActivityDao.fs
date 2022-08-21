@@ -1,13 +1,29 @@
-namespace ActivityDao
+namespace DailyDos.Api.Daos.ActivityDao
 
 open DailyDos.Generated
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open System
+open System.Linq
 
 open BaseDao
 
 module ActivityDao =
+    /// checks if an activity actually exists
+    let DoesActivityExist id =
+        /// when we only want to know of a record exists we only try to retrieve an id from db to reduce data
+        let result =
+            select {
+            table "activities"
+            where (eq "id" id)
+            take 1
+            }
+            |> db_connection.SelectAsync<{| id: int |}>
+            |> Async.AwaitTask
+            |> Async.RunSynchronously
+
+        result.Count() > 0
+
     /// Return all Activities from a User
     let GetAllActivitiesByUserId (id: int) =
         select {
