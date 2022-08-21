@@ -5,6 +5,7 @@ open Giraffe
 open UserRequesthandler
 open AuthRequestHandler
 open PlanRequesthandler
+open PlanRatingRequesthandler
 
 // ---------------------------------
 // Web app
@@ -45,6 +46,28 @@ module Routing =
                 PATCH
                 >=> choose [
                     routef "/%i" PlanRequesthandler.UpdatePlan
+                ]
+            ])
+             // PLAN-RATING
+            subRoute "/planrating" AuthRequestHandler.Authorize
+            >=> (choose [
+                GET
+                >=> choose [
+                    routef "/all/%i" PlanRatingRequesthandler.GetRatingsForActivity
+                    routef "/%i" PlanRatingRequesthandler.GetRatings
+                    ]
+                POST
+                >=> choose [
+                    routex "/?"
+                    >=> PlanRatingRequesthandler.PostRating
+                ]
+                DELETE
+                >=> choose [
+                    routef "/%i" PlanRatingRequesthandler.DeleteRating
+                ]
+                PATCH
+                >=> choose [
+                    routef "/%i" PlanRatingRequesthandler.UpdateRating
                 ]
             ])
             // ACTIVITY

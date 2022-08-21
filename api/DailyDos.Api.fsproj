@@ -23,6 +23,7 @@
     <Compile Include="Requesthandler/AuthRequesthandler.fs" />
     <Compile Include="Requesthandler/ActivityRequesthandler.fs" />
     <Compile Include="Requesthandler/PlanRequesthandler.fs" />
+    <Compile Include="Requesthandler/PlanRatingRequesthandler.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -32,5 +33,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="../.paket/Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="Dapper.Fsharp" Version="2.4.1" />
+    <PackageReference Include="FSharp.Core" Version="6.0.5" />
+    <PackageReference Include="Giraffe" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
+    <PackageReference Include="npgsql" Version="6.0.6" />
+    <PackageReference Include="Ply" Version="0.3.1" />
+  </ItemGroup>
 </Project>
