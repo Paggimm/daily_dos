@@ -11,6 +11,7 @@ type GeneratorType =
     | GInt
     | GFloat
     | GString
+    | GBool
     | GDate
     | GCustom
     | GList of GeneratorType
@@ -20,6 +21,7 @@ type FsType =
     | FsInt
     | FsFloat
     | FsString
+    | FsBool
     | FsDate
     | FsCustom
     | FsList of FsType
@@ -33,6 +35,7 @@ module FsType =
             | GInt -> wrapper FsInt
             | GFloat -> wrapper FsFloat
             | GString -> wrapper FsString
+            | GBool -> wrapper FsBool
             | GCustom -> wrapper FsCustom
             | GList listType -> helper (wrapper >> FsList) listType
             | GDate -> wrapper FsDate
@@ -46,6 +49,7 @@ module FsType =
             | FsInt -> "int"
             | FsFloat -> "float"
             | FsString -> "string"
+            | FsBool -> "bool"
             | FsList listType -> helper (wrapper >> (fun s -> s + " list")) listType
             | FsDate -> "DateTime"
             | _ -> raise (new InvalidConstraintException("tried to generate invalid type"))
@@ -56,6 +60,7 @@ module FsType =
 type TsType =
     | TsNumber
     | TsString
+    | TsBool
     | TsDate
     | TsCustom
     | TsList of TsType
@@ -69,6 +74,7 @@ module TsType =
             | GInt -> wrapper TsNumber
             | GFloat -> wrapper TsNumber
             | GString -> wrapper TsString
+            | GBool -> wrapper TsBool
             | GDate -> wrapper TsDate
             | GCustom -> wrapper TsCustom
             | GList listType -> helper (wrapper >> TsList) listType
@@ -81,6 +87,7 @@ module TsType =
             match typ with
             | TsNumber -> "number"
             | TsString -> "string"
+            | TsBool -> "boolean"
             | TsDate -> "Date"
             | TsList listType -> helper (wrapper >> (fun s -> s + "[]")) listType
             | _ -> raise (new InvalidConstraintException("tried to generate invalid type"))

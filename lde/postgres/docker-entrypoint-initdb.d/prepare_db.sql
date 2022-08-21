@@ -17,13 +17,21 @@ create table if not exists activities (
 	"createTime" timestamp
 );
 /* PLANS TABLE */
-create table if not exists activities (
+create table if not exists plans (
     "id" serial primary key,
     "userId" integer references users(id),
     "activityId" integer references activities(id),
     "duration" integer,
     "date" timestamp,
     "repeatable" VARCHAR(10),
+    "createTime" timestamp
+);
+/* PlanRating TABLE */
+create table if not exists plan_ratings (
+    "id" serial primary key,
+    "planId" integer references plans(id),
+    "rating" integer,
+    "isPreRating" bool,
     "createTime" timestamp
 );
 /* USER DATA */

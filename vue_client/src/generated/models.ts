@@ -56,3 +56,9 @@ export interface PlanInput {
     date: Date;
     repeatable: string;
 }
+
+export interface PlanPostRating {
+    planId: number;
+    rating: number;
+    isPreRating: boolean;
+}

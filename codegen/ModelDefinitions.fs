@@ -66,6 +66,12 @@ module ModelDefinitions =
         |> Model.withProperty "date" GDate ""
         |> Model.withProperty "repeatable" GString ""
 
+    let private PlanRatingInput =
+        Model.create "PlanPostRating"
+        |> Model.withProperty "planId" GInt ""
+        |> Model.withProperty "rating" GInt ""
+        |> Model.withProperty "isPreRating" GBool ""
+
     let get = [
           LoginResponse
           UserModel
@@ -75,4 +81,5 @@ module ModelDefinitions =
           ActivityInput
           Plan
           PlanInput
+          PlanRatingInput
     ]

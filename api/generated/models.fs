@@ -54,3 +54,9 @@ type PlanInput =
       duration: int
       date: DateTime
       repeatable: string }
+
+[<CLIMutable>]
+type PlanPostRating =
+    { planId: int
+      rating: int
+      isPreRating: bool }
