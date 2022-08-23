@@ -72,7 +72,7 @@ module ActivityRequesthandler =
 
                 if oldActivity.Count() > 0
                    && ActivityInputValidator.ValidateActivityPatchInput activity (oldActivity.First()) userId then
-                    ActivityDao.UpdateActivity id userId activity
+                    ActivityDao.UpdateActivity id activity
                     return! json "successfully updated activity" next ctx
                 else
                     ctx.SetStatusCode 400

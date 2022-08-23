@@ -3,15 +3,22 @@ namespace UserDao
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open DailyDos.Generated
-open Npgsql
+open DailyDos.Api.Models.ModelDTO
 
 open BaseDao
 
 /// Service Module for User related Querys
 module UserDao =
+    let userTable = table'<UserDTO> "users"
+    // TODO: doesn't feel right to create a special "insert" table definition
+    // works for now but should be replaced by a more elegant solution later
+    let userInsertTable = table'<UserInsertDTO> "users"
     /// Return all Users found in the Database
     let GetAllUsers =
-        select { table "users" }
+        select {
+            for user in userTable do
+                selectAll
+        }
         |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
         |> Async.RunSynchronously
@@ -19,8 +26,9 @@ module UserDao =
     /// Return a User specified by his ID
     let GetUserById id =
         select {
-            table "users"
-            where (eq "id" id)
+            for user in userTable do
+            where (user.id = id)
+            take 1
         }
         |> db_connection.SelectAsync<User>
         |> Async.AwaitTask
@@ -29,8 +37,8 @@ module UserDao =
     /// Return a Users Password
     let GetUserPassword userName =
         select {
-            table "users"
-            where (eq "name" userName)
+            for user in userTable do
+            where (user.name = userName)
             take 1
         }
         |> db_connection.SelectAsync<{| password: string |}>
@@ -40,8 +48,8 @@ module UserDao =
     /// Return a User by his Username
     let GetUserByName name =
         select {
-            table "users"
-            where (eq "name" name)
+            for user in userTable do
+            where (user.name = name)
             take 1
         }
         |> db_connection.SelectAsync<User>
@@ -51,7 +59,7 @@ module UserDao =
     /// Create a new user
     let InsertNewUser (name: string) (password: string) =
         insert {
-            table "users"
+            into userInsertTable
             value { name = name; password = password }
         }
         |> db_connection.InsertAsync

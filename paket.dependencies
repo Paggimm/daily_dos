@@ -5,7 +5,7 @@ framework: auto-detect
 
 nuget FSharp.Core
 
-nuget Dapper.FSharp ~> 2
+nuget Dapper.FSharp ~> 3
 nuget Giraffe
 nuget Microsoft.AspNetCore.Authentication.JwtBearer
 nuget npgsql

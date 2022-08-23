@@ -11,6 +11,10 @@ open Dapper.FSharp.PostgreSQL
 open BaseDao
 
 module PlanDao =
+    let planTable = table'<PlanDTO> "plans"
+    // TODO: doesn't feel right to create a special "insert" table definition
+    // works for now but should be replaced by a more elegant solution later
+    let planInserTable = table'<PlanInsertDTO> "plans"
 
     /// maps a PlanDTO and an Activity to a Plan-Model
     let private MapPlanActivity (planDTO: PlanDTO) (activity: Activity): Plan = {
@@ -28,8 +32,8 @@ module PlanDao =
     let GetPlanById (id: int32) =
         let planDTO =
             select {
-                table "plans"
-                where (eq "id" id)
+                for plan in planTable do
+                where (plan.id = id)
                 take 1
             }
             |> db_connection.SelectAsync<PlanDTO>
@@ -44,8 +48,8 @@ module PlanDao =
     let GetAllPlansByUserId (userId: int32) =
         let planDTOList =
             select {
-            table "plans"
-            where (eq "userId" userId)
+            for plan in planTable do
+            where (plan.userId = userId)
             }
             |> db_connection.SelectAsync<PlanDTO>
             |> Async.AwaitTask
@@ -71,33 +75,41 @@ module PlanDao =
 
     /// create a new plan
     let InsertPlan (plan: PlanInput) (userId: int32) =
-        insert {
-            table "plans"
-            value {|
+        let newPlan = {
                   userId = userId
                   activityId = plan.activityId
                   duration = plan.duration
                   date = plan.date.ToUniversalTime()
                   repeatable = plan.repeatable
                   createTime = DateTime.Now.ToUniversalTime()
-                  |}
+        }
+        insert {
+            into planInserTable
+            value newPlan
         }
         |> db_connection.InsertAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
 
-    let UpdatePlan (plan: PlanInput) (planId: int32) =
+    let UpdatePlan (planInput: PlanInput) (planId: int32) =
+            let oldPlan = (GetPlanById planId)
+            let updatedPlan = {
+                id = oldPlan.id
+                userId = oldPlan.userId
+                activityId = planInput.activityId
+                duration = planInput.duration
+                date = planInput.date.ToUniversalTime()
+                repeatable = planInput.repeatable
+                createTime = DateTime.Now.ToUniversalTime()
+            }
+
             update {
-                table "plans"
-                where (eq "id" planId)
-                set {|
-                        activityId = plan.activityId
-                        duration = plan.duration
-                        date = plan.date.ToUniversalTime()
-                        repeatable = plan.repeatable
-                        createTime = DateTime.Now.ToUniversalTime()
-                        |}
+                for plan in planTable do
+                excludeColumn plan.id
+                excludeColumn plan.userId
+                set updatedPlan
+                where (plan.id = planId)
             }
             |> db_connection.UpdateAsync
             |> Async.AwaitTask
@@ -107,8 +119,8 @@ module PlanDao =
     /// Delete specific plan
     let DeletePlanById (id: int) =
         delete {
-            table "plans"
-            where (eq "id" id)
+            for plan in planTable do
+            where (plan.id = id)
         }
         |> db_connection.DeleteAsync
         |> Async.AwaitTask
