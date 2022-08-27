@@ -60,3 +60,20 @@ type PlanPostRating =
     { planId: int
       rating: int
       isPreRating: bool }
+
+[<CLIMutable>]
+type FreeTime =
+    { id: int
+      userId: string
+      startDate: DateTime
+      duration: int
+      recurringType: string
+      recurringInterval: string
+      createTime: DateTime }
+
+[<CLIMutable>]
+type FreeTimeInput =
+    { startDate: DateTime
+      duration: int
+      recurringType: string
+      recurringInterval: string }

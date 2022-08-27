@@ -62,3 +62,20 @@ export interface PlanPostRating {
     rating: number;
     isPreRating: boolean;
 }
+
+export interface FreeTime {
+    id: number;
+    userId: string;
+    startDate: Date;
+    duration: number;
+    recurringType: string;
+    recurringInterval: string;
+    createTime: Date;
+}
+
+export interface FreeTimeInput {
+    startDate: Date;
+    duration: number;
+    recurringType: string;
+    recurringInterval: string;
+}

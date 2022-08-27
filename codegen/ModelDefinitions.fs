@@ -72,6 +72,23 @@ module ModelDefinitions =
         |> Model.withProperty "rating" GInt ""
         |> Model.withProperty "isPreRating" GBool ""
 
+    let private FreeTime =
+        Model.create "FreeTime"
+        |> Model.withProperty "id" GInt ""
+        |> Model.withProperty "userId" GString ""
+        |> Model.withProperty "startDate" GDate ""
+        |> Model.withProperty "duration" GInt ""
+        |> Model.withProperty "recurringType" GString ""
+        |> Model.withProperty "recurringInterval" GString ""
+        |> Model.withProperty "createTime" GDate ""
+
+    let private FreeTimeInput =
+        Model.create "FreeTimeInput"
+        |> Model.withProperty "startDate" GDate ""
+        |> Model.withProperty "duration" GInt ""
+        |> Model.withProperty "recurringType" GString ""
+        |> Model.withProperty "recurringInterval" GString ""
+
     let get = [
           LoginResponse
           UserModel
@@ -82,4 +99,6 @@ module ModelDefinitions =
           Plan
           PlanInput
           PlanRatingInput
+          FreeTime
+          FreeTimeInput
     ]
