@@ -57,7 +57,15 @@ export interface PlanInput {
     repeatable: string;
 }
 
-export interface PlanPostRating {
+export interface PlanRating {
+    id: number;
+    planId: number;
+    rating: number;
+    isPreRating: boolean;
+    createTime: Date;
+}
+
+export interface PlanRatingInput {
     planId: number;
     rating: number;
     isPreRating: boolean;
@@ -65,7 +73,7 @@ export interface PlanPostRating {
 
 export interface FreeTime {
     id: number;
-    userId: string;
+    userId: number;
     startDate: Date;
     duration: number;
     recurringType: string;

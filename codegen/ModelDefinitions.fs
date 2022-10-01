@@ -66,8 +66,16 @@ module ModelDefinitions =
         |> Model.withProperty "date" GDate ""
         |> Model.withProperty "repeatable" GString ""
 
+    let private PlanRating =
+        Model.create "PlanRating"
+        |> Model.withProperty "id" GInt ""
+        |> Model.withProperty "planId" GInt ""
+        |> Model.withProperty "rating" GInt ""
+        |> Model.withProperty "isPreRating" GBool ""
+        |> Model.withProperty "createTime" GDate ""
+
     let private PlanRatingInput =
-        Model.create "PlanPostRating"
+        Model.create "PlanRatingInput"
         |> Model.withProperty "planId" GInt ""
         |> Model.withProperty "rating" GInt ""
         |> Model.withProperty "isPreRating" GBool ""
@@ -75,7 +83,7 @@ module ModelDefinitions =
     let private FreeTime =
         Model.create "FreeTime"
         |> Model.withProperty "id" GInt ""
-        |> Model.withProperty "userId" GString ""
+        |> Model.withProperty "userId" GInt ""
         |> Model.withProperty "startDate" GDate ""
         |> Model.withProperty "duration" GInt ""
         |> Model.withProperty "recurringType" GString ""
@@ -98,6 +106,7 @@ module ModelDefinitions =
           ActivityInput
           Plan
           PlanInput
+          PlanRating
           PlanRatingInput
           FreeTime
           FreeTimeInput
