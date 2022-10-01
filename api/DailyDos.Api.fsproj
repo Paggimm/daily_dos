@@ -16,6 +16,8 @@
     <Compile Include="Daos/UserDao.fs" />
     <Compile Include="Daos/ActivityDao.fs" />
     <Compile Include="Daos/PlanDao.fs" />
+    <Compile Include="Daos\PlanRatingDao.fs" />
+    <Compile Include="Daos\FreeTimeDao.fs" />
     <Compile Include="Services/AuthService.fs" />
     <Compile Include="InputValidator/ActivityInputValidator.fs" />
     <Compile Include="InputValidator/PlanInputValidator.fs" />

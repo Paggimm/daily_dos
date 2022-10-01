@@ -58,3 +58,20 @@ type ActivityInsertDTO = {
       recurringInterval: int
       createTime: DateTime
  }
+
+[<CLIMutable>]
+type PlanRatingDTO = {
+    planId: int
+    rating: int
+    isPreRating: bool
+    createTime: DateTime
+}
+
+[<CLIMutable>]
+type FreeTimeDTO = {
+    userId: int
+    startDate: DateTime
+    duration: int
+    recurringType: string
+    recurringInterval: string
+}
