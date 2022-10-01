@@ -6,6 +6,7 @@ open UserRequesthandler
 open AuthRequestHandler
 open PlanRequesthandler
 open PlanRatingRequesthandler
+open FreeTimeRequestHandler
 
 // ---------------------------------
 // Web app
@@ -48,7 +49,7 @@ module Routing =
                     routef "/%i" PlanRequesthandler.UpdatePlan
                 ]
             ])
-             // PLAN-RATING
+            // PLAN-RATING
             subRoute "/planrating" AuthRequestHandler.Authorize
             >=> (choose [
                 GET
@@ -68,6 +69,28 @@ module Routing =
                 PATCH
                 >=> choose [
                     routef "/%i" PlanRatingRequesthandler.UpdateRating
+                ]
+            ])
+            // FreeTime
+            subRoute "/freetime" AuthRequestHandler.Authorize
+            >=> (choose [
+                GET
+                >=> choose [
+                    routex "(/?)" >=> FreeTimeRequesthandler.GetFreeTimes
+                    routef "/%i" FreeTimeRequesthandler.GetFreeTime
+                    ]
+                POST
+                >=> choose [
+                    routex "/?"
+                    >=> FreeTimeRequesthandler.PostFreeTime
+                ]
+                DELETE
+                >=> choose [
+                    routef "/%i" FreeTimeRequesthandler.DeleteFreeTime
+                ]
+                PATCH
+                >=> choose [
+                    routef "/%i" FreeTimeRequesthandler.UpdateFreeTime
                 ]
             ])
             // ACTIVITY

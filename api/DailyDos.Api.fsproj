@@ -24,6 +24,7 @@
     <Compile Include="Requesthandler/ActivityRequesthandler.fs" />
     <Compile Include="Requesthandler/PlanRequesthandler.fs" />
     <Compile Include="Requesthandler/PlanRatingRequesthandler.fs" />
+    <Compile Include="Requesthandler\FreeTimeRequestHandler.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
