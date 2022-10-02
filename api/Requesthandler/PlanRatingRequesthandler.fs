@@ -2,32 +2,50 @@ namespace PlanRatingRequesthandler
 
 open Giraffe
 open Microsoft.AspNetCore.Http
+open DailyDos.Generated
+open PlanRatingDao
+open System.Linq
 
 module PlanRatingRequesthandler =
+    /// create a new post rating
     let PostRating =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                return! json "tried to create a new rating" next ctx
+                let! ratingInput = ctx.BindJsonAsync<PlanRatingInput>()
+                // TODO: validate input
+                PlanRatingDao.InsertPlanRating ratingInput
+                ctx.SetStatusCode 201
+                return! json "ok" next ctx
             }
 
-    let UpdateRating (id: int) =
+    /// update an existing post rating
+    let UpdateRating (ratingId: int) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                return! json "tried to update rating" next ctx
+                let! ratingInput = ctx.BindJsonAsync<PlanRatingInput>()
+                // TODO: validate input
+                PlanRatingDao.UpdatePlanRating ratingId ratingInput
+                ctx.SetStatusCode 201
+                return! json "ok" next ctx
             }
 
     /// retrieve ratings for a single plan
-    let GetRatings (id: int) =
+    let GetRatings (planId: int) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            json "tried to get the ratings for a specific plan" next ctx
+            // TODO: validate ownership
+            let planRating = (PlanRatingDao.GetAllRatingsForPlan planId)
+            json planRating next ctx
 
     /// retrieve ratings for all plans with a given activity
-    let GetRatingsForActivity (id: int) =
+    let GetRatingsForActivity (activityId: int) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
+
             json "tried to get all ratings for a specific activity" next ctx
 
-    let DeleteRating (id: int) : HttpHandler =
+    let DeleteRating (ratingId: int) : HttpHandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-               return! json "tried to delete rating" next ctx
+               // TODO: validate ownership and check existence
+               PlanRatingDao.DeletePlanRating ratingId
+               return! json "ok" next ctx
             }

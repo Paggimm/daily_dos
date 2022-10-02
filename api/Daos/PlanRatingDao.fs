@@ -38,12 +38,10 @@ module PlanRatingDao =
     /// create a new PlanRating
     let InsertPlanRating (planInput: PlanRatingInput) =
         let newPlanRating: PlanRatingDTO =
-            {
-                planId = planInput.planId
-                rating = planInput.rating
-                isPreRating = planInput.isPreRating
-                createTime = DateTime.Now.ToUniversalTime()
-            }
+            { planId = planInput.planId
+              rating = planInput.rating
+              isPreRating = planInput.isPreRating
+              createTime = DateTime.Now.ToUniversalTime() }
 
         insert {
             into planRatingInserTable
@@ -63,18 +61,19 @@ module PlanRatingDao =
         |> db_connection.DeleteAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
+        |> ignore
 
     /// update PlanRating
     let UpdatePlanRating (planRatingId: int) (planInput: PlanRatingInput) =
         let oldPlanRating = (GetRatingById planRatingId).First()
+
         let updatedPlanRating: PlanRating =
-            {
-                id = oldPlanRating.id
-                planId = oldPlanRating.planId
-                rating = planInput.rating
-                isPreRating = planInput.isPreRating
-                createTime = oldPlanRating.createTime
-            }
+            { id = oldPlanRating.id
+              planId = oldPlanRating.planId
+              rating = planInput.rating
+              isPreRating = planInput.isPreRating
+              createTime = oldPlanRating.createTime }
+
         update {
             for planRating in planRatingTable do
                 set updatedPlanRating
@@ -86,4 +85,3 @@ module PlanRatingDao =
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
-
