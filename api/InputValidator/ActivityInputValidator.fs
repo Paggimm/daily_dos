@@ -39,6 +39,7 @@ module ActivityInputValidator =
         let durationValid =
             ValidateActivityDuration activity.minDuration activity.maxDuration
 
+        // TODO: right now recurring is mandatory, that should not be the case
         let recurringTypeValid =
             match activity.recurringType with
             | "daily"

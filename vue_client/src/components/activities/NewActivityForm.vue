@@ -131,7 +131,7 @@ async function submit() {
     if(validateActivityInput(activityInput)) {
       await fetchRequest('activity', JSON.stringify(activityInput), 'POST', authStore.getToken);
     } else {
-      throw new Error("Not implemented yet")
+      throw new Error("invalid input")
     }
 }
 
