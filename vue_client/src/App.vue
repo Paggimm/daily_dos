@@ -4,12 +4,10 @@
         <div class="router-view">
             <router-view/>
         </div>
-        <!--
-        <ServerStatus />
-        -->
     </div>
 </template>
 <script setup lang="ts">
+import Header from "@/components/header/Header.vue";
 </script>
 <style>
 @import "css/colors.css";
