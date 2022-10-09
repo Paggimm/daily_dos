@@ -40,11 +40,11 @@ create table if not exists plan_ratings
 );
 
 /* FREETIMES TABLE */
-create table if not exists plan_ratings
+create table if not exists freetime
 (
     "id"                serial primary key,
     "userId"            integer references users (id),
-    "startTime"         timestamp,
+    "startDate"         timestamp,
     "duration"          integer,
     "recurringType"     VARCHAR(10),
     "recurringInterval" integer,

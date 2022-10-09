@@ -77,7 +77,7 @@ export interface FreeTime {
     startDate: Date;
     duration: number;
     recurringType: string;
-    recurringInterval: string;
+    recurringInterval: number;
     createTime: Date;
 }
 
@@ -85,5 +85,5 @@ export interface FreeTimeInput {
     startDate: Date;
     duration: number;
     recurringType: string;
-    recurringInterval: string;
+    recurringInterval: number;
 }

@@ -1,36 +1,57 @@
 namespace FreeTimeRequestHandler
 
+open DailyDos.Api.Services.AuthService
+open DailyDos.Generated
+open FreeTimeDao
 open Microsoft.AspNetCore.Http
 open Giraffe
+open System.Linq
 
-// TODO: needs implementations
+// TODO: needs Validations
 module FreeTimeRequesthandler =
     /// create a new freetime for current user
     let PostFreeTime =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                return! json "tried to create a freetime" next ctx
+                let! freeTimeInput = ctx.BindJsonAsync<FreeTimeInput>()
+                let userId = AuthService.GetUserIdFromContext ctx
+                FreeTimeDao.InsertFreeTime userId freeTimeInput
+                ctx.SetStatusCode 201
+                return! json "created FreeTime" next ctx
             }
 
     /// update an existing freetime owned by current user
-    let UpdateFreeTime (id: int32) =
+    let UpdateFreeTime (freeTimeId: int32) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-                return! json "tried to update freetime" next ctx
+                let! freeTimeInput = ctx.BindJsonAsync<FreeTimeInput>()
+                FreeTimeDao.UpdateFreeTime freeTimeId freeTimeInput
+                ctx.SetStatusCode 201
+                return! json "updated FreeTime" next ctx
             }
 
     /// get a specific freetime object
-    let GetFreeTime (id: int32) =
+    let GetFreeTime (freeTimeId: int32) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            json "tried to get a specific freetime" next ctx
+            let freeTimeResult = (FreeTimeDao.GetFreeTimeById freeTimeId)
+            if freeTimeResult.Count() < 1 then
+                ctx.SetStatusCode 401
+                json "no freetime found for this id" next ctx
+            else
+                ctx.SetStatusCode 200
+                json (freeTimeResult.First()) next ctx
 
     /// get every freetime owned by current user
     let GetFreeTimes =
         fun (next: HttpFunc) (ctx: HttpContext) ->
-            json "tried to get all freetimes for current user" next ctx
+            let freeTimeResult = FreeTimeDao.GetAllFreeTimes (AuthService.GetUserIdFromContext ctx)
+            ctx.SetStatusCode 200
+            json freeTimeResult next ctx
 
-    let DeleteFreeTime (id: int32) =
+    /// delete an existing freetime
+    let DeleteFreeTime (freeTimeId: int32) =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             task {
-               return! json "tried to delete freetime" next ctx
+               FreeTimeDao.DeleteFreeTime freeTimeId
+               return! json "ok" next ctx
             }

@@ -87,7 +87,7 @@ module ModelDefinitions =
         |> Model.withProperty "startDate" GDate ""
         |> Model.withProperty "duration" GInt ""
         |> Model.withProperty "recurringType" GString ""
-        |> Model.withProperty "recurringInterval" GString ""
+        |> Model.withProperty "recurringInterval" GInt ""
         |> Model.withProperty "createTime" GDate ""
 
     let private FreeTimeInput =
@@ -95,7 +95,7 @@ module ModelDefinitions =
         |> Model.withProperty "startDate" GDate ""
         |> Model.withProperty "duration" GInt ""
         |> Model.withProperty "recurringType" GString ""
-        |> Model.withProperty "recurringInterval" GString ""
+        |> Model.withProperty "recurringInterval" GInt ""
 
     let get = [
           LoginResponse

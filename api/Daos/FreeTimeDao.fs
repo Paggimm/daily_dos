@@ -1,5 +1,6 @@
 namespace FreeTimeDao
 
+open System
 open Dapper.FSharp
 open Dapper.FSharp.PostgreSQL
 open DailyDos.Generated
@@ -43,6 +44,7 @@ module FreeTimeDao =
                 duration = freeTimeInput.duration
                 recurringType = freeTimeInput.recurringType
                 recurringInterval = freeTimeInput.recurringInterval
+                createTime = DateTime.Now.ToUniversalTime()
             }
 
         insert {
@@ -63,6 +65,7 @@ module FreeTimeDao =
         |> db_connection.DeleteAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
+        |> ignore
 
     /// update FreeTime
     let UpdateFreeTime (freeTimeId: int) (freeTimeInput: FreeTimeInput) =
@@ -79,6 +82,7 @@ module FreeTimeDao =
             }
         update {
             for freeTime in FreeTimeTable do
+                where (freeTime.id = freeTimeId)
                 set updatedFreeTime
                 excludeColumn freeTime.id
                 excludeColumn freeTime.userId

@@ -76,7 +76,7 @@ type FreeTime =
       startDate: DateTime
       duration: int
       recurringType: string
-      recurringInterval: string
+      recurringInterval: int
       createTime: DateTime }
 
 [<CLIMutable>]
@@ -84,4 +84,4 @@ type FreeTimeInput =
     { startDate: DateTime
       duration: int
       recurringType: string
-      recurringInterval: string }
+      recurringInterval: int }

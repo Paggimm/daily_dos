@@ -73,5 +73,6 @@ type FreeTimeDTO = {
     startDate: DateTime
     duration: int
     recurringType: string
-    recurringInterval: string
+    recurringInterval: int
+    createTime: DateTime
 }
