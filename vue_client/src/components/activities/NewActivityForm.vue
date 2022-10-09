@@ -70,11 +70,11 @@
 
 <script lang="ts" setup>
 import {ref} from 'vue';
-import NumberInputWithHeadline from '../input/NumberInputWithHeadline.vue'
-import TextInputWithHeadline from '../input/TextInputWithHeadline.vue'
-import WeekdayConstraintInput from '../input/WeekdayConstraintInput.vue'
+import NumberInputWithHeadline from '@/components/form-components/NumberInputWithHeadline.vue'
+import TextInputWithHeadline from '@/components/form-components/TextInputWithHeadline.vue'
+import WeekdayConstraintInput from '@/components/form-components/WeekdayConstraintInput.vue'
 import {createAvailableRecurringTypes, RecurringType} from '@/enums/RecurringType'
-import Dropdown from '../input/Dropdown.vue'
+import Dropdown from '@/components/form-components/Dropdown.vue'
 import {fetchRequest} from '@/utils'
 import {useAuthStore} from '@/store/AuthStore'
 import {ActivityInput} from "@/generated/models";
