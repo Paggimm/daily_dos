@@ -1,14 +1,14 @@
 <template>
-  <div
-    class="sidenavi-item-container"
-    @click="onItemClicked"
-  >
     <div
-      class="sidenavi-item-content"
+          class="sidenavi-item-container"
+          @click="onItemClicked"
     >
-      {{ props.text }}
+        <div
+              class="sidenavi-item-content"
+        >
+            {{ props.text }}
+        </div>
     </div>
-  </div>
 </template>
 <script lang="ts" setup>
 import router from '@/router'
@@ -21,22 +21,22 @@ interface Props {
 
 const props = defineProps<Props>();
 
-  function onItemClicked() {
+function onItemClicked() {
     router.push(props.routeTarget);
-  }
+}
 
 </script>
 
 <style scoped>
-    .sidenavi-item-container {
-        aspect-ratio: 3;
-        border-bottom: 1px solid #64646494;
-        display: flex;
-        align-items: center;
-    }
+.sidenavi-item-container {
+    aspect-ratio: 3;
+    border-bottom: 1px solid #64646494;
+    display: flex;
+    align-items: center;
+}
 
-    .sidenavi-item-container > .sidenavi-item-content {
-        margin-left: auto;
-        margin-right: auto;
-    }
+.sidenavi-item-container > .sidenavi-item-content {
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>

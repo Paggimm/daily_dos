@@ -1,8 +1,8 @@
 <template>
-  <div class="home-container">
-    <h1>MY ACTIONS</h1>
-  </div>
-  <HomeActionOverview />
+    <div class="home-container">
+        <h1>MY ACTIONS</h1>
+    </div>
+    <HomeActionOverview/>
 </template>
 
 <script setup lang="ts">

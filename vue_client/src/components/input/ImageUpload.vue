@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <FilePond
-      ref="pond"
-      name="test"
-      label-idle="Drop files here..."
-      :allow-multiple="true"
-      accepted-file-types="image/jpeg, image/png"
-      server="/api"
-      instant-upload="false"
-      @init="handleFilePondInit"
-    />
-  </div>
+    <div>
+        <FilePond
+              ref="pond"
+              name="test"
+              label-idle="Drop files here..."
+              :allow-multiple="true"
+              accepted-file-types="image/jpeg, image/png"
+              server="/api"
+              instant-upload="false"
+              @init="handleFilePondInit"
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { Component } from "vue";
+import {Component} from "vue";
 
 // Import Vue FilePond + Plugins and Styles
 import vueFilePond from "vue-filepond";
@@ -25,13 +25,13 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 
 //create FilePond Component
 const FilePond = vueFilePond(
-  FilePondPluginFileValidateType,
-  FilePondPluginImagePreview
+      FilePondPluginFileValidateType,
+      FilePondPluginImagePreview
 ) as Component;
 
 function handleFilePondInit(): void {
-  console.log("FilePond has initialized");
+    console.log("FilePond has initialized");
 
-  // FilePond instance methods are available on `this.$refs.pond`
+    // FilePond instance methods are available on `this.$refs.pond`
 }
 </script>

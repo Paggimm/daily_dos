@@ -1,16 +1,19 @@
-import { defineStore } from "pinia"
+import {defineStore} from "pinia"
 
 export const useAuthStore = defineStore('authStore', {
     state: () => ({
         token: "",
     }),
     getters: {
-        getToken: (state) => { return state.token },
-        isLoggedIn: (state) => { return state.token !== "" }
+        getToken: (state) => {
+            return state.token
+        },
+        isLoggedIn: (state) => {
+            return state.token !== ""
+        }
     },
     actions: {
-        setToken(token: string)
-        {
+        setToken(token: string) {
             this.token = token
         }
     },

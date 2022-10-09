@@ -6,15 +6,15 @@ export default function useLoginFeature() {
     const password = ref("");
 
     async function login(): Promise<LoginResponse> {
-        const loginViewModel = { name: username.value, password: password.value }
-        let loginResponse = { token: ''};
+        const loginViewModel = {name: username.value, password: password.value}
+        let loginResponse = {token: ''};
 
         const reponse = await fetch("http://localhost:8085/login", {
-                body: JSON.stringify(loginViewModel),
-                method: "POST",
-            })
+            body: JSON.stringify(loginViewModel),
+            method: "POST",
+        })
 
-        if(reponse.status === 200) {
+        if (reponse.status === 200) {
             loginResponse = await reponse.json();
         }
         return loginResponse;

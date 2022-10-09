@@ -2,8 +2,7 @@ export async function fetchWithTimeout(
     resource: RequestInfo,
     options: RequestInit,
     timeout: number
-): Promise<Response>
-{
+): Promise<Response> {
     const controller = new AbortController()
     const id = setTimeout(() => controller.abort(), timeout)
 
@@ -24,12 +23,11 @@ export async function fetchWithTimeout(
  * @param httpMethod GET|POST|PATCH|DELETE
  * @param token authorization-token
  */
-export async function fetchRequest(uri: string, body: string | FormData | undefined, httpMethod: string, token?: string): Promise<Response>
-{
+export async function fetchRequest(uri: string, body: string | FormData | undefined, httpMethod: string, token?: string): Promise<Response> {
     const headers = new Headers()
     headers.append("pragma", "no-cache")
     headers.append("cache-control", "no-cache")
-    headers.append("Authorization", `Bearer ${ token }`)
+    headers.append("Authorization", `Bearer ${token}`)
 
     const requestInit: RequestInit = {
         method: httpMethod,
@@ -43,8 +41,7 @@ export async function fetchRequest(uri: string, body: string | FormData | undefi
 function getBaseUrl(): string {
     if (process.env.NODE_ENV === "development") {
         return "http://localhost:8085/";
-    }
-    else {
+    } else {
         return "https://bernsky.de:5000/"
     }
 }

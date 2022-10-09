@@ -1,6 +1,6 @@
 <template>
-  <h1 class="title">Login</h1>
-  <LoginForm />
+    <h1 class="title">Login</h1>
+    <LoginForm/>
 </template>
 
 <script setup lang="ts">

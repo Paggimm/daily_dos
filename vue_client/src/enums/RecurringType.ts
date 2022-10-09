@@ -1,5 +1,5 @@
 export enum RecurringType {
-    NO='no', DAILY = 'daily', WEEKLY = 'weekly', MONTHLY = 'monthly'
+    NO = 'no', DAILY = 'daily', WEEKLY = 'weekly', MONTHLY = 'monthly'
 }
 
 // creates an array containing every recurringtype minus no
@@ -9,7 +9,7 @@ export function createAvailableRecurringTypes(): RecurringType[] {
     return recurringTypes;
 }
 
-export function validRecurringType( type: string): boolean {
+export function validRecurringType(type: string): boolean {
     switch (type) {
         case 'daily':
         case 'weekly':
@@ -22,7 +22,7 @@ export function validRecurringType( type: string): boolean {
 }
 
 export function createRecurringTypeFromString(type: string): RecurringType {
-    if(!validRecurringType(type)) {
+    if (!validRecurringType(type)) {
         throw new TypeError('invalid recurring type!');
     }
 
