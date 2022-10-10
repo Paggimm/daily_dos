@@ -69,7 +69,6 @@ function validateInput(input: HTMLInputElement) {
         font-size: x-small;
         background-color: var(--background-information-surface);
         margin: 0;
-        width: 100%;
         height: 40%;
     }
 
@@ -77,9 +76,9 @@ function validateInput(input: HTMLInputElement) {
         background-color: var(--background-interactable-surface);
         border-radius: 0 0 5px 5px;
         height: 60%;
-        width: 100%;
         padding: 0;
         border: 1.5px solid #dbdbdb;
+        padding-left: 1%;
     }
 }
 </style>

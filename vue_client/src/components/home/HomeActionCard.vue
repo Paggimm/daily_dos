@@ -30,7 +30,6 @@ function toRouterLink() {
 </script>
 <style scoped lang="less">
 .home-action-card-container {
-    aspect-ratio: 2;
     border-radius: var(--default-border-radius);
     background-color: var(--background-interactable-surface);
     display: grid;
@@ -44,13 +43,13 @@ function toRouterLink() {
 
     .home-action-card-image {
         grid-area: main;
-        opacity: 0.65;
+        opacity: 0.6;
         width: 100%;
         height: 100%;
-
-        p {
-            grid-area: main;
-        }
+    }
+    p {
+        grid-area: main;
+        z-index: 1;
     }
 }
 </style>

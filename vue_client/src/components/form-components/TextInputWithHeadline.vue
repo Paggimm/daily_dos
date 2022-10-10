@@ -58,6 +58,7 @@ const updateValue = (event: Event) => {
         height: 60%;
         padding: 0;
         border: 1.5px solid #dbdbdb;
+        padding-left: 1%;
     }
 }
 </style>

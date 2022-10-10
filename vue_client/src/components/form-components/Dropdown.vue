@@ -3,6 +3,7 @@
           v-click-outside="closeDropdown"
           class="dropdown-container"
     >
+        <p class="title"> {{ title }}</p>
         <!-- Selected Value -->
         <div
               class="dropdown-selected-value"
@@ -37,7 +38,10 @@ const props = defineProps({
     },
     modelValue: {
         type: String,
-        required: true,
+    },
+    title: {
+        type: String,
+        default: "",
     }
 })
 
@@ -80,13 +84,25 @@ function updateModelValue() {
     width: 100%;
     border-radius: 10px;
 
+    .title {
+        border-top: 1.5px solid #dbdbdb;
+        border-left: 1.5px solid #dbdbdb;
+        border-right: 1.5px solid #dbdbdb;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        font-size: x-small;
+        background-color: var(--background-information-surface);
+        margin: 0;
+        height: 40%;
+    }
+
     .dropdown-selected-value {
         background-color: var(--background-interactable-surface);
         display: flex;
         padding-left: 1vw;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        height: 100%;
+        height: 60%;
         justify-content: center;
         align-items: center;
         border: 1px solid #dbdbdb;
@@ -97,7 +113,7 @@ function updateModelValue() {
     }
 
     .dropdown-selected-value.closed {
-        border-radius: 10px;
+        border-radius: 0 0 10px 10px;
     }
 
     .dropdown-option-container {
