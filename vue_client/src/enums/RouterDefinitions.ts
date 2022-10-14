@@ -5,5 +5,6 @@ export enum RouterDefinitions {
     REGISTER = 'register',
     LOGOUT = 'logout',
     ACTIVITIES = 'activities',
+    PLANS = "plans",
     My = 'my',
 }
