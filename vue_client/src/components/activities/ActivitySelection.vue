@@ -42,10 +42,14 @@ const toggleSelectionEnabled = () => selectionEnabled.value = !selectionEnabled.
 
 </script>
 <style scoped lang="less">
+@import "../../css/colors.less";
+@import "../../css/measures.less";
 .activity-selection-activation {
     aspect-ratio: 1;
     border: 1px solid black;
+    border-radius: @default-border-radius;
     height: 10vw;
+    background-color: @background-interactable-surface;
 
     &:hover {
         cursor: pointer;
@@ -53,11 +57,18 @@ const toggleSelectionEnabled = () => selectionEnabled.value = !selectionEnabled.
 }
 
 .activity-selection {
-    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    margin-left: 3%;
+    background-color: @background-information-surface;
+    padding: 1vw;
+    border-radius: @default-border-radius;
 
     .activity-selection-item {
         aspect-ratio: 1;
-        width: 5vw;
+        width: 15%;
+        border-radius: @default-border-radius;
         border: 1px solid black;
     }
 }

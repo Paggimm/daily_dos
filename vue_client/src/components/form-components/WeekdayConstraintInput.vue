@@ -46,7 +46,8 @@ function toggleWeekday(index: number) {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
+@import "@/css/colors.less";
 
 .weekday-constraint-input-container {
     display: flex;
@@ -57,7 +58,7 @@ function toggleWeekday(index: number) {
     aspect-ratio: 1;
     width: 16%;
     border-radius: 10px;
-    background-color: var(--background-interactable-surface);
+    background-color: @background-interactable-surface;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
@@ -65,7 +66,7 @@ function toggleWeekday(index: number) {
 
 .weekday-constraint-input-item:hover {
     cursor: pointer;
-    background-color: var(--background-interactable-surface-focused);
+    background-color: @background-interactable-surface-focused;
 
     animation: pulse 1.5s infinite ease-out;
 }
@@ -75,7 +76,7 @@ function toggleWeekday(index: number) {
 }
 
 .selected {
-    background-color: var(--background-interactable-surface-focused);
+    background-color: @background-interactable-surface-focused;
 }
 
 @keyframes pulse {

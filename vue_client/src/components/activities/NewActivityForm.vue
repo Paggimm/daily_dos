@@ -137,6 +137,7 @@ async function submit() {
 
 </script>
 <style scoped lang="less">
+@import "@/css/measures.less";
 .new-activity-form-container {
     margin-left: 2vw;
     margin-right: 2vw;
@@ -195,7 +196,7 @@ async function submit() {
     .submit-button {
         width: 100%;
         height: 4vw;
-        border-radius: var(--default-border-radius);
+        border-radius: @default-border-radius;
         border: 1.5px solid #dbdbdb;
         cursor: pointer;
     }

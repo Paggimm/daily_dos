@@ -55,6 +55,8 @@ function validateInput(input: HTMLInputElement) {
 
 </script>
 <style scoped lang="less">
+@import "@/css/colors.less";
+
 .input-with-headline {
     display: flex;
     flex-direction: column;
@@ -67,13 +69,13 @@ function validateInput(input: HTMLInputElement) {
         border-radius: 5px 5px 0 0;
         text-align: center;
         font-size: x-small;
-        background-color: var(--background-information-surface);
+        background-color: @background-information-surface;
         margin: 0;
         height: 40%;
     }
 
     input {
-        background-color: var(--background-interactable-surface);
+        background-color: @background-interactable-surface;
         border-radius: 0 0 5px 5px;
         height: 60%;
         padding: 0;

@@ -18,13 +18,14 @@ defineProps({
 })
 
 </script>
-<style scoped>
+<style scoped lang="less">
+@import "@/css/colors.less";
 .activity-info-card-container {
     border-radius: 10px;
     margin: 1vw;
     aspect-ratio: 5;
     width: 40%;
-    background-color: var(--background-information-surface);
+    background-color: @background-information-surface;
     justify-content: center;
     display: flex;
     align-items: center;

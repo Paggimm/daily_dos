@@ -20,7 +20,9 @@ const authStore = useAuthStore()
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
+@import "@/css/colors.less";
+
 .sidenavi-container {
     width: 15vw;
     position: absolute;
@@ -44,6 +46,6 @@ const authStore = useAuthStore()
 }
 
 .sidenavi-items {
-    background-color: var(--background-information-surface);
+    background-color: @background-information-surface;
 }
 </style>

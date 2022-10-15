@@ -22,24 +22,26 @@ function toActivity() {
 }
 
 </script>
-<style scoped>
+<style scoped lang="less">
+@import "@/css/colors.less";
+@import "@/css/measures.less";
 
 .header-navigation {
     height: 5vw;
-    background-color: var(--background-surface-dark);
+    background-color: @background-surface-dark;
     display: flex;
     justify-content: center;
 }
 
 .header-navigation-item {
     width: 10%;
-    background-color: var(--background-interactable-surface);
+    background-color: @background-interactable-surface;
     margin: 1vw;
-    border-radius: var(--default-border-radius);
+    border-radius: @default-border-radius;
 }
 
 .header-navigation-item:hover {
-    background-color: var(--background-interactable-surface-focused);
+    background-color: @background-interactable-surface-focused;
     cursor: pointer;
 }
 </style>

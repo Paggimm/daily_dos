@@ -35,6 +35,8 @@ const updateValue = (event: Event) => {
 
 </script>
 <style scoped lang="less">
+@import "@/css/colors.less";
+
 .input-with-headline {
     display: flex;
     flex-direction: column;
@@ -49,16 +51,15 @@ const updateValue = (event: Event) => {
         height: 40%;
         text-align: center;
         font-size: x-small;
-        background-color: var(--background-information-surface);
+        background-color: @background-information-surface;
     }
 
     input {
-        background-color: var(--background-interactable-surface);
+        background-color: @background-interactable-surface;
         border-radius: 0 0 5px 5px;
         height: 60%;
-        padding: 0;
         border: 1.5px solid #dbdbdb;
-        padding-left: 1%;
+        padding: 0 0 0 1%;
     }
 }
 </style>

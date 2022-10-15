@@ -9,6 +9,6 @@
 
 import HomeActionOverview from "@/components/home/HomeActionOverview.vue";
 </script>
-<style scoped>
+<style scoped lang="less">
 
 </style>

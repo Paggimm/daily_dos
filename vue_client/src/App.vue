@@ -9,9 +9,9 @@
 <script setup lang="ts">
 import Header from "@/components/header/Header.vue";
 </script>
-<style>
-@import "css/colors.css";
-@import "css/measures.css";
+<style lang="less">
+@import "css/colors.less";
+@import "css/measures.less";
 
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -19,7 +19,7 @@ import Header from "@/components/header/Header.vue";
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    background-color: var(--background-surface-bright);
+    background-color: @background-surface-bright;
     padding-bottom: 5vw;
 }
 </style>

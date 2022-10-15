@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import RegisterForm from "@/components/auth/RegisterForm.vue";
 </script>
-<style>
+<style scoped lang="less">
 .register-form {
     margin-left: 30%;
     margin-right: 30%;

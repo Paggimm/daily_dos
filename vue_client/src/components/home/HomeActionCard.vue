@@ -29,15 +29,18 @@ function toRouterLink() {
 
 </script>
 <style scoped lang="less">
+@import "@/css/colors.less";
+@import "@/css/measures.less";
+
 .home-action-card-container {
-    border-radius: var(--default-border-radius);
-    background-color: var(--background-interactable-surface);
+    border-radius: @default-border-radius;
+    background-color: @background-interactable-surface;
     display: grid;
     grid-template-areas: "main";
     overflow: hidden;
 
     &:hover {
-        background-color: var(--background-interactable-surface-focused);
+        background-color: @background-interactable-surface-focused;
         cursor: pointer;
     }
 

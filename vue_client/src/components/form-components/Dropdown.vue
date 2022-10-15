@@ -1,6 +1,6 @@
 <template>
     <div
-          v-click-outside="closeDropdown"
+          @v-click-outside="closeDropdown"
           class="dropdown-container"
     >
         <p class="title"> {{ title }}</p>
@@ -78,6 +78,7 @@ function updateModelValue() {
 
 </script>
 <style scoped lang="less">
+@import "@/css/colors.less";
 
 .dropdown-container {
     position: relative;
@@ -91,13 +92,13 @@ function updateModelValue() {
         border-radius: 5px 5px 0 0;
         text-align: center;
         font-size: x-small;
-        background-color: var(--background-information-surface);
+        background-color: @background-information-surface;
         margin: 0;
         height: 40%;
     }
 
     .dropdown-selected-value {
-        background-color: var(--background-interactable-surface);
+        background-color: @background-interactable-surface;
         display: flex;
         padding-left: 1vw;
         border-top-left-radius: 10px;
@@ -129,12 +130,12 @@ function updateModelValue() {
         }
 
         .dropdown-option {
-            background-color: var(--background-interactable-surface);
+            background-color: @background-interactable-surface;
             width: 100%;
             border: 1px solid #dbdbdb;
 
             &:hover {
-                background-color: var(--background-interactable-surface-focused);
+                background-color: @background-interactable-surface-focused;
             }
         }
     }

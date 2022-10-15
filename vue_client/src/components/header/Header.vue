@@ -53,9 +53,10 @@ const authStore = useAuthStore();
 const loggedIn = computed((): boolean => authStore.isLoggedIn);
 </script>
 
-<style>
+<style scoped lang="less">
+@import "@/css/colors.less";
 .header-container {
-    background-color: var(--background-surface);
+    background-color: @background-surface;
     display: flex;
     flex-direction: column;
 }
