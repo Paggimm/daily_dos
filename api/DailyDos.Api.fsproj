@@ -43,8 +43,5 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="npgsql" Version="6.0.6" />
     <PackageReference Include="Ply" Version="0.3.1" />
-    <PackageReference Update="Dapper.FSharp">
-      <Version>3.3.0</Version>
-    </PackageReference>
   </ItemGroup>
 </Project>
