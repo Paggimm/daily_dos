@@ -4,9 +4,9 @@
         <!-- FORM FIELDS -->
         <ActivitySelection
               :activity-list="activityList"
+              v-model:selected-activity="activity"
         />
         <!--
-            activity dropdown
             date
             duration
             repeatable
@@ -22,8 +22,9 @@ import ActivitySelection from "@/components/activities/ActivitySelection.vue";
 
 const authStore = useAuthStore();
 
-// activityList and computed OptionList for Dropdown
 const activityList = ref<Activity[]>([]);
+const activity = ref<Activity|undefined>(undefined);
+
 // load activityList
 onMounted(async () => {
     const response = await fetchRequest('activity', undefined, 'GET', authStore.getToken);
