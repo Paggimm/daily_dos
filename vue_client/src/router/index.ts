@@ -1,5 +1,15 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import {RouterDefinitions} from "@/enums/RouterDefinitions";
+import {useAuthStore} from "@/store/AuthStore";
+
+// checks if the current user is logged in and returns a redirect to the login-page
+// TODO: take to-route as parameter and redirect from login-page after successful login to to-route
+const checkLoggedIn = () => {
+        const authStore = useAuthStore();
+        if(!authStore.isLoggedIn) {
+            return { name: RouterDefinitions.LOGIN }
+        }
+}
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -35,12 +45,14 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/activities',
         name: RouterDefinitions.ACTIVITIES,
-        component: () => import('@/views/ActivitiesOverview.vue')
+        component: () => import('@/views/ActivitiesOverview.vue'),
+        beforeEnter: checkLoggedIn
     },
     {
         path: '/plans',
         name: RouterDefinitions.PLANS,
-        component: () => import('@/views/PlansOverview.vue')
+        component: () => import('@/views/PlansOverview.vue'),
+        beforeEnter: checkLoggedIn
     },
 ]
 
