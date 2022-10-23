@@ -6,8 +6,8 @@
         <div
               v-for="(weekday, index) in weekday_list"
               :key="index"
-              class="weekday-constraint-input-item"
               :class="{'selected':isWeekdaySelected(index)}"
+              class="weekday-constraint-input-item pulsating-on-hover"
               @click="toggleWeekday(index)"
         >
             <p>{{ weekday }}</p>
@@ -15,7 +15,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {ref, defineProps, defineEmits} from 'vue';
+import {defineEmits, defineProps, ref} from 'vue';
 
 defineProps({
     weekdayConstraints: {
@@ -46,7 +46,7 @@ function toggleWeekday(index: number) {
 }
 
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 @import "@/css/colors.less";
 
 .weekday-constraint-input-container {
@@ -67,8 +67,6 @@ function toggleWeekday(index: number) {
 .weekday-constraint-input-item:hover {
     cursor: pointer;
     background-color: @background-interactable-surface-focused;
-
-    animation: pulse 1.5s infinite ease-out;
 }
 
 .weekday-constraint-input-item:not(:last-child) {
@@ -77,18 +75,6 @@ function toggleWeekday(index: number) {
 
 .selected {
     background-color: @background-interactable-surface-focused;
-}
-
-@keyframes pulse {
-    from {
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7)
-    }
-    70% {
-        box-shadow: 0 0 0 5px rgba(0, 0, 0, 0)
-    }
-    to {
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0)
-    }
 }
 
 </style>

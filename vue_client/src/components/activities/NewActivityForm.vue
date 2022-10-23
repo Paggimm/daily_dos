@@ -35,29 +35,9 @@
             <WeekdayConstraintInput
                   v-model:weekdayConstraints="weekdayConstraints"
             />
-            <!-- recurring -->
-            <div class="recurring-checkbox">
-                <input
-                      v-model="recurring"
-                      type="checkbox"
-                >
-                <p>recurring Activity?</p>
-            </div>
-            <div
-                  v-if="recurring"
-                  class="recurring-form-container"
-            >
-                <Dropdown
-                      v-model="recurringType"
-                      :option-list="availableRecurringTypes"
-                />
-                <NumberInputWithHeadline
-                      :title="'RECURRING INTERVAL'"
-                      :model-value="recurringInterval"
-                      :max-value="29"
-                      :min-value="1"
-                />
-            </div>
+            <RecurringInput
+                  v-model="recurringInput"
+            />
             <button
                   class="submit-button button is-primary"
                   @click="submit"
@@ -73,26 +53,28 @@ import {ref} from 'vue';
 import NumberInputWithHeadline from '@/components/form-components/NumberInputWithHeadline.vue'
 import TextInputWithHeadline from '@/components/form-components/TextInputWithHeadline.vue'
 import WeekdayConstraintInput from '@/components/form-components/WeekdayConstraintInput.vue'
-import {createAvailableRecurringTypes, RecurringType} from '@/enums/RecurringType'
-import Dropdown from '@/components/form-components/Dropdown.vue'
+import {RecurringType} from '@/enums/RecurringType'
 import {fetchRequest} from '@/utils'
 import {useAuthStore} from '@/store/AuthStore'
 import {ActivityInput} from "@/generated/models";
 import {validateActivityInput} from "@/validators/ActivityInputValidator";
+import {IRecurringInput} from "@/types";
+import RecurringInput from "@/components/form-components/RecurringInput.vue";
 
-const recurring = ref(false);
-const flexibleDuration = ref(false);
 const authStore = useAuthStore();
 
 const activityName = ref('')
 const weekdayConstraints = ref<string[]>(['0', '0', '0', '0', '0', '0', '0']);
 
-const recurringType = ref<RecurringType>(RecurringType.DAILY)
-const recurringInterval = ref(1);
-const availableRecurringTypes = createAvailableRecurringTypes();
+const recurringInput = ref<IRecurringInput>({
+    recurringType: RecurringType.NO,
+    recurringInterval: 1
+});
 
+const flexibleDuration = ref(false);
 const durationMin = ref<number>(1);
 const durationMax = ref<number>(2);
+
 function checkDurationInput() {
     if (flexibleDuration.value) {
         // when max lower equals min we change max to min+1
@@ -122,8 +104,8 @@ async function submit() {
         name: activityName.value,
         minDuration: durationMin.value,
         maxDuration: durationMax.value,
-        recurringType: recurring.value ? recurringType.value : RecurringType.NO,
-        recurringInterval: recurringInterval.value,
+        recurringType: recurringInput.value.recurringType,
+        recurringInterval: recurringInput.value.recurringInterval,
         weekdayConstraint: weekdays,
     }
 
@@ -135,8 +117,9 @@ async function submit() {
 }
 
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 @import "@/css/measures.less";
+
 .new-activity-form-container {
     margin-left: 2vw;
     margin-right: 2vw;
@@ -166,29 +149,6 @@ async function submit() {
             p, input {
                 width: 5vw;
             }
-        }
-    }
-
-    .recurring-form-container {
-        display: flex;
-        margin-bottom: 1vw;
-
-        * {
-            width: 49%;
-        }
-
-        & > *:not(:last-child) {
-            margin-right: 2%;
-        }
-    }
-
-    .recurring-checkbox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        * {
-            margin-right: 0.5vw;
         }
     }
 

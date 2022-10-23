@@ -6,12 +6,12 @@
         </div>
     </div>
 </template>
-<script setup lang="ts">
-import Header from "@/components/header/Header.vue";
-</script>
+<script lang="ts" setup>
+import Header from "@/components/header/Header.vue";</script>
 <style lang="less">
-@import "css/colors.less";
-@import "css/measures.less";
+@import "@/css/colors.less";
+@import "@/css/measures.less";
+@import "@/css/animations.less";
 
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

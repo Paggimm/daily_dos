@@ -8,7 +8,7 @@
               @click="toggleSelectionEnabled"
         >
             <p v-if="selectedActivity === undefined">select activity</p>
-            <p v-else>{{selectedActivity.name}}</p>
+            <p v-else>{{ selectedActivity.name }}</p>
         </div>
         <transition name="selection-container">
             <div
@@ -18,8 +18,8 @@
                 <div
                       v-for="(activity, index) in activityList"
                       :key="index"
-                      class="activity-selection-item pulsating-on-hover"
                       :class="{selected: isActivitySelected(activity)}"
+                      class="activity-selection-item pulsating-on-hover"
                       @click="activityClicked(index)"
                 >
                     <p>{{ activity.name }}</p>
@@ -29,9 +29,9 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {Activity} from "@/generated/models";
-import {ref, defineProps, defineEmits} from "vue";
+import {defineEmits, defineProps, ref} from "vue";
 
 const props = defineProps<{
     activityList: Activity[],
@@ -39,7 +39,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits([
-      'update:selectedActivity'
+    'update:selectedActivity'
 ]);
 
 const selectionEnabled = ref(false);
@@ -48,8 +48,7 @@ const enableSelection = () => selectionEnabled.value = true;
 const toggleSelectionEnabled = () => selectionEnabled.value = !selectionEnabled.value
 
 const activityClicked = (index: number) => {
-    if(props.activityList.length >= index)
-    {
+    if (props.activityList.length >= index) {
         const activity = props.activityList[index];
         emit('update:selectedActivity', activity);
         disableSelection();
@@ -57,17 +56,16 @@ const activityClicked = (index: number) => {
 };
 
 const isActivitySelected = (activity: Activity) => {
-    if(props.selectedActivity === undefined) {
+    if (props.selectedActivity === undefined) {
         return false;
     }
     return activity.id === props.selectedActivity.id
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 @import "@/css/colors.less";
 @import "@/css/measures.less";
-@import "@/css/animations.less";
 
 .activity-selection-activation {
     aspect-ratio: 1;
