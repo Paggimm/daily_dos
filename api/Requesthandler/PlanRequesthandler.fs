@@ -6,7 +6,6 @@ open DailyDos.Api.Services.AuthService
 open DailyDos.Generated
 open Giraffe
 open Microsoft.AspNetCore.Http
-open System.Linq
 
 module PlanRequesthandler =
     /// return every plan of the current user
@@ -21,6 +20,7 @@ module PlanRequesthandler =
         fun (next: HttpFunc) (ctx: HttpContext) ->
             let plan = PlanDao.GetPlanById id
             let userId = AuthService.GetUserIdFromContext ctx
+
             if plan.userId = userId then
                 json (plan) next ctx
             else
@@ -39,7 +39,7 @@ module PlanRequesthandler =
                     return! json "ok" next ctx
                 else
                     ctx.SetStatusCode 403
-                    return! json "forbidden" next ctx
+                    return! json "invalid input" next ctx
             }
 
     /// overwrite an existing plan
@@ -51,7 +51,8 @@ module PlanRequesthandler =
                 let oldPlan = PlanDao.GetPlanById id
 
                 // we only do something when input is ok and user is the owner
-                if PlanInputValidator.ValidatePlanInput planInput && oldPlan.userId = userId then
+                if PlanInputValidator.ValidatePlanInput planInput
+                   && oldPlan.userId = userId then
                     PlanDao.UpdatePlan planInput id
                     return! json "ok" next ctx
                 else

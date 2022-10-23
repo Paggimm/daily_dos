@@ -7,7 +7,13 @@ open System
 module PlanInputValidator =
     /// validates if acitivity exists and is owned by user
     let private ValidateActivityId id =
-        ActivityDao.DoesActivityExist id
+        let result =
+            ActivityDao.DoesActivityExist id
+
+        if not result then
+            printf "activity does not exist"
+
+        result
 
     /// validate duration constraints
     let private ValidateDuration duration =
@@ -19,7 +25,7 @@ module PlanInputValidator =
             true
 
     /// validate Date constraints
-    let rec private ValidateDate (date: DateTime) =
+    let private ValidateDate (date: DateTime) =
         // is the date in the future?
         if date.ToUniversalTime() < DateTime.UtcNow then
             printf "date is not in the future"
@@ -29,13 +35,17 @@ module PlanInputValidator =
 
     /// validates the repeatable constraint
     let private ValidateRepeatable repeatable =
-        if repeatable = "daily" || repeatable = "weekly" || repeatable = "monthly" || repeatable = "yearly" then
+        if repeatable = "daily"
+           || repeatable = "weekly"
+           || repeatable = "monthly"
+           || repeatable = "yearly"
+           || repeatable = "no" then
             true
         else
             false
 
     let ValidatePlanInput (planInput: PlanInput) =
-        ValidateActivityId planInput.activityId &&
-        ValidateDuration planInput.duration &&
-        ValidateDate planInput.date &&
-        ValidateRepeatable planInput.repeatable
+        ValidateActivityId planInput.activityId
+        && ValidateDuration planInput.duration
+        && ValidateDate planInput.date
+        && ValidateRepeatable planInput.repeatable
