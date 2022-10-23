@@ -84,16 +84,15 @@ const recurring = ref(false);
 const flexibleDuration = ref(false);
 const authStore = useAuthStore();
 
-// form values
-const durationMin = ref<number>(1);
-const durationMax = ref<number>(2);
 const activityName = ref('')
 const weekdayConstraints = ref<string[]>(['0', '0', '0', '0', '0', '0', '0']);
+
 const recurringType = ref<RecurringType>(RecurringType.DAILY)
 const recurringInterval = ref(1);
-
 const availableRecurringTypes = createAvailableRecurringTypes();
 
+const durationMin = ref<number>(1);
+const durationMax = ref<number>(2);
 function checkDurationInput() {
     if (flexibleDuration.value) {
         // when max lower equals min we change max to min+1

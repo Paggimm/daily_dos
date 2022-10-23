@@ -3,27 +3,47 @@
         <h3>NEW PLAN</h3>
         <!-- FORM FIELDS -->
         <ActivitySelection
-              :activity-list="activityList"
               v-model:selected-activity="activity"
+              :activity-list="activityList"
         />
-        <!--
-            date
-            duration
-            repeatable
-        -->
+        <Calendar
+              v-model="date"
+              :manualInput="false"
+              :showTime="true"
+              dateFormat="dd.mm.yy"
+              selectionMode="single"
+        />
+        <NumberInputWithHeadline
+              v-model="duration"
+              title="DURATION"
+        />
+        <RecurringInput
+              v-model="recurringInput"
+        />
     </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import {onMounted, ref} from "vue";
 import {Activity} from "@/generated/models";
 import {useAuthStore} from "@/store/AuthStore";
 import {fetchRequest} from "@/utils";
 import ActivitySelection from "@/components/activities/ActivitySelection.vue";
+import Calendar from "primevue/calendar";
+import NumberInputWithHeadline from "@/components/form-components/NumberInputWithHeadline.vue";
+import RecurringInput from "@/components/form-components/RecurringInput.vue";
+import {IRecurringInput} from "@/types";
+import {RecurringType} from "@/enums/RecurringType";
 
 const authStore = useAuthStore();
 
 const activityList = ref<Activity[]>([]);
-const activity = ref<Activity|undefined>(undefined);
+const activity = ref<Activity | undefined>(undefined);
+const date = ref<Date>();
+const duration = ref<number>(1);
+const recurringInput = ref<IRecurringInput>({
+    recurringInterval: 1,
+    recurringType: RecurringType.NO
+});
 
 // load activityList
 onMounted(async () => {
@@ -34,6 +54,6 @@ onMounted(async () => {
 });
 
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 
 </style>
