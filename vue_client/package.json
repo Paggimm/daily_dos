@@ -17,7 +17,7 @@
     "pinia": "^2.0.17",
     "pinia-plugin-persistedstate": "^1.6.3",
     "primeicons": "^6.0.1",
-    "primevue": "^3.17.0",
+    "primevue": "^3.18.0",
     "vue": "^3.2.13",
     "vue-filepond": "^7.0.2",
     "vue-router": "^4.0.3"

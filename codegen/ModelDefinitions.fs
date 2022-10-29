@@ -1,6 +1,5 @@
 namespace DailyDos.Codegen.ModelService
 
-open System
 open DailyDos.Codegen
 
 /// Generates Modeldefinitions
@@ -17,7 +16,7 @@ module ModelDefinitions =
 
     let private RegisterModel =
         Model.create "RegisterData"
-        |> Model.withProperty "name" GString""
+        |> Model.withProperty "name" GString ""
         |> Model.withProperty "email" GString ""
         |> Model.withProperty "password" GString ""
 
@@ -97,8 +96,8 @@ module ModelDefinitions =
         |> Model.withProperty "recurringType" GString ""
         |> Model.withProperty "recurringInterval" GInt ""
 
-    let get = [
-          LoginResponse
+    let get =
+        [ LoginResponse
           UserModel
           RegisterModel
           LoginViewModel
@@ -109,5 +108,4 @@ module ModelDefinitions =
           PlanRating
           PlanRatingInput
           FreeTime
-          FreeTimeInput
-    ]
+          FreeTimeInput ]

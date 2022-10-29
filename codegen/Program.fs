@@ -1,6 +1,5 @@
 namespace DailyDos.Codegen
 
-open System
 open System.IO
 open DailyDos.Codegen.ModelService
 
@@ -12,9 +11,9 @@ module FsGenerator =
           for prop in model.properties do
               let typ =
                   if (prop.typ = GCustom) then
-                    prop.customType
+                      prop.customType
                   else
-                    FsType.fromGenType prop.typ |> FsType.toFs
+                      FsType.fromGenType prop.typ |> FsType.toFs
 
               $"    %s{prop.name}: %s{typ}"
           $"}}" ]
@@ -31,9 +30,9 @@ module TsGenerator =
           for prop in model.properties do
               let typ =
                   if (prop.typ = GCustom) then
-                    prop.customType
+                      prop.customType
                   else
-                    TsType.fromGenType prop.typ |> TsType.toTs
+                      TsType.fromGenType prop.typ |> TsType.toTs
 
               $"    %s{prop.name}: %s{typ};"
           $"}}" ]

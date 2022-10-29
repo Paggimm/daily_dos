@@ -27,7 +27,7 @@ module PlanInputValidator =
     /// validate Date constraints
     let private ValidateDate (date: DateTime) =
         // is the date in the future?
-        if date.ToUniversalTime() < DateTime.UtcNow then
+        if date <= DateTime.UtcNow then
             printf "date is not in the future"
             false
         else
