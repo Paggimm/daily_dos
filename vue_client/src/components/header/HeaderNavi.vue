@@ -4,25 +4,34 @@
               v-for="(item, index) in headerItems"
               :key="index"
               class="header-navigation-item"
-              @click="toActivity"
+              @click="toActivity(item.routerTarget)"
         >
-            {{ item }}
+            {{ item.name }}
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import router from "@/router";
 import {RouterDefinitions} from "@/enums/RouterDefinitions";
 
-const headerItems = ['ACTIVITY', 'PLANS', 'BLABLA']
+interface IHeaderItem {
+    name: string,
+    routerTarget: RouterDefinitions
+}
 
-function toActivity() {
-    router.push(RouterDefinitions.ACTIVITIES);
+const headerItems: IHeaderItem[] = [
+    {name: 'ACTIVITY', routerTarget: RouterDefinitions.ACTIVITIES},
+    {name: 'PLANS', routerTarget: RouterDefinitions.PLANS},
+    {name: 'BLABLA', routerTarget: RouterDefinitions.ACTIVITIES}
+]
+
+function toActivity(routerTarget: RouterDefinitions) {
+    router.push(routerTarget);
 }
 
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 @import "@/css/colors.less";
 @import "@/css/measures.less";
 
@@ -31,6 +40,7 @@ function toActivity() {
     background-color: @background-surface-dark;
     display: flex;
     justify-content: center;
+    min-height: 50px;
 }
 
 .header-navigation-item {
@@ -38,6 +48,8 @@ function toActivity() {
     background-color: @background-interactable-surface;
     margin: 1vw;
     border-radius: @default-border-radius;
+    min-height: 30px;
+    min-width: 100px;
 }
 
 .header-navigation-item:hover {

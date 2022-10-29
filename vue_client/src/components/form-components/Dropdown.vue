@@ -1,13 +1,13 @@
 <template>
     <div
-          @v-click-outside="closeDropdown"
           class="dropdown-container"
+          @v-click-outside="closeDropdown"
     >
         <p class="title"> {{ title }}</p>
         <!-- Selected Value -->
         <div
-              class="dropdown-selected-value"
               :class="{'closed': !showSelectionOptions}"
+              class="dropdown-selected-value"
               @click="toogleDropdown"
         >
             <p> {{ selectionValue }}</p>
@@ -29,26 +29,18 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {ref, defineProps, defineEmits, PropType} from 'vue';
+import {defineEmits, defineProps, ref} from 'vue';
 
-const props = defineProps({
-    optionList: {
-        type: Array as PropType<Array<string>>,
-        required: true,
-    },
-    modelValue: {
-        type: String,
-    },
-    title: {
-        type: String,
-        default: "",
-    }
-})
+const props = defineProps<{
+    optionList: string[],
+    modelValue: string,
+    title: string,
+}>()
 
 const emit = defineEmits(['update:modelValue'])
 
 const showSelectionOptions = ref(false);
-const selectionValue = ref<string>('...');
+const selectionValue = ref<string>(props.modelValue);
 
 function openDropdown() {
     showSelectionOptions.value = true;
@@ -67,9 +59,11 @@ function toogleDropdown() {
 }
 
 function optionClicked(index: number) {
-    selectionValue.value = props.optionList[index];
-    closeDropdown();
-    updateModelValue();
+    if (props.optionList.length >= index) {
+        selectionValue.value = props.optionList[index];
+        closeDropdown();
+        updateModelValue();
+    }
 }
 
 function updateModelValue() {
@@ -77,19 +71,21 @@ function updateModelValue() {
 }
 
 </script>
-<style scoped lang="less">
+<style lang="less" scoped>
 @import "@/css/colors.less";
+@import "@/css/measures.less";
 
 .dropdown-container {
     position: relative;
     width: 100%;
-    border-radius: 10px;
+    border-radius: @default-border-radius;
+    height: 5vw;
 
     .title {
         border-top: 1.5px solid #dbdbdb;
         border-left: 1.5px solid #dbdbdb;
         border-right: 1.5px solid #dbdbdb;
-        border-radius: 5px 5px 0 0;
+        border-radius: @default-border-radius @default-border-radius 0 0;
         text-align: center;
         font-size: x-small;
         background-color: @background-information-surface;
@@ -101,8 +97,8 @@ function updateModelValue() {
         background-color: @background-interactable-surface;
         display: flex;
         padding-left: 1vw;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-top-left-radius: @default-border-radius;
+        border-top-right-radius: @default-border-radius;
         height: 60%;
         justify-content: center;
         align-items: center;
@@ -114,7 +110,7 @@ function updateModelValue() {
     }
 
     .dropdown-selected-value.closed {
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 @default-border-radius @default-border-radius;
     }
 
     .dropdown-option-container {

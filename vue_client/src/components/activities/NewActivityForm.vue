@@ -37,6 +37,7 @@
             />
             <RecurringInput
                   v-model="recurringInput"
+                  class="recurring-input"
             />
             <button
                   class="submit-button button is-primary"
@@ -150,6 +151,10 @@ async function submit() {
                 width: 5vw;
             }
         }
+    }
+
+    .recurring-input {
+        margin-top: 2vw;
     }
 
     .submit-button {

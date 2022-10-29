@@ -68,11 +68,11 @@ const isActivitySelected = (activity: Activity) => {
 @import "@/css/measures.less";
 
 .activity-selection-activation {
-    aspect-ratio: 1;
     border: 1px solid black;
     border-radius: @default-border-radius;
-    height: 10vw;
     background-color: @background-interactable-surface;
+    height: 100%;
+    width: 100%;
 
     &:hover {
         cursor: pointer;

@@ -5,12 +5,14 @@ export enum RecurringType {
 // creates an array containing every recurringtype minus no
 export function createAvailableRecurringTypes(): RecurringType[] {
     const recurringTypes = Object.values(RecurringType);
-    delete recurringTypes[recurringTypes.indexOf(RecurringType.NO)];
-    return recurringTypes;
+    return recurringTypes.map((value) => {
+        return createRecurringTypeFromString(value);
+    });
 }
 
 export function validRecurringType(type: string): boolean {
     switch (type) {
+        case 'no':
         case 'daily':
         case 'weekly':
         case 'monthly':
@@ -27,6 +29,8 @@ export function createRecurringTypeFromString(type: string): RecurringType {
     }
 
     switch (type) {
+        case 'no':
+            return RecurringType.NO;
         case 'daily':
             return RecurringType.DAILY;
         case 'weekly':
