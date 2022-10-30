@@ -44,6 +44,7 @@ import RecurringInput from "@/components/form-components/RecurringInput.vue";
 import {IRecurringInput} from "@/types";
 import {RecurringType} from "@/enums/RecurringType";
 import DateWithHeadline from "@/components/form-components/DateWithHeadline.vue";
+import {ValidatePlanInput} from "@/validators/PlanInputValidator";
 
 const authStore = useAuthStore();
 
@@ -65,7 +66,6 @@ onMounted(async () => {
 });
 
 async function submit() {
-    // todo: validate input
     const planInput: PlanInput = {
         activityId: activity.value!.id,
         date: date.value!,
@@ -73,7 +73,12 @@ async function submit() {
         repeatable: recurringInput.value.recurringType.toString()
     }
 
-    const response = await fetchRequest('plan', JSON.stringify(planInput), 'POST', authStore.getToken);
+    if (ValidatePlanInput(planInput)) {
+        const response = await fetchRequest('plan', JSON.stringify(planInput), 'POST', authStore.getToken);
+    } else {
+        // TODO: react to false input
+    }
+
 }
 
 </script>

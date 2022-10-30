@@ -1,5 +1,5 @@
 import {ActivityInput} from "@/generated/models";
-import {RecurringType, validRecurringType} from "../enums/RecurringType";
+import {RecurringType, validRecurringType} from "@/enums/RecurringType";
 
 export function validateActivityInput(activityInput: ActivityInput): boolean {
     const recurring = activityInput.recurringType !== RecurringType.NO
@@ -31,10 +31,5 @@ export function validateActivityInput(activityInput: ActivityInput): boolean {
         return false;
     }
 
-    const recurringIntervalValid = !recurring || (activityInput.recurringInterval > 0 && activityInput.recurringInterval < 100)
-    if (!recurringIntervalValid) {
-        return false;
-    }
-
-    return true;
+    return !recurring || (activityInput.recurringInterval > 0 && activityInput.recurringInterval < 100)
 }

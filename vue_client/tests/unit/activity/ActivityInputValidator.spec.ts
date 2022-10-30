@@ -9,8 +9,7 @@ test("test a correct ActivityInput", () => {
         maxDuration: 50,
         recurringInterval: 2,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeTruthy();
+    })).toBeTruthy();
 })
 
 test("test activityInput with incorrect name", () => {
@@ -21,8 +20,7 @@ test("test activityInput with incorrect name", () => {
         maxDuration: 50,
         recurringInterval: 2,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeFalsy();
+    })).toBeFalsy();
 })
 
 test("test activityInput with incorrect weekday", () => {
@@ -33,8 +31,7 @@ test("test activityInput with incorrect weekday", () => {
         maxDuration: 50,
         recurringInterval: 2,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeFalsy();
+    })).toBeFalsy();
 })
 
 test("test activityInput with to low minDuration", () => {
@@ -45,8 +42,7 @@ test("test activityInput with to low minDuration", () => {
         maxDuration: 50,
         recurringInterval: 2,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeFalsy();
+    })).toBeFalsy();
 })
 
 test("test activityInput with no duration set", () => {
@@ -57,8 +53,7 @@ test("test activityInput with no duration set", () => {
         maxDuration: 0,
         recurringInterval: 2,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeTruthy();
+    })).toBeTruthy();
 })
 
 test("test activityInput with invalid RecurringType", () => {
@@ -69,8 +64,7 @@ test("test activityInput with invalid RecurringType", () => {
         maxDuration: 6,
         recurringInterval: 2,
         recurringType: 'DIALY'
-    }))
-        .toBeFalsy();
+    })).toBeFalsy();
 })
 
 test("test activityInput with invalid RecurringInterval", () => {
@@ -81,6 +75,5 @@ test("test activityInput with invalid RecurringInterval", () => {
         maxDuration: 6,
         recurringInterval: -1,
         recurringType: RecurringType.DAILY
-    }))
-        .toBeFalsy();
+    })).toBeFalsy();
 })
