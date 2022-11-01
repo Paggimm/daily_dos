@@ -1,47 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>DailyDos.Api</AssemblyName>
-    <EnableDefaultContentItems>false</EnableDefaultContentItems>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OtherFlags>--warnon:1182 $(OtherFlags)</OtherFlags>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Consts.fs" />
-    <Compile Include="generated/models.fs" />
-    <Compile Include="Models/ModelDTO.fs" />
-    <Compile Include="Daos/BaseDao.fs" />
-    <Compile Include="Daos/UserDao.fs" />
-    <Compile Include="Daos/ActivityDao.fs" />
-    <Compile Include="Daos/PlanDao.fs" />
-    <Compile Include="Daos\PlanRatingDao.fs" />
-    <Compile Include="Daos\FreeTimeDao.fs" />
-    <Compile Include="Services/AuthService.fs" />
-    <Compile Include="InputValidator/ActivityInputValidator.fs" />
-    <Compile Include="InputValidator/PlanInputValidator.fs" />
-    <Compile Include="Requesthandler/UserRequesthandler.fs" />
-    <Compile Include="Requesthandler/AuthRequesthandler.fs" />
-    <Compile Include="Requesthandler/ActivityRequesthandler.fs" />
-    <Compile Include="Requesthandler/PlanRequesthandler.fs" />
-    <Compile Include="Requesthandler/PlanRatingRequesthandler.fs" />
-    <Compile Include="Requesthandler\FreeTimeRequestHandler.fs" />
-    <Compile Include="Routing.fs" />
-    <Compile Include="Program.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="web.config" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="WebRoot\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Dapper.Fsharp" Version="3.3.0" />
-    <PackageReference Include="FSharp.Core" Version="6.0.5" />
-    <PackageReference Include="Giraffe" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
-    <PackageReference Include="npgsql" Version="6.0.6" />
-    <PackageReference Include="Ply" Version="0.3.1" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>DailyDos.Api</AssemblyName>
+        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <OtherFlags>--warnon:1182 $(OtherFlags)</OtherFlags>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Consts.fs"/>
+        <Compile Include="generated/models.fs"/>
+        <Compile Include="Models/ModelDTO.fs"/>
+        <Compile Include="Daos/BaseDao.fs"/>
+        <Compile Include="Daos/UserDao.fs"/>
+        <Compile Include="Daos/ActivityDao.fs"/>
+        <Compile Include="Daos/PlanDao.fs"/>
+        <Compile Include="Daos\PlanRatingDao.fs"/>
+        <Compile Include="Daos\FreeTimeDao.fs"/>
+        <Compile Include="Services/AuthService.fs"/>
+        <Compile Include="InputValidator/ActivityInputValidator.fs"/>
+        <Compile Include="InputValidator/PlanInputValidator.fs"/>
+        <Compile Include="Requesthandler/UserRequesthandler.fs"/>
+        <Compile Include="Requesthandler/AuthRequesthandler.fs"/>
+        <Compile Include="Requesthandler/ActivityRequesthandler.fs"/>
+        <Compile Include="Requesthandler/PlanRequesthandler.fs"/>
+        <Compile Include="Requesthandler/PlanRatingRequesthandler.fs"/>
+        <Compile Include="Requesthandler\FreeTimeRequestHandler.fs"/>
+        <Compile Include="Routing.fs"/>
+        <Compile Include="Program.fs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="web.config" CopyToOutputDirectory="PreserveNewest"/>
+        <Content Include="WebRoot\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Dapper.Fsharp" Version="3.4.0"/>
+        <PackageReference Include="FSharp.Core" Version="6.0.5"/>
+        <PackageReference Include="Giraffe" Version="6.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8"/>
+        <PackageReference Include="npgsql" Version="6.0.6"/>
+        <PackageReference Include="Ply" Version="0.3.1"/>
+        <PackageReference Update="Dapper.FSharp">
+            <Version>3.4.0</Version>
+        </PackageReference>
+    </ItemGroup>
 </Project>

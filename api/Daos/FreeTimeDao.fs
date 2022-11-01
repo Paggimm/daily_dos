@@ -11,75 +11,87 @@ open System.Linq
 open BaseDao
 
 module FreeTimeDao =
-    let private FreeTimeInsertTable = table'<FreeTimeDTO> "freetime"
-    let private FreeTimeTable = table'<FreeTime> "freetime"
+    let private FreeTimeInsertTable =
+        table'<FreeTimeDTO> "freetime"
+
+    let private FreeTimeTable =
+        table'<FreeTime> "freetime"
 
     /// return every FreeTime for a specific User
     let GetAllFreeTimes (userId: int) =
+        let connection = get_connection ()
+
         select {
             for freeTime in FreeTimeTable do
                 where (freeTime.userId = userId)
         }
-        |> db_connection.SelectAsync<FreeTime>
+        |> connection.SelectAsync<FreeTime>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// return a specific FreeTime
     let GetFreeTimeById (freeTimeID: int) =
+        let connection = get_connection ()
+
         select {
             for freeTime in FreeTimeTable do
                 where (freeTime.id = freeTimeID)
                 take 1
         }
-        |> db_connection.SelectAsync<FreeTime>
+        |> connection.SelectAsync<FreeTime>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// create a new FreeTime
-    let InsertFreeTime (userId: int)(freeTimeInput: FreeTimeInput) =
+    let InsertFreeTime (userId: int) (freeTimeInput: FreeTimeInput) =
+        let connection = get_connection ()
+
         let newFreeTime: FreeTimeDTO =
-            {
-                userId = userId
-                startDate = freeTimeInput.startDate
-                duration = freeTimeInput.duration
-                recurringType = freeTimeInput.recurringType
-                recurringInterval = freeTimeInput.recurringInterval
-                createTime = DateTime.Now.ToUniversalTime()
-            }
+            { userId = userId
+              startDate = freeTimeInput.startDate
+              duration = freeTimeInput.duration
+              recurringType = freeTimeInput.recurringType
+              recurringInterval = freeTimeInput.recurringInterval
+              createTime = DateTime.Now.ToUniversalTime() }
 
         insert {
             into FreeTimeInsertTable
             value newFreeTime
         }
-        |> db_connection.InsertAsync
+        |> connection.InsertAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
 
     /// delete a specific FreeTime
     let DeleteFreeTime (freeTimeId: int) =
+        let connection = get_connection ()
+
         delete {
             for freeTime in FreeTimeTable do
                 where (freeTime.id = freeTimeId)
         }
-        |> db_connection.DeleteAsync
+        |> connection.DeleteAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
 
     /// update FreeTime
     let UpdateFreeTime (freeTimeId: int) (freeTimeInput: FreeTimeInput) =
-        let oldFreeTime = (GetFreeTimeById freeTimeId).First()
+        let connection = get_connection ()
+
+        let oldFreeTime =
+            (GetFreeTimeById freeTimeId).First()
+
         let updatedFreeTime: FreeTime =
-            {
-                id = oldFreeTime.id
-                userId = oldFreeTime.userId
-                startDate = freeTimeInput.startDate
-                duration = freeTimeInput.duration
-                recurringType = freeTimeInput.recurringType
-                recurringInterval = freeTimeInput.recurringInterval
-                createTime = oldFreeTime.createTime
-            }
+            { id = oldFreeTime.id
+              userId = oldFreeTime.userId
+              startDate = freeTimeInput.startDate
+              duration = freeTimeInput.duration
+              recurringType = freeTimeInput.recurringType
+              recurringInterval = freeTimeInput.recurringInterval
+              createTime = oldFreeTime.createTime }
+
         update {
             for freeTime in FreeTimeTable do
                 where (freeTime.id = freeTimeId)
@@ -88,8 +100,7 @@ module FreeTimeDao =
                 excludeColumn freeTime.userId
                 excludeColumn freeTime.createTime
         }
-        |> db_connection.UpdateAsync
+        |> connection.UpdateAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
-

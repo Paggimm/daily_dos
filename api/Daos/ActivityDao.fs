@@ -10,13 +10,17 @@ open System.Linq
 open BaseDao
 
 module ActivityDao =
-    let activityTable = table'<Activity> "activities"
+    let activityTable =
+        table'<Activity> "activities"
     // TODO: doesn't feel right to create a special "insert" table definition
     // works for now but should be replaced by a more elegant solution later
-    let activityInsertTable = table'<ActivityInsertDTO> "activities"
+    let activityInsertTable =
+        table'<ActivityInsertDTO> "activities"
 
     /// checks if an activity actually exists
     let DoesActivityExist id =
+        let connection = get_connection ()
+
         /// when we only want to know of a record exists we only try to retrieve an id from db to reduce data
         let result =
             select {
@@ -24,7 +28,7 @@ module ActivityDao =
                     where (activity.id = id)
                     take 1
             }
-            |> db_connection.SelectAsync<{| id: int |}>
+            |> connection.SelectAsync<{| id: int |}>
             |> Async.AwaitTask
             |> Async.RunSynchronously
 
@@ -32,28 +36,34 @@ module ActivityDao =
 
     /// Return all Activities from a User
     let GetAllActivitiesByUserId (id: int) =
+        let connection = get_connection ()
+
         select {
             for activity in activityTable do
                 where (activity.userId = id)
         }
-        |> db_connection.SelectAsync<Activity>
+        |> connection.SelectAsync<Activity>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// Return specific Activity
     let GetActivityById (id: int) =
+        let connection = get_connection ()
+
         select {
             for activity in activityTable do
                 where (activity.id = id)
                 take 1
         }
-        |> db_connection.SelectAsync<Activity>
+        |> connection.SelectAsync<Activity>
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// Create a new Activity
     /// TODO: check if it works out with id=0
     let InsertActivity userId activity =
+        let connection = get_connection ()
+
         let newActivity: ActivityInsertDTO =
             { userId = userId
               name = activity.name
@@ -68,35 +78,40 @@ module ActivityDao =
             into activityInsertTable
             value newActivity
         }
-        |> db_connection.InsertAsync
+        |> connection.InsertAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
 
     /// Delete specific Activity
     let DeleteActivityById (id: int) =
+        let connection = get_connection ()
+
         delete {
             for activity in activityTable do
                 where (activity.id = id)
         }
-        |> db_connection.DeleteAsync
+        |> connection.DeleteAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
 
     /// Update specific Activity
     let UpdateActivity activityId activityInput =
-        let oldActivity = (GetActivityById activityId).First()
+        let connection = get_connection ()
+
+        let oldActivity =
+            (GetActivityById activityId).First()
+
         let updatedActivity: Activity =
-            {
-               id = oldActivity.id
-               userId = oldActivity.userId
-               name = activityInput.name
-               maxDuration = activityInput.maxDuration
-               minDuration = activityInput.minDuration
-               weekdayConstraint = activityInput.weekdayConstraint
-               recurringType = activityInput.recurringType
-               recurringInterval = activityInput.recurringInterval
-               createTime = oldActivity.createTime }
+            { id = oldActivity.id
+              userId = oldActivity.userId
+              name = activityInput.name
+              maxDuration = activityInput.maxDuration
+              minDuration = activityInput.minDuration
+              weekdayConstraint = activityInput.weekdayConstraint
+              recurringType = activityInput.recurringType
+              recurringInterval = activityInput.recurringInterval
+              createTime = oldActivity.createTime }
 
         update {
             for activity in activityTable do
@@ -106,7 +121,7 @@ module ActivityDao =
                 excludeColumn activity.createTime
                 where (activity.id = activityId)
         }
-        |> db_connection.UpdateAsync
+        |> connection.UpdateAsync
         |> Async.AwaitTask
         |> Async.RunSynchronously
         |> ignore
