@@ -87,6 +87,7 @@ async function submit() {
 
 .submit-button {
     height: 4vw;
+    width: 62vw;
     border-radius: @default-border-radius;
     border: 1.5px solid #dbdbdb;
     cursor: pointer;
