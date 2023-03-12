@@ -57,9 +57,9 @@ import WeekdayConstraintInput from '@/components/form-components/WeekdayConstrai
 import {RecurringType} from '@/enums/RecurringType'
 import {fetchRequest} from '@/utils'
 import {useAuthStore} from '@/store/AuthStore'
-import {ActivityInput} from "@/generated/models";
+import type {ActivityInput} from "@/generated/models";
 import {validateActivityInput} from "@/validators/ActivityInputValidator";
-import {IRecurringInput} from "@/types";
+import type {IRecurringInput} from "@/types";
 import RecurringInput from "@/components/form-components/RecurringInput.vue";
 
 const authStore = useAuthStore();

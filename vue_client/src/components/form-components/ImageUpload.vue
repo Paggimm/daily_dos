@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import {Component} from "vue";
+import type {Component} from "vue";
 
 // Import Vue FilePond + Plugins and Styles
 import vueFilePond from "vue-filepond";

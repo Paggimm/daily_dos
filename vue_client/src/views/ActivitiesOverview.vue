@@ -5,7 +5,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import {Activity} from '@/generated/models'
+import type {Activity} from '@/generated/models'
 import {useAuthStore} from '@/store/AuthStore'
 import {fetchRequest} from '@/utils'
 import {onMounted, ref} from 'vue';

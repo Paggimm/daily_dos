@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Activity} from "@/generated/models";
+import type {Activity} from "@/generated/models";
 import {defineEmits, defineProps, ref} from "vue";
 
 const props = defineProps<{

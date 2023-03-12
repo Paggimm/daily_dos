@@ -66,8 +66,8 @@ void ping(true);
 
 onMounted(() => {
     // For Hotreload: Delete old Interval before we add a new one
-    clearInterval(intervalPid.value);
-    intervalPid.value = setInterval(async () => {
+    window.clearTimeout(intervalPid.value)
+    intervalPid.value = window.setTimeout(async () => {
         void ping(false);
         void ping(true);
     }, 10000);

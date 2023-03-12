@@ -20,9 +20,9 @@
 <script lang="ts" setup>
 import {computed, defineEmits, defineProps, toRef, watch} from "vue";
 import {createAvailableRecurringTypes, RecurringType} from "@/enums/RecurringType";
-import NumberInputWithHeadline from "@/components/form-components/NumberInputWithHeadline"
-import Dropdown from "@/components/form-components/Dropdown"
-import {IRecurringInput} from "@/types";
+import NumberInputWithHeadline from "@/components/form-components/NumberInputWithHeadline.vue"
+import Dropdown from "@/components/form-components/Dropdown.vue"
+import type {IRecurringInput} from "@/types";
 
 const props = defineProps<{
     modelValue: IRecurringInput

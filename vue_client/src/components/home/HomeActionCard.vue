@@ -13,8 +13,8 @@
 </template>
 <script setup lang="ts">
 import router from "@/router";
-import {defineProps, PropType} from "vue";
-import {IHomeActionCardConfiguration} from "@/actions/HomeActionCardPropBuilder";
+import {defineProps, type PropType} from "vue";
+import type {IHomeActionCardConfiguration} from "@/actions/HomeActionCardPropBuilder";
 
 const props = defineProps({
     actionCardProperties: {

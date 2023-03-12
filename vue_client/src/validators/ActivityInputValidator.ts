@@ -1,4 +1,4 @@
-import {ActivityInput} from "@/generated/models";
+import type {ActivityInput} from "@/generated/models";
 import {RecurringType, validRecurringType} from "@/enums/RecurringType";
 
 export function validateActivityInput(activityInput: ActivityInput): boolean {

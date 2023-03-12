@@ -7,8 +7,8 @@
 </template>
 <script setup lang="ts">
 
-import {defineProps, PropType} from "vue";
-import {Activity} from "@/generated/models";
+import {defineProps, type PropType} from "vue";
+import type {Activity} from "@/generated/models";
 
 defineProps({
     activity: {

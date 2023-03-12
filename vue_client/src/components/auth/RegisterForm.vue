@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import {RegisterData} from "@/generated/models";
+import type {RegisterData} from "@/generated/models";
 import ImageUpload from "@/components/form-components/ImageUpload.vue";
 
 const register_data: RegisterData = {

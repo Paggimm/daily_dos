@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import NewPlanForm from "@/components/plans/NewPlanForm.vue";
-import {Plan} from "@/generated/models";
+import type {Plan} from "@/generated/models";
 import {onMounted, ref} from "vue";
 import {useAuthStore} from "@/store/AuthStore";
 import {fetchRequest} from "@/utils";

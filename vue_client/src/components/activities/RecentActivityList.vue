@@ -19,8 +19,8 @@
 </template>
 <script setup lang="ts">
 
-import {Activity} from "@/generated/models";
-import {PropType, defineProps} from "vue";
+import type {Activity} from "@/generated/models";
+import {type PropType, defineProps} from "vue";
 import ActivityInfoCard from "@/components/activities/ActivityInfoCard.vue";
 
 defineProps({

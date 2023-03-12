@@ -35,13 +35,13 @@
 </template>
 <script lang="ts" setup>
 import {onMounted, ref} from "vue";
-import {Activity, PlanInput} from "@/generated/models";
+import type {Activity, PlanInput} from "@/generated/models";
 import {useAuthStore} from "@/store/AuthStore";
 import {fetchRequest} from "@/utils";
 import ActivitySelection from "@/components/activities/ActivitySelection.vue";
 import NumberInputWithHeadline from "@/components/form-components/NumberInputWithHeadline.vue";
 import RecurringInput from "@/components/form-components/RecurringInput.vue";
-import {IRecurringInput} from "@/types";
+import type {IRecurringInput} from "@/types";
 import {RecurringType} from "@/enums/RecurringType";
 import DateWithHeadline from "@/components/form-components/DateWithHeadline.vue";
 import {ValidatePlanInput} from "@/validators/PlanInputValidator";

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Plan} from "@/generated/models";
+import type {Plan} from "@/generated/models";
 import {computed, defineProps} from "vue";
 
 const props = defineProps<{

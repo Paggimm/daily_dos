@@ -1,4 +1,4 @@
-import {PlanInput} from "@/generated/models";
+import type {PlanInput} from "@/generated/models";
 import {validRecurringType} from "@/enums/RecurringType";
 
 export function ValidatePlanInput(planInput: PlanInput): boolean {

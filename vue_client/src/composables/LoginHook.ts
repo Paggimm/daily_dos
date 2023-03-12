@@ -1,5 +1,5 @@
 import {ref} from "vue";
-import {LoginResponse} from "@/generated/models";
+import type {LoginResponse} from "@/generated/models";
 
 export default function useLoginFeature() {
     const username = ref("");

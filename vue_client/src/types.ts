@@ -1,4 +1,4 @@
-import {RecurringType} from "@/enums/RecurringType";
+import type {RecurringType} from "@/enums/RecurringType";
 
 export interface IRecurringInput {
     recurringType: RecurringType,

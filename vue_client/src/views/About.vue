@@ -4,6 +4,6 @@
     </div>
     <ServerStatus/>
 </template>
-<script setup>
-import ServerStatus from "@/components/server/ServerStatus";
+<script setup lang="ts">
+import ServerStatus from "@/components/server/ServerStatus.vue";
 </script>
