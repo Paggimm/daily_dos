@@ -12,14 +12,14 @@ export function createAvailableRecurringTypes(): RecurringType[] {
 
 export function validRecurringType(type: string): boolean {
     switch (type) {
-        case 'no':
-        case 'daily':
-        case 'weekly':
-        case 'monthly':
-            return true;
+    case 'no':
+    case 'daily':
+    case 'weekly':
+    case 'monthly':
+        return true;
 
-        default:
-            return false;
+    default:
+        return false;
     }
 }
 
@@ -29,13 +29,13 @@ export function createRecurringTypeFromString(type: string): RecurringType {
     }
 
     switch (type) {
-        case 'no':
-            return RecurringType.NO;
-        case 'daily':
-            return RecurringType.DAILY;
-        case 'weekly':
-            return RecurringType.WEEKLY;
-        default:
-            return RecurringType.MONTHLY;
+    case 'no':
+        return RecurringType.NO;
+    case 'daily':
+        return RecurringType.DAILY;
+    case 'weekly':
+        return RecurringType.WEEKLY;
+    default:
+        return RecurringType.MONTHLY;
     }
 }

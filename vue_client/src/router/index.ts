@@ -5,10 +5,10 @@ import {useAuthStore} from "@/store/AuthStore";
 // checks if the current user is logged in and returns a redirect to the login-page
 // TODO: take to-route as parameter and redirect from login-page after successful login to to-route
 const checkLoggedIn = () => {
-        const authStore = useAuthStore();
-        if(!authStore.isLoggedIn) {
-            return { name: RouterDefinitions.LOGIN }
-        }
+    const authStore = useAuthStore();
+    if(!authStore.isLoggedIn) {
+        return { name: RouterDefinitions.LOGIN }
+    }
 }
 
 const routes: Array<RouteRecordRaw> = [

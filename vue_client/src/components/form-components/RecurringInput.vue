@@ -1,18 +1,18 @@
 <template>
     <div
-          class="recurring-form-container"
+        class="recurring-form-container"
     >
         <Dropdown
-              v-model="recurringInput.recurringType"
-              :option-list="availableRecurringTypes"
-              title="Recurring Type"
+            v-model="recurringInput.recurringType"
+            :option-list="availableRecurringTypes"
+            title="Recurring Type"
         />
         <NumberInputWithHeadline
-              v-show="recurring"
-              v-model="recurringInput.recurringInterval"
-              :max-value="29"
-              :min-value="1"
-              title="RECURRING INTERVAL"
+            v-show="recurring"
+            v-model="recurringInput.recurringInterval"
+            :max-value="29"
+            :min-value="1"
+            title="RECURRING INTERVAL"
         />
     </div>
 </template>

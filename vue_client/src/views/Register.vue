@@ -1,7 +1,7 @@
 <template>
     <h1 class="title">Register</h1>
     <div class="register-form">
-        <RegisterForm/>
+        <RegisterForm />
     </div>
 </template>
 

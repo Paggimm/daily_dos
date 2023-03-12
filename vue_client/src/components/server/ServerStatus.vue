@@ -3,13 +3,13 @@
         <div class="server-status-content">
             Server:
             <span
-                  :class="online ? 'has-text-success' : 'has-text-danger'"
-                  v-text="online ? 'online' : 'offline'"
+                :class="online ? 'has-text-success' : 'has-text-danger'"
+                v-text="online ? 'online' : 'offline'"
             />
             | Authenticated:
             <span
-                  :class="authenticated ? 'has-text-success' : 'has-text-danger'"
-                  v-text="authenticated ? 'yes' : 'no'"
+                :class="authenticated ? 'has-text-success' : 'has-text-danger'"
+                v-text="authenticated ? 'yes' : 'no'"
             />
         </div>
     </div>
@@ -34,10 +34,10 @@ async function ping(check_auth: boolean): Promise<void> {
     let result: boolean;
     try {
         const response = await fetchRequest(
-              check_auth ? "authping" : "ping",
-              undefined,
-              "GET",
-              authStore.getToken
+            check_auth ? "authping" : "ping",
+            undefined,
+            "GET",
+            authStore.getToken
         );
         if (response.status === 200) {
             const body: PingResponse = await response.json();

@@ -1,15 +1,15 @@
 <template>
     <div class="register-container">
-        <ImageUpload/>
+        <ImageUpload />
         <form @submit.prevent="submit">
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control">
                     <input
-                          v-model="register_data.name"
-                          class="input block"
-                          required
-                          type="text"
+                        v-model="register_data.name"
+                        class="input block"
+                        required
+                        type="text"
                     >
                 </div>
             </div>
@@ -17,10 +17,10 @@
                 <label class="label">Email</label>
                 <div class="control">
                     <input
-                          v-model="register_data.email"
-                          class="input block"
-                          required
-                          type="text"
+                        v-model="register_data.email"
+                        class="input block"
+                        required
+                        type="text"
                     >
                 </div>
             </div>
@@ -28,10 +28,10 @@
                 <label class="label">Password</label>
                 <div class="control">
                     <input
-                          v-model="register_data.password"
-                          class="input block"
-                          required
-                          type="password"
+                        v-model="register_data.password"
+                        class="input block"
+                        required
+                        type="password"
                     >
                 </div>
             </div>

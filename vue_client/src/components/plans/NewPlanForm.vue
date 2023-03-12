@@ -5,28 +5,29 @@
         <div class="form-fields-container">
             <div class="form-fields-input-container">
                 <ActivitySelection
-                      v-model:selected-activity="activity"
-                      :activity-list="activityList"
-                      class="form-field-activity"
+                    v-model:selected-activity="activity"
+                    :activity-list="activityList"
+                    class="form-field-activity"
                 />
                 <div class="form-fields-inputs">
                     <DateWithHeadline
-                          v-model="date"
-                          title="DATE"/>
+                        v-model="date"
+                        title="DATE"
+                    />
                     <NumberInputWithHeadline
-                          v-model="duration"
-                          class="form-field-duration"
-                          title="DURATION"
+                        v-model="duration"
+                        class="form-field-duration"
+                        title="DURATION"
                     />
                     <RecurringInput
-                          v-model="recurringInput"
-                          class="form-field-recurring"
+                        v-model="recurringInput"
+                        class="form-field-recurring"
                     />
                 </div>
             </div>
             <button
-                  class="submit-button button is-primary pulsating-on-hover"
-                  @click="submit"
+                class="submit-button button is-primary pulsating-on-hover"
+                @click="submit"
             >
                 SUBMIT
             </button>

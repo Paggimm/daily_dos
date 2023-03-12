@@ -2,41 +2,41 @@
     <div class="columns">
         <div class="column is-one-third is-offset-one-third">
             <form
-                  v-if="!loggedIn"
-                  @submit.prevent="submit"
+                v-if="!loggedIn"
+                @submit.prevent="submit"
             >
                 <div class="field">
                     <label class="label">Username</label>
                     <div class="control has-icons-left">
                         <input
-                              v-model="loginFeature.username.value"
-                              :class="invalidLogin ? 'is-danger' : ''"
-                              class="input block"
-                              required
-                              type="text"
+                            v-model="loginFeature.username.value"
+                            :class="invalidLogin ? 'is-danger' : ''"
+                            class="input block"
+                            required
+                            type="text"
                         >
                         <span class="icon is-small is-left">
-              <i class="fas fa-user"/>
-            </span>
+                            <i class="fas fa-user" />
+                        </span>
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Password</label>
                     <div class="control has-icons-left">
                         <input
-                              v-model="loginFeature.password.value"
-                              :class="invalidLogin ? 'is-danger' : ''"
-                              class="input block"
-                              required
-                              type="password"
+                            v-model="loginFeature.password.value"
+                            :class="invalidLogin ? 'is-danger' : ''"
+                            class="input block"
+                            required
+                            type="password"
                         >
                         <span class="icon is-small is-left">
-              <i class="fas fa-lock"/>
-            </span>
+                            <i class="fas fa-lock" />
+                        </span>
                     </div>
                     <p
-                          v-if="invalidLogin"
-                          class="help is-danger"
+                        v-if="invalidLogin"
+                        class="help is-danger"
                     >
                         This login is invalid
                     </p>

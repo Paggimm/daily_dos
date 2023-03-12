@@ -1,7 +1,7 @@
 <template>
     <div class="activities-overview-container">
-        <RecentActivityList :activity-list="activityList"/>
-        <NewActivityForm/>
+        <RecentActivityList :activity-list="activityList" />
+        <NewActivityForm />
     </div>
 </template>
 <script setup lang="ts">

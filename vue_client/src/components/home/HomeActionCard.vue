@@ -1,12 +1,12 @@
 <template>
     <div
-          class="home-action-card-container"
-          @click="toRouterLink"
+        class="home-action-card-container"
+        @click="toRouterLink"
     >
         <img
-              class="home-action-card-image"
-              src="../../../images/activity-action2.jpeg"
-              alt="activity action"
+            class="home-action-card-image"
+            src="../../../images/activity-action2.jpeg"
+            alt="activity action"
         >
         <p>{{ actionCardProperties.title }}</p>
     </div>

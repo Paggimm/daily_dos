@@ -1,14 +1,14 @@
 <template>
     <div
-          class="weekday-constraint-input-container block"
-          @click="updateWeekdayConstraints"
+        class="weekday-constraint-input-container block"
+        @click="updateWeekdayConstraints"
     >
         <div
-              v-for="(weekday, index) in weekday_list"
-              :key="index"
-              :class="{'selected':isWeekdaySelected(index)}"
-              class="weekday-constraint-input-item pulsating-on-hover"
-              @click="toggleWeekday(index)"
+            v-for="(weekday, index) in weekday_list"
+            :key="index"
+            :class="{'selected':isWeekdaySelected(index)}"
+            class="weekday-constraint-input-item pulsating-on-hover"
+            @click="toggleWeekday(index)"
         >
             <p>{{ weekday }}</p>
         </div>

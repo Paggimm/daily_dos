@@ -1,14 +1,14 @@
 <template>
     <div>
         <FilePond
-              ref="pond"
-              name="test"
-              label-idle="Drop files here..."
-              :allow-multiple="true"
-              accepted-file-types="image/jpeg, image/png"
-              server="/api"
-              instant-upload="false"
-              @init="handleFilePondInit"
+            ref="pond"
+            name="test"
+            label-idle="Drop files here..."
+            :allow-multiple="true"
+            accepted-file-types="image/jpeg, image/png"
+            server="/api"
+            instant-upload="false"
+            @init="handleFilePondInit"
         />
     </div>
 </template>
@@ -25,8 +25,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 
 //create FilePond Component
 const FilePond = vueFilePond(
-      FilePondPluginFileValidateType,
-      FilePondPluginImagePreview
+    FilePondPluginFileValidateType,
+    FilePondPluginImagePreview
 ) as Component;
 
 function handleFilePondInit(): void {

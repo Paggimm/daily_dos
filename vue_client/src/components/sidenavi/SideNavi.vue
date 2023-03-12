@@ -5,8 +5,8 @@
         </div>
         <div class="sidenavi-items">
             <SideNaviItemVue
-                  text="ACTIVITIES"
-                  :route-target="RouterDefinitions.ACTIVITIES"
+                text="ACTIVITIES"
+                :route-target="RouterDefinitions.ACTIVITIES"
             />
         </div>
     </div>

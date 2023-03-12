@@ -1,26 +1,26 @@
 <template>
     <div
-          v-click-outside="disableSelection"
-          class="activity-selection-container"
+        v-click-outside="disableSelection"
+        class="activity-selection-container"
     >
         <div
-              class="activity-selection-activation pulsating-on-hover"
-              @click="toggleSelectionEnabled"
+            class="activity-selection-activation pulsating-on-hover"
+            @click="toggleSelectionEnabled"
         >
             <p v-if="selectedActivity === undefined">select activity</p>
             <p v-else>{{ selectedActivity.name }}</p>
         </div>
         <transition name="selection-container">
             <div
-                  v-if="selectionEnabled"
-                  class="activity-selection"
+                v-if="selectionEnabled"
+                class="activity-selection"
             >
                 <div
-                      v-for="(activity, index) in activityList"
-                      :key="index"
-                      :class="{selected: isActivitySelected(activity)}"
-                      class="activity-selection-item pulsating-on-hover"
-                      @click="activityClicked(index)"
+                    v-for="(activity, index) in activityList"
+                    :key="index"
+                    :class="{selected: isActivitySelected(activity)}"
+                    class="activity-selection-item pulsating-on-hover"
+                    @click="activityClicked(index)"
                 >
                     <p>{{ activity.name }}</p>
                 </div>

@@ -2,12 +2,12 @@
     <div class="input-with-headline">
         <p> {{ title }}</p>
         <Calendar
-              v-model="value"
-              :manualInput="false"
-              :showTime="true"
-              class="input"
-              dateFormat="dd.mm.yy"
-              selectionMode="single"
+            v-model="value"
+            :manual-input="false"
+            :show-time="true"
+            class="input"
+            date-format="dd.mm.yy"
+            selection-mode="single"
         />
     </div>
 </template>

@@ -4,44 +4,44 @@
         <div class="new-activity-form">
             <!-- name -->
             <TextInputWithHeadline
-                  v-model="activityName"
-                  class="activity-name"
-                  title="NAME"
+                v-model="activityName"
+                class="activity-name"
+                title="NAME"
             />
             <!-- duration -->
             <div
-                  class="duration-container"
-                  @change="checkDurationInput"
+                class="duration-container"
+                @change="checkDurationInput"
             >
                 <NumberInputWithHeadline
-                      v-model="durationMin"
-                      :title="getDurationInputText()"
+                    v-model="durationMin"
+                    :title="getDurationInputText()"
                 />
                 <div class="duration-flexible-checkbox">
                     <input
-                          v-model="flexibleDuration"
-                          type="checkbox"
+                        v-model="flexibleDuration"
+                        type="checkbox"
                     >
                     <p>flexible?</p>
                 </div>
 
                 <NumberInputWithHeadline
-                      v-if="flexibleDuration"
-                      v-model="durationMax"
-                      title="MAXIMUM DURATION"
+                    v-if="flexibleDuration"
+                    v-model="durationMax"
+                    title="MAXIMUM DURATION"
                 />
             </div>
             <!-- weekday constraint -->
             <WeekdayConstraintInput
-                  v-model:weekdayConstraints="weekdayConstraints"
+                v-model:weekdayConstraints="weekdayConstraints"
             />
             <RecurringInput
-                  v-model="recurringInput"
-                  class="recurring-input"
+                v-model="recurringInput"
+                class="recurring-input"
             />
             <button
-                  class="submit-button button is-primary"
-                  @click="submit"
+                class="submit-button button is-primary"
+                @click="submit"
             >
                 SUBMIT
             </button>

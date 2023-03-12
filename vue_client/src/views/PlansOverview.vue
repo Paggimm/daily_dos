@@ -1,11 +1,11 @@
 <template>
     <h2>RECENT PLANS</h2>
     <PlanInfoCard
-          v-for="(plan, index) in plans"
-          v-bind:key="index"
-          :plan="plan"
+        v-for="(plan, index) in plans"
+        :key="index"
+        :plan="plan"
     />
-    <NewPlanForm/>
+    <NewPlanForm />
 </template>
 
 <script lang="ts" setup>

@@ -1,10 +1,10 @@
 <template>
     <div class="header-navigation">
         <div
-              v-for="(item, index) in headerItems"
-              :key="index"
-              class="header-navigation-item"
-              @click="toActivity(item.routerTarget)"
+            v-for="(item, index) in headerItems"
+            :key="index"
+            class="header-navigation-item"
+            @click="toActivity(item.routerTarget)"
         >
             {{ item.name }}
         </div>

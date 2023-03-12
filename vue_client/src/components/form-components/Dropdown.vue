@@ -1,27 +1,27 @@
 <template>
     <div
-          class="dropdown-container"
-          @v-click-outside="closeDropdown"
+        class="dropdown-container"
+        @v-click-outside="closeDropdown"
     >
         <p class="title"> {{ title }}</p>
         <!-- Selected Value -->
         <div
-              :class="{'closed': !showSelectionOptions}"
-              class="dropdown-selected-value"
-              @click="toogleDropdown"
+            :class="{'closed': !showSelectionOptions}"
+            class="dropdown-selected-value"
+            @click="toogleDropdown"
         >
             <p> {{ selectionValue }}</p>
         </div>
         <!-- Selectable Options -->
         <div
-              v-if="showSelectionOptions"
-              class="dropdown-option-container"
+            v-if="showSelectionOptions"
+            class="dropdown-option-container"
         >
             <div
-                  v-for="(option, index) in optionList"
-                  :key="index"
-                  class="dropdown-option"
-                  @click="optionClicked(index)"
+                v-for="(option, index) in optionList"
+                :key="index"
+                class="dropdown-option"
+                @click="optionClicked(index)"
             >
                 <p>{{ option }}</p>
             </div>

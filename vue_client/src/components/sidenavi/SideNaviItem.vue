@@ -1,10 +1,10 @@
 <template>
     <div
-          class="sidenavi-item-container"
-          @click="onItemClicked"
+        class="sidenavi-item-container"
+        @click="onItemClicked"
     >
         <div
-              class="sidenavi-item-content"
+            class="sidenavi-item-content"
         >
             {{ props.text }}
         </div>

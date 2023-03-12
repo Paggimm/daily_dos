@@ -2,10 +2,10 @@
     <div class="input-with-headline">
         <p> {{ title }}</p>
         <input
-              :value="modelValue"
-              class="input"
-              type="number"
-              @input="updateValue"
+            :value="modelValue"
+            class="input"
+            type="number"
+            @input="updateValue"
         >
     </div>
 </template>
