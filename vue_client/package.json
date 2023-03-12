@@ -17,6 +17,7 @@
     "filepond": "^4.30.4",
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",
+    "msw": "^1.1.0",
     "pinia": "^2.0.32",
     "pinia-plugin-persistedstate": "^3.1.0",
     "primeicons": "^6.0.1",
