@@ -1,6 +1,7 @@
 import {ValidatePlanInput} from "@/validators/PlanInputValidator";
+import { describe, it, expect } from 'vitest'
 
-test("test a correct planInput", () => {
+it("test a correct planInput", () => {
     expect(ValidatePlanInput({
         activityId: 1,
         duration: 60,
@@ -9,7 +10,7 @@ test("test a correct planInput", () => {
     })).toBeTruthy();
 });
 
-test("test planInput with incorrect activityId", () => {
+it("test planInput with incorrect activityId", () => {
     expect(ValidatePlanInput({
         activityId: 0,
         duration: 60,
@@ -18,7 +19,7 @@ test("test planInput with incorrect activityId", () => {
     })).toBeFalsy()
 });
 
-test("test planInput with duration lower than 0", () => {
+it("test planInput with duration lower than 0", () => {
     expect(ValidatePlanInput({
         activityId: 1,
         duration: -5,
@@ -27,7 +28,7 @@ test("test planInput with duration lower than 0", () => {
     })).toBeFalsy()
 });
 
-test("test planInput with duration 0", () => {
+it("test planInput with duration 0", () => {
     expect(ValidatePlanInput({
         activityId: 1,
         duration: 0,
@@ -36,7 +37,7 @@ test("test planInput with duration 0", () => {
     })).toBeFalsy()
 });
 
-test("test planInput with invalid recurringType", () => {
+it("test planInput with invalid recurringType", () => {
     expect(ValidatePlanInput({
         activityId: 1,
         duration: 60,
@@ -45,7 +46,7 @@ test("test planInput with invalid recurringType", () => {
     })).toBeFalsy()
 });
 
-test("test planInput with date in the past", () => {
+it("test planInput with date in the past", () => {
     expect(ValidatePlanInput({
         activityId: 1,
         duration: 60,

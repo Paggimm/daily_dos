@@ -16,10 +16,10 @@ services:
     user: "node"
     working_dir: /home/node/app/vue_client
     ports:
-      - 8080:8080
+      - 8080:5173
     volumes:
       - ../:/home/node/app
-    command: "npm run serve"
+    command: "npm run dev"
 
   swagger_ui:
     image: swaggerapi/swagger-ui

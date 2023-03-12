@@ -1,20 +1,14 @@
-{
-  "root": true,
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": "@typescript-eslint/parser"
-  },
-  "env": {
-    "node": true
-  },
-  "plugins": [
-    "@typescript-eslint",
-    "no-null"
-  ],
-  "extends": [
-    "eslint:recommended",
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution')
+
+module.exports = {
+  root: true,
+  'extends': [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/eslint-config-typescript',
+    '@vue/eslint-config-prettier/skip-formatting',
     "plugin:vue/base",
-    "plugin:vue/vue3-essential",
     "plugin:vue/vue3-strongly-recommended",
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -22,7 +16,13 @@
     "@vue/typescript",
     "@vue/typescript/recommended"
   ],
-  "rules": {
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
+  plugins: [
+    "no-null"
+  ],
+  rules: {
     "no-null/no-null": "error",
     "prefer-const": "warn",
     "vue/singleline-html-element-content-newline": "off",

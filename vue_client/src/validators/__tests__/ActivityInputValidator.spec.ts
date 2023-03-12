@@ -1,7 +1,8 @@
-import {validateActivityInput} from "@/validators/ActivityInputValidator";
 import {RecurringType} from "@/enums/RecurringType";
+import { describe, it, expect } from 'vitest'
+import { validateActivityInput } from "../ActivityInputValidator";
 
-test("test a correct ActivityInput", () => {
+it("test a correct ActivityInput", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000000",
@@ -12,7 +13,7 @@ test("test a correct ActivityInput", () => {
     })).toBeTruthy();
 })
 
-test("test activityInput with incorrect name", () => {
+it("test activityInput with incorrect name", () => {
     expect(validateActivityInput({
         name: "těst;",
         weekdayConstraint: "0000000",
@@ -23,7 +24,7 @@ test("test activityInput with incorrect name", () => {
     })).toBeFalsy();
 })
 
-test("test activityInput with incorrect weekday", () => {
+it("test activityInput with incorrect weekday", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000002",
@@ -34,7 +35,7 @@ test("test activityInput with incorrect weekday", () => {
     })).toBeFalsy();
 })
 
-test("test activityInput with to low minDuration", () => {
+it("test activityInput with to low minDuration", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000001",
@@ -45,7 +46,7 @@ test("test activityInput with to low minDuration", () => {
     })).toBeFalsy();
 })
 
-test("test activityInput with no duration set", () => {
+it("test activityInput with no duration set", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000001",
@@ -56,7 +57,7 @@ test("test activityInput with no duration set", () => {
     })).toBeTruthy();
 })
 
-test("test activityInput with invalid RecurringType", () => {
+it("test activityInput with invalid RecurringType", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000001",
@@ -67,7 +68,7 @@ test("test activityInput with invalid RecurringType", () => {
     })).toBeFalsy();
 })
 
-test("test activityInput with invalid RecurringInterval", () => {
+it("test activityInput with invalid RecurringInterval", () => {
     expect(validateActivityInput({
         name: "těst",
         weekdayConstraint: "0000001",
