@@ -1,7 +1,9 @@
 <template>
     <header class="header-container">
         <div class="header-main">
-            <h1 class="nav-headline">
+            <h1 class="nav-headline"
+            @click="routeToHome"
+            >
                 DailyDos
             </h1>
             <!-- router links -->
@@ -48,9 +50,14 @@ import {computed} from "vue";
 import {RouterLink} from "vue-router";
 import HeaderNavi from "@/components/header/HeaderNavi.vue";
 import {RouterDefinitions} from "@/enums/RouterDefinitions";
+import router from "@/router";
 
 const authStore = useAuthStore();
 const loggedIn = computed((): boolean => authStore.isLoggedIn);
+
+const routeToHome = () => {
+    router.push({name: RouterDefinitions.HOME});
+}
 </script>
 
 <style scoped lang="less">
@@ -90,5 +97,9 @@ const loggedIn = computed((): boolean => authStore.isLoggedIn);
     left: 2vw;
     font-weight: bold;
     font-size: 5vw;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 </style>
