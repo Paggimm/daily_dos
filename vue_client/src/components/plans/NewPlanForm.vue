@@ -86,22 +86,20 @@ async function submit() {
 <style lang="less" scoped>
 @import "@/css/measures.less";
 
-.submit-button {
-    height: 4vw;
-    width: 62vw;
-    border-radius: @default-border-radius;
-    border: 1.5px solid #dbdbdb;
-    cursor: pointer;
-}
-
 .form-fields-container {
     margin-left: 5vw;
     margin-right: 5vw;
-    display: flex;
+    display: grid;
+    grid-template-areas:
+          "field field field"
+          "field field field"
+          "field field field"
+          "submit submit submit";
     gap: 2vw;
-    flex-direction: column;
+    justify-content: center;
 
     .form-fields-input-container {
+        grid-area: field;
         display: flex;
         gap: 2vw;
         align-items: center;
@@ -117,6 +115,15 @@ async function submit() {
             width: 40vw;
             flex-direction: column;
         }
+    }
+
+    .submit-button {
+        height: 4vw;
+        width: 62vw;
+        border-radius: @default-border-radius;
+        border: 1.5px solid #dbdbdb;
+        cursor: pointer;
+        grid-area: submit;
     }
 }
 </style>
