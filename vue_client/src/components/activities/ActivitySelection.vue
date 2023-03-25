@@ -82,15 +82,12 @@ const isActivitySelected = (activity: Activity) => {
 .activity-selection {
     position: absolute;
     bottom: 0;
-    width: 90%;
+    width: 62vw;
     height: 30vw;
-    margin-left: 3%;
     background-color: @background-information-surface;
-    padding: 1vw;
     border-top-left-radius: @default-border-radius;
     border-top-right-radius: @default-border-radius;
     display: flex;
-    //animation: fly-from-bottom 0.5s ease-out;
 
     .activity-selection-item {
         aspect-ratio: 1;
