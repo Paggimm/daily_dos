@@ -23,6 +23,3 @@ onMounted(async () => {
 });
 
 </script>
-<style scoped lang="less">
-
-</style>

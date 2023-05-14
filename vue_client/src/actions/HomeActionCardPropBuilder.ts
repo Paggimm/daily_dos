@@ -10,6 +10,7 @@ export function buildHomeActionCardPropList(): IHomeActionCardConfiguration[] {
     return [
         { title: 'ACTIVITIES', routerLink: RouterDefinitions.ACTIVITIES},
         { title: 'PLANS', routerLink: RouterDefinitions.PLANS},
+        { title: 'Free Time', routerLink: RouterDefinitions.FreeTime},
         { title: 'TEST', routerLink: RouterDefinitions.ACTIVITIES},
         { title: 'TSET', routerLink: RouterDefinitions.ACTIVITIES},
         { title: 'LOREM IPSUM', routerLink: RouterDefinitions.ACTIVITIES},

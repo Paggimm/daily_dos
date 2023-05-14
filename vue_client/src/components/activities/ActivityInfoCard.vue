@@ -1,6 +1,6 @@
 <template>
     <div
-        class="activity-info-card-container"
+        class="rounded-sm m-1 aspect-[5/1] w-2/5 bg-sky-200 flex justify-items-center justify-center"
     >
         <p>{{ activity.name }}</p>
     </div>
@@ -18,16 +18,3 @@ defineProps({
 })
 
 </script>
-<style scoped lang="less">
-@import "@/css/colors.less";
-.activity-info-card-container {
-    border-radius: 10px;
-    margin: 1vw;
-    aspect-ratio: 5;
-    width: 40%;
-    background-color: @background-information-surface;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-</style>

@@ -1,27 +1,29 @@
 <template>
     <div
-        class="dropdown-container"
-        @v-click-outside="closeDropdown"
+            class="dropdown-container relative w-full rounded-md h-[5vw]"
+            @v-click-outside="closeDropdown"
     >
-        <p class="title"> {{ title }}</p>
+        <p class="title border-[1.5] border-b-0 border-s-black rounded-t-md text-center bg-sky-300 m-0 h-[40%]">
+            {{ title }}
+        </p>
         <!-- Selected Value -->
         <div
-            :class="{'closed': !showSelectionOptions}"
-            class="dropdown-selected-value"
-            @click="toogleDropdown"
+                :class="{'closed': !showSelectionOptions}"
+                class="dropdown-selected-value cursor-pointer bg-white flex pl-[1vw] rounded-t-md h-3/5 items-center place-content-center border-s-black"
+                @click="toogleDropdown"
         >
             <p> {{ selectionValue }}</p>
         </div>
         <!-- Selectable Options -->
         <div
-            v-if="showSelectionOptions"
-            class="dropdown-option-container"
+                v-if="showSelectionOptions"
+                class="dropdown-option-container flex flex-col absolute w-full items-start z-20 cursor-pointer"
         >
             <div
-                v-for="(option, index) in optionList"
-                :key="index"
-                class="dropdown-option"
-                @click="optionClicked(index)"
+                    v-for="(option, index) in optionList"
+                    :key="index"
+                    class="dropdown-option bg-white w-full border-s-[#dbdbdb]"
+                    @click="optionClicked(index)"
             >
                 <p>{{ option }}</p>
             </div>
@@ -71,70 +73,14 @@ function updateModelValue() {
 }
 
 </script>
-<style lang="less" scoped>
-@import "@/css/colors.less";
-@import "@/css/measures.less";
+<style scoped>
 
-.dropdown-container {
-    position: relative;
-    width: 100%;
-    border-radius: @default-border-radius;
-    height: 5vw;
+.closed {
+  border-radius: 0 0 5px 5px;
+}
 
-    .title {
-        border-top: 1.5px solid #dbdbdb;
-        border-left: 1.5px solid #dbdbdb;
-        border-right: 1.5px solid #dbdbdb;
-        border-radius: @default-border-radius @default-border-radius 0 0;
-        text-align: center;
-        font-size: x-small;
-        background-color: @background-information-surface;
-        margin: 0;
-        height: 40%;
-    }
-
-    .dropdown-selected-value {
-        background-color: @background-interactable-surface;
-        display: flex;
-        padding-left: 1vw;
-        border-top-left-radius: @default-border-radius;
-        border-top-right-radius: @default-border-radius;
-        height: 60%;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #dbdbdb;
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-    .dropdown-selected-value.closed {
-        border-radius: 0 0 @default-border-radius @default-border-radius;
-    }
-
-    .dropdown-option-container {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        width: 100%;
-        align-items: flex-start;
-        z-index: 20;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        .dropdown-option {
-            background-color: @background-interactable-surface;
-            width: 100%;
-            border: 1px solid #dbdbdb;
-
-            &:hover {
-                background-color: @background-interactable-surface-focused;
-            }
-        }
-    }
+.dropdown-option:hover {
+  background-color: #D9E7FF;
 }
 
 </style>

@@ -1,9 +1,11 @@
 <template>
-    <div class="input-with-headline">
-        <p> {{ title }}</p>
+    <div class="input-with-headline flex flex-col h-[5vw]">
+        <p class="title border-[1.5] border-b-0 border-s-[#dbdbdb] rounded-t-md text-center bg-sky-300 m-0 h-[40%]">
+            {{ title }}
+        </p>
         <input
             :value="modelValue"
-            class="input"
+            class="input bg-white rounded-b-md h-3/5 p-2 border-s-[#dbdbdb] pl-[1%]"
             type="number"
             @input="updateValue"
         >
@@ -54,33 +56,3 @@ function validateInput(input: HTMLInputElement) {
 }
 
 </script>
-<style scoped lang="less">
-@import "@/css/colors.less";
-
-.input-with-headline {
-    display: flex;
-    flex-direction: column;
-    height: 5vw;
-
-    p {
-        border-top: 1.5px solid #dbdbdb;
-        border-left: 1.5px solid #dbdbdb;
-        border-right: 1.5px solid #dbdbdb;
-        border-radius: 5px 5px 0 0;
-        text-align: center;
-        font-size: x-small;
-        background-color: @background-information-surface;
-        margin: 0;
-        height: 40%;
-    }
-
-    input {
-        background-color: @background-interactable-surface;
-        border-radius: 0 0 5px 5px;
-        height: 60%;
-        padding: 0;
-        border: 1.5px solid #dbdbdb;
-        padding-left: 1%;
-    }
-}
-</style>

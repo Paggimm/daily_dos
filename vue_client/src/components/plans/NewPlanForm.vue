@@ -2,14 +2,14 @@
     <div class="new-plans-container">
         <h3>NEW PLAN</h3>
         <!-- FORM FIELDS -->
-        <div class="form-fields-container">
-            <div class="form-fields-input-container">
+        <div class="form-fields-container ml-[5vw] mr-[5vw] grid justify-center gap-[2vw]">
+            <div class="form-fields-input-container flex gap-[2vw] items-center">
                 <ActivitySelection
                     v-model:selected-activity="activity"
                     :activity-list="activityList"
-                    class="form-field-activity"
+                    class="form-field-activity h-[20vw] w-[20vw] col-start-1 col-end-1 row-span-full"
                 />
-                <div class="form-fields-inputs">
+                <div class="form-fields-inputs col-start-2 col-end-2 flex gap-[2vw] w-[40vw] flex-col row-span-full">
                     <DateWithHeadline
                         v-model="date"
                         title="DATE"
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <button
-                class="submit-button button is-primary pulsating-on-hover"
+                class="submit-button pulsating-on-hover h-[4vw] w-[62vw] rounded-md cursor-pointer bg-sky-200"
                 @click="submit"
             >
                 SUBMIT
@@ -83,47 +83,3 @@ async function submit() {
 }
 
 </script>
-<style lang="less" scoped>
-@import "@/css/measures.less";
-
-.form-fields-container {
-    margin-left: 5vw;
-    margin-right: 5vw;
-    display: grid;
-    grid-template-areas:
-          "field field field"
-          "field field field"
-          "field field field"
-          "submit submit submit";
-    gap: 2vw;
-    justify-content: center;
-
-    .form-fields-input-container {
-        grid-area: field;
-        display: flex;
-        gap: 2vw;
-        align-items: center;
-
-        .form-field-activity {
-            height: 20vw;
-            width: 20vw;
-        }
-
-        .form-fields-inputs {
-            display: flex;
-            gap: 2vw;
-            width: 40vw;
-            flex-direction: column;
-        }
-    }
-
-    .submit-button {
-        height: 4vw;
-        width: 62vw;
-        border-radius: @default-border-radius;
-        border: 1.5px solid #dbdbdb;
-        cursor: pointer;
-        grid-area: submit;
-    }
-}
-</style>

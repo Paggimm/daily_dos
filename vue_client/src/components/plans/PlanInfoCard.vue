@@ -1,5 +1,5 @@
 <template>
-    <div class="plan-info-card">
+    <div class="plan-info-card rounded-md bg-sky-300 aspect-square w-[10vw] text-xs">
         <h3>{{ plan.activity.name }}</h3>
         <p>DATE: {{ dateText }}</p>
     </div>
@@ -24,14 +24,3 @@ const dateText = computed(() => {
 });
 
 </script>
-
-<style lang="less" scoped>
-@import "@/css/colors.less";
-@import "@/css/measures.less";
-
-.plan-info-card {
-    background-color: @background-information-surface;
-    border-radius: @default-border-radius;
-}
-
-</style>

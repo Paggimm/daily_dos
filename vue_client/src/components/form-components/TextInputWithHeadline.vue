@@ -1,9 +1,11 @@
 <template>
-    <div class="input-with-headline">
-        <p> {{ title }}</p>
+    <div class="input-with-headline flex flex-col h-[5vw]">
+        <p class="title border-[1.5] border-b-0 border-s-[#dbdbdb] rounded-t-md text-center bg-sky-300 m-0 h-[40%]">
+            {{ title }}
+        </p>
         <input
             :value="modelValue"
-            class="input"
+            class="input bg-white rounded-b-md h-3/5 p-2 border-s-[#dbdbdb] pl-[1%]"
             type="text"
             @input="updateValue"
         >
@@ -34,32 +36,3 @@ const updateValue = (event: Event) => {
 };
 
 </script>
-<style scoped lang="less">
-@import "@/css/colors.less";
-
-.input-with-headline {
-    display: flex;
-    flex-direction: column;
-    height: 5vw;
-
-    p {
-        border-top: 1.5px solid #dbdbdb;
-        border-left: 1.5px solid #dbdbdb;
-        border-right: 1.5px solid #dbdbdb;
-        border-radius: 5px 5px 0 0;
-        margin: 0;
-        height: 40%;
-        text-align: center;
-        font-size: x-small;
-        background-color: @background-information-surface;
-    }
-
-    input {
-        background-color: @background-interactable-surface;
-        border-radius: 0 0 5px 5px;
-        height: 60%;
-        border: 1.5px solid #dbdbdb;
-        padding: 0 0 0 1%;
-    }
-}
-</style>

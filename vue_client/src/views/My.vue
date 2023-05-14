@@ -9,5 +9,3 @@ import {useAuthStore} from '@/store/AuthStore'
 const authStore = useAuthStore()
 
 </script>
-<style scoped lang="less">
-</style>

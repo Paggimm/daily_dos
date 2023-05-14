@@ -1,13 +1,13 @@
 <template>
     <div
-        class="weekday-constraint-input-container block"
+        class="weekday-constraint-input-container flex"
         @click="updateWeekdayConstraints"
     >
         <div
             v-for="(weekday, index) in weekday_list"
             :key="index"
             :class="{'selected':isWeekdaySelected(index)}"
-            class="weekday-constraint-input-item pulsating-on-hover"
+            class="weekday-constraint-input-item pulsating-on-hover flex aspect-square w-[16%] rounded-lg bg-white items-center place-content-center border-s-black border-1 cursor-pointer"
             @click="toggleWeekday(index)"
         >
             <p>{{ weekday }}</p>
@@ -46,27 +46,9 @@ function toggleWeekday(index: number) {
 }
 
 </script>
-<style lang="less" scoped>
-@import "@/css/colors.less";
-
-.weekday-constraint-input-container {
-    display: flex;
-}
-
-.weekday-constraint-input-item {
-    display: flex;
-    aspect-ratio: 1;
-    width: 16%;
-    border-radius: 10px;
-    background-color: @background-interactable-surface;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-}
-
+<style scoped>
 .weekday-constraint-input-item:hover {
-    cursor: pointer;
-    background-color: @background-interactable-surface-focused;
+    background-color: #bae6fd;
 }
 
 .weekday-constraint-input-item:not(:last-child) {
@@ -74,7 +56,6 @@ function toggleWeekday(index: number) {
 }
 
 .selected {
-    background-color: @background-interactable-surface-focused;
+    background-color: #bae6fd;
 }
-
 </style>

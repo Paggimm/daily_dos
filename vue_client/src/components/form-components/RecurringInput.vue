@@ -1,13 +1,15 @@
 <template>
     <div
-        class="recurring-form-container"
+        class="recurring-form-container flex mb-1"
     >
         <Dropdown
+            class="w-1/2"
             v-model="recurringInput.recurringType"
             :option-list="availableRecurringTypes"
             title="Recurring Type"
         />
         <NumberInputWithHeadline
+            class="interval-input"
             v-show="recurring"
             v-model="recurringInput.recurringInterval"
             :max-value="29"
@@ -41,17 +43,8 @@ watch(recurringInput, () => {
 
 </script>
 
-<style lang="less" scoped>
-.recurring-form-container {
-    display: flex;
-    margin-bottom: 1vw;
-
-    * {
-        width: 49%;
-    }
-
-    & > *:not(:last-child) {
-        margin-right: 2%;
-    }
+<style scoped>
+.recurring-form-container > *:not(:last-child) {
+    margin-right: 2%;
 }
 </style>

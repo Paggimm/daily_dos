@@ -1,9 +1,9 @@
 <template>
-    <div class="header-navigation">
+    <div class="header-navigation h-[5vw] bg-sky-500 flex place-content-center">
         <div
             v-for="(item, index) in headerItems"
             :key="index"
-            class="header-navigation-item"
+            class="header-navigation-item w-[10%] bg-white m-[1vw] rounded-md min cursor-pointer"
             @click="toActivity(item.routerTarget)"
         >
             {{ item.name }}
@@ -31,29 +31,8 @@ function toActivity(routerTarget: RouterDefinitions) {
 }
 
 </script>
-<style lang="less" scoped>
-@import "@/css/colors.less";
-@import "@/css/measures.less";
-
-.header-navigation {
-    height: 5vw;
-    background-color: @background-surface-dark;
-    display: flex;
-    justify-content: center;
-    min-height: 50px;
-}
-
-.header-navigation-item {
-    width: 10%;
-    background-color: @background-interactable-surface;
-    margin: 1vw;
-    border-radius: @default-border-radius;
-    min-height: 30px;
-    min-width: 100px;
-}
-
+<style scoped>
 .header-navigation-item:hover {
-    background-color: @background-interactable-surface-focused;
-    cursor: pointer;
+    background-color: #bae6fd;
 }
 </style>

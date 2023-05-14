@@ -4,7 +4,7 @@
         class="activity-selection-container"
     >
         <div
-            class="activity-selection-activation pulsating-on-hover"
+            class="pulsating-on-hover border-s-black rounded-sm bg-white h-full cursor-pointer"
             @click="toggleSelectionEnabled"
         >
             <p v-if="selectedActivity === undefined">select activity</p>
@@ -13,13 +13,13 @@
         <transition name="selection-container">
             <div
                 v-if="selectionEnabled"
-                class="activity-selection"
+                class="absolute bottom-0 w-[62vw] h-[30vw] rounded-t-sm bg-sky-100 flex gap-2 p-2"
             >
                 <div
                     v-for="(activity, index) in activityList"
                     :key="index"
                     :class="{selected: isActivitySelected(activity)}"
-                    class="activity-selection-item pulsating-on-hover"
+                    class="pulsating-on-hover aspect-square w-[8vw] h-[8vw] rounded-sm border-s-black bg-sky-200 cursor-pointer hover:bg-white"
                     @click="activityClicked(index)"
                 >
                     <p>{{ activity.name }}</p>
@@ -63,50 +63,7 @@ const isActivitySelected = (activity: Activity) => {
 }
 </script>
 
-<style lang="less" scoped>
-@import "@/css/colors.less";
-@import "@/css/measures.less";
-
-.activity-selection-activation {
-    border: 1px solid black;
-    border-radius: @default-border-radius;
-    background-color: @background-interactable-surface;
-    height: 100%;
-    width: 100%;
-
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-.activity-selection {
-    position: absolute;
-    bottom: 0;
-    width: 62vw;
-    height: 30vw;
-    background-color: @background-information-surface;
-    border-top-left-radius: @default-border-radius;
-    border-top-right-radius: @default-border-radius;
-    display: flex;
-
-    .activity-selection-item {
-        aspect-ratio: 1;
-        width: 8vw;
-        height: 8vw;
-        border-radius: @default-border-radius;
-        background-color: @background-interactable-surface;
-        border: 1px solid black;
-
-        &.selected {
-            background-color: @background-interactable-surface-focused;
-        }
-
-        &:hover {
-            cursor: pointer;
-        }
-    }
-}
-
+<style scoped>
 .selection-container-enter-active {
     animation: fly-from-bottom 0.5s ease-out;
 }

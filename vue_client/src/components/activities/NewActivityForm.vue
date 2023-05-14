@@ -1,34 +1,37 @@
 <template>
-    <div class="new-activity-form-container">
+    <div class="new-activity-form-container ml-[2vw] mr-[2vw]">
         <h2>CREATE NEW ACTIVITY</h2>
         <div class="new-activity-form">
             <!-- name -->
             <TextInputWithHeadline
                 v-model="activityName"
-                class="activity-name"
+                class="mb-[1vw]"
                 title="NAME"
             />
             <!-- duration -->
             <div
-                class="duration-container"
+                class="duration-container flex justify-start items-center mb-[1vw] w-full"
                 @change="checkDurationInput"
             >
                 <NumberInputWithHeadline
                     v-model="durationMin"
                     :title="getDurationInputText()"
+                    class="w-[45.5%] mr-[2vw]"
                 />
-                <div class="duration-flexible-checkbox">
+                <div class="duration-flexible-checkbox mr-[2vw] w-[5vw]">
                     <input
+                        class="w-[5vw]"
                         v-model="flexibleDuration"
                         type="checkbox"
                     >
-                    <p>flexible?</p>
+                    <p class="w-[5vw]">flexible?</p>
                 </div>
 
                 <NumberInputWithHeadline
                     v-if="flexibleDuration"
                     v-model="durationMax"
                     title="MAXIMUM DURATION"
+                    class="w-[45.5%]"
                 />
             </div>
             <!-- weekday constraint -->
@@ -37,10 +40,10 @@
             />
             <RecurringInput
                 v-model="recurringInput"
-                class="recurring-input"
+                class="recurring-input mt-[2vw]"
             />
             <button
-                class="submit-button button is-primary"
+                class="submit cursor-pointer border-s-black border-[1.5] w-full h-[4vw] rounded-sm bg-sky-200"
                 @click="submit"
             >
                 SUBMIT
@@ -118,51 +121,3 @@ async function submit() {
 }
 
 </script>
-<style lang="less" scoped>
-@import "@/css/measures.less";
-
-.new-activity-form-container {
-    margin-left: 2vw;
-    margin-right: 2vw;
-
-    .activity-name {
-        margin-bottom: 1vw;
-    }
-
-    .duration-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 1vw;
-        width: 100%;
-
-        * {
-            width: 45.5%;
-        }
-
-        *:not(:last-child) {
-            margin-right: 2vw;
-        }
-
-        .duration-flexible-checkbox {
-            width: 5vw;
-
-            p, input {
-                width: 5vw;
-            }
-        }
-    }
-
-    .recurring-input {
-        margin-top: 2vw;
-    }
-
-    .submit-button {
-        width: 100%;
-        height: 4vw;
-        border-radius: @default-border-radius;
-        border: 1.5px solid #dbdbdb;
-        cursor: pointer;
-    }
-}
-</style>
