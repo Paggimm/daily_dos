@@ -54,6 +54,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/PlansOverview.vue'),
         beforeEnter: checkLoggedIn
     },
+    {
+        path: '/freetime',
+        name: RouterDefinitions.FreeTime,
+        component: () => import('@/views/FreeTimeOverview.vue'),
+        beforeEnter: checkLoggedIn
+    }
 ]
 
 const router = createRouter({
