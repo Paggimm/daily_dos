@@ -7,4 +7,5 @@ export enum RouterDefinitions {
     ACTIVITIES = 'activities',
     PLANS = "plans",
     My = 'my',
+    FreeTime= "freetime"
 }
