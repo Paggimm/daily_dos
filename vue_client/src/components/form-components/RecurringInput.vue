@@ -3,15 +3,15 @@
         class="recurring-form-container flex mb-1"
     >
         <Dropdown
-            class="w-1/2"
             v-model="recurringInput.recurringType"
+            class="w-1/2"
             :option-list="availableRecurringTypes"
             title="Recurring Type"
         />
         <NumberInputWithHeadline
-            class="interval-input"
             v-show="recurring"
             v-model="recurringInput.recurringInterval"
+            class="interval-input"
             :max-value="29"
             :min-value="1"
             title="RECURRING INTERVAL"

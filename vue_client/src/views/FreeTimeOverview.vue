@@ -2,7 +2,7 @@
     <h1>
         Free Time
     </h1>
-    <NewFreeTimeForm/>
+    <NewFreeTimeForm />
 </template>
 
 <script setup lang="ts">

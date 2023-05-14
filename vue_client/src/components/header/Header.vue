@@ -1,54 +1,60 @@
 <template>
     <header class="header-container bg-sky-300 flex flex-col">
         <div class="header-main relative h-[10vw] flex">
-            <h1 class="nav-headline absolute top-[2vw] left-[2vw] font-bold text-6xl cursor-pointer"
+            <h1
+                class="nav-headline absolute top-[2vw] left-[2vw] font-bold text-6xl cursor-pointer"
                 @click="routeToHome"
             >
                 DailyDos
             </h1>
             <!-- router links -->
-            <nav id="nav" class="absolute top-[4vw] right-[2vw]">
+            <nav
+                id="nav"
+                class="absolute top-[4vw] right-[2vw]"
+            >
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]"
-                        :to="{name: RouterDefinitions.HOME}"
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.HOME}"
                 >
                     Home
                 </router-link>
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]" :to="{name: RouterDefinitions.ABOUT}">
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.ABOUT}"
+                >
                     About
                 </router-link>
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]"
-                        v-if="!loggedIn"
-                        :to="{name: RouterDefinitions.LOGIN}"
+                    v-if="!loggedIn"
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.LOGIN}"
                 >
                     Login
                 </router-link>
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]"
-                        v-if="!loggedIn"
-                        :to="{name: RouterDefinitions.REGISTER}"
+                    v-if="!loggedIn"
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.REGISTER}"
                 >
                     Register
                 </router-link>
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]"
-                        v-if="loggedIn"
-                        :to="{name: RouterDefinitions.My}"
+                    v-if="loggedIn"
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.My}"
                 >
                     MeinAccount
                 </router-link>
                 <router-link
-                        class="font-bold text-black text-2xl mr-[0.6vw]"
-                        v-if="loggedIn"
-                        :to="{name: RouterDefinitions.LOGOUT}"
+                    v-if="loggedIn"
+                    class="font-bold text-black text-2xl mr-[0.6vw]"
+                    :to="{name: RouterDefinitions.LOGOUT}"
                 >
                     Logout
                 </router-link>
             </nav>
         </div>
-        <HeaderNavi/>
+        <HeaderNavi />
     </header>
 </template>
 

@@ -20,8 +20,8 @@
                 />
                 <div class="duration-flexible-checkbox mr-[2vw] w-[5vw]">
                     <input
-                        class="w-[5vw]"
                         v-model="flexibleDuration"
+                        class="w-[5vw]"
                         type="checkbox"
                     >
                     <p class="w-[5vw]">flexible?</p>

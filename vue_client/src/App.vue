@@ -1,12 +1,15 @@
 <template>
-    <div id="app" class="bg-sky-50">
+    <div
+        id="app"
+        class="bg-sky-50"
+    >
         <Header />
         <div class="router-view">
             <router-view />
         </div>
     </div>
 </template>
-<script setup>
+<script lang="ts" setup>
 import Header from "@/components/header/Header.vue";</script>
 <style>
 #app {
