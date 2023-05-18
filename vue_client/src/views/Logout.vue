@@ -3,7 +3,10 @@
         <h1>
             Logout
         </h1>
-        <button @click="logout">
+        <button
+                class="button submit w-1/4 h-[4vw]"
+                @click="logout"
+        >
             logout
         </button>
     </div>

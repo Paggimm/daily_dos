@@ -1,13 +1,14 @@
 <template>
-    <div class="columns">
-        <div class="column is-one-third is-offset-one-third">
+    <div>
+        <div>
             <form
                 v-if="!loggedIn"
                 @submit.prevent="submit"
+                class="flex flex-col items-center mr-auto ml-auto"
             >
-                <div class="field">
+                <div>
                     <label class="label">Username</label>
-                    <div class="control has-icons-left">
+                    <div>
                         <input
                             v-model="loginFeature.username.value"
                             :class="invalidLogin ? 'is-danger' : ''"
@@ -20,9 +21,9 @@
                         </span>
                     </div>
                 </div>
-                <div class="field">
+                <div>
                     <label class="label">Password</label>
-                    <div class="control has-icons-left">
+                    <div>
                         <input
                             v-model="loginFeature.password.value"
                             :class="invalidLogin ? 'is-danger' : ''"
@@ -41,7 +42,7 @@
                         This login is invalid
                     </p>
                 </div>
-                <button class="button is-primary">Submit</button>
+                <button class="button submit w-1/4 h-[4vw]">Submit</button>
             </form>
             <p v-else>You are logged in.</p>
         </div>

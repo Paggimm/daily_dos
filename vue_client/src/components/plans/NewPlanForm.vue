@@ -26,7 +26,7 @@
                 </div>
             </div>
             <button
-                class="submit-button pulsating-on-hover h-[4vw] w-[62vw] rounded-md cursor-pointer bg-sky-200"
+                class="submit button h-[4vw]"
                 @click="submit"
             >
                 SUBMIT

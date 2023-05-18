@@ -42,9 +42,3 @@ watch(recurringInput, () => {
 });
 
 </script>
-
-<style scoped>
-.recurring-form-container > *:not(:last-child) {
-    margin-right: 2%;
-}
-</style>

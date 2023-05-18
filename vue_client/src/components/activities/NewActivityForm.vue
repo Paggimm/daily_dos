@@ -43,7 +43,7 @@
                 class="recurring-input mt-[2vw]"
             />
             <button
-                class="submit cursor-pointer border-s-black border-[1.5] w-full h-[4vw] rounded-sm bg-sky-200"
+                class="submit button w-1/4 h-[4vw]"
                 @click="submit"
             >
                 SUBMIT
