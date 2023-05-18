@@ -10,16 +10,20 @@ services:
     command: dotnet watch run
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - dailydos_network
 
-  vue_client:
+  client:
     build: vue_client
     user: "node"
     working_dir: /home/node/app/vue_client
     ports:
-      - 8080:5173
+      - 8089:5173
     volumes:
       - ../:/home/node/app
     command: "npm run dev"
+    networks:
+      - dailydos_network
 
   swagger_ui:
     image: swaggerapi/swagger-ui
@@ -29,8 +33,15 @@ services:
       - ./swagger:/usr/share/nginx/html/doc
     environment:
       API_URL: doc/openapi.yaml
+    networks:
+      - dailydos_network
 
   swagger_editor:
     image: swaggerapi/swagger-editor
     ports:
       - 9001:8080
+    networks:
+      - dailydos_network
+
+networks:
+  dailydos_network:

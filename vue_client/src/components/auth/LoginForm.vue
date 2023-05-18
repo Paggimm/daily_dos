@@ -64,7 +64,6 @@ const loggedIn = computed(() => authStore.isLoggedIn);
 async function submit(): Promise<void> {
     invalidLogin.value = false;
     const loginResponse = await loginFeature.login();
-    console.log(loginResponse)
 
     if (loginResponse.token !== "") {
         authStore.setToken(loginResponse.token);

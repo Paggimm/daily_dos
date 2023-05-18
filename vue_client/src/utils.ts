@@ -42,6 +42,6 @@ function getBaseUrl(): string {
     if (process.env.NODE_ENV === "development") {
         return "http://localhost:8085/";
     } else {
-        return "https://bernsky.de:5000/"
+        return "http://api.dailydos/"
     }
 }

@@ -4,16 +4,29 @@ services:
     build: server
     working_dir: /app/api
     ports:
-      - 8085:8085
+      - 8085:80
     volumes:
       - ../:/app
     command: dotnet run -p DailyDos.Api.fsproj
+    networks:
+      - dailydos_network
 
-  nginx:
+  client:
     build: ../vue_client
     ports:
-      - 80:80
+      - 8089:80
     tty: true
+    networks:
+      - dailydos_network
+
+  proxy:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - dailydos_network
 
   postgres:
     image: postgres:14.2
@@ -28,6 +41,8 @@ services:
       - postgres-data:/var/lib/postgresql/data
       - .postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
     restart: unless-stopped
+    networks:
+      - dailydos_network
 
   pgadmin:
     image: dpage/pgadmin4:6.5
@@ -39,6 +54,11 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.de
       PGADMIN_DEFAULT_PASSWORD: admin
     restart: unless-stopped
+    networks:
+      - dailydos_network
 
 volumes:
   postgres-data: null
+
+networks:
+  dailydos_network:
