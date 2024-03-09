@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:0-7.0
+FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION

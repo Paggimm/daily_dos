@@ -1,31 +1,23 @@
-open System
-open System.IO
-
 open Fake.Core
-open Fake.IO
 
 open RunHelpers
-open RunHelpers.BasicShortcuts
-open RunHelpers.FakeHelpers
+open RunHelpers.Shortcuts
 open RunHelpers.Templates
 
-let startAsJob errorCode (proc: CreateProcess<ProcessResult<unit>>) =
+let startAsJob (proc: CreateProcess<ProcessResult<unit>>) =
     printfn $"> %s{proc.CommandLine}"
-    let task = proc |> Proc.start
 
     async {
-        let! result = task |> Async.AwaitTask
+        let! result = proc |> Proc.startAndAwait
 
         return
             match result.ExitCode with
             | 0 -> Ok
-            | _ -> Error(errorCode, [])
+            | _ -> Error []
     }
 
-let startAsJob' = startAsJob 10
-
 type AsyncJobBuilder() =
-    inherit JobBuilder()
+    inherit ParallelJobBuilder()
     member __.YieldFrom x = x |> Async.RunSynchronously
 
 let jobAsync = AsyncJobBuilder()
@@ -49,56 +41,41 @@ module private Task =
 
     let restoreServer () = DotNet.restore Config.serverProject
 
-    let restoreClient () = Npm.install()
+    let restoreClient () =
+        CreateProcess.fromRawCommand "npm" [ "install" ]
+        |> CreateProcess.withWorkingDirectory Config.clientFolder
+        |> Job.fromCreateProcess
 
     let buildCodegen () =
-        DotNet.build Config.codegenProject DotNetConfig.Debug
+        DotNet.build Config.codegenProject Debug
 
-    let buildServer () =
-        DotNet.build Config.serverProject DotNetConfig.Debug
+    let buildServer () = DotNet.build Config.serverProject Debug
 
     let buildClient () =
         CreateProcess.fromRawCommand "npm" [ "run"; "build" ]
         |> CreateProcess.withWorkingDirectory Config.clientFolder
-        |> Proc.runAsJob 10
+        |> Job.fromCreateProcess
 
     let lintClient () =
         CreateProcess.fromRawCommand "npm" [ "run"; "lint" ]
         |> CreateProcess.withWorkingDirectory Config.clientFolder
-        |> Proc.runAsJob 10
+        |> Job.fromCreateProcess
 
     let generate () =
         job {
-            dotnet [
-                "run"
-                "--project"
-                Config.codegenProject
-            ]
+            dotnet [ "run"; "--project"; Config.codegenProject ]
             // Format generated F# code
-            dotnet [
-                "fantomas"
-                Config.generatedServerPath
-            ]
+            dotnet [ "fantomas"; Config.generatedServerPath ]
         }
 
     let ldeStartCode () =
         jobAsync {
-            let clientWatch =
-                CreateProcess.fromRawCommand "npm" [ "run"; "serve" ]
-                |> CreateProcess.withWorkingDirectory Config.clientFolder
-                |> startAsJob'
+            CreateProcess.fromRawCommand "npm" [ "run"; "dev" ]
+            |> CreateProcess.withWorkingDirectory Config.clientFolder
+            |> startAsJob
 
-            let serverWatch =
-                CreateProcess.fromRawCommand
-                    "dotnet"
-                    [ "watch"
-                      "run"
-                      "--project"
-                      Config.serverProject ]
-                |> startAsJob'
-
-            yield! clientWatch
-            yield! serverWatch
+            CreateProcess.fromRawCommand "dotnet" [ "watch"; "run"; "--project"; Config.serverProject ]
+            |> startAsJob
         }
 
     let ldeStartFull () =
@@ -110,7 +87,7 @@ module private Task =
                   "-f"
                   $"%s{Config.ldeFolder}/no-devcontainer.docker-compose.yml"
                   "up" ]
-            |> Proc.runAsJob 10
+            |> Job.fromCreateProcess
         }
 
     let ldeDown () =
@@ -122,7 +99,7 @@ module private Task =
                   "-f"
                   $"%s{Config.ldeFolder}/no-devcontainer.docker-compose.yml"
                   "down" ]
-            |> Proc.runAsJob 10
+            |> Job.fromCreateProcess
         }
 
 module private Command =
@@ -189,5 +166,5 @@ let main args =
                 [ "Usage: dotnet run [<command>]"
                   "Look up available commands at the bottom of run.fs" ]
 
-            Error(1, msg)
-    |> ProcessResult.wrapUp
+            Job.error msg
+    |> Job.execute
