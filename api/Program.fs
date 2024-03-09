@@ -23,16 +23,21 @@ module Program =
     let errorHandler (ex: Exception) (logger: ILogger) =
         logger.LogError(ex, "An unhandled exception has occurred while executing the request.")
 
-        clearResponse
-        >=> setStatusCode 500
-        >=> text ex.Message
+        clearResponse >=> setStatusCode 500 >=> text ex.Message
 
     // ---------------------------------
     // Config and Main
     // ---------------------------------
     let configureCors (builder: CorsPolicyBuilder) =
         builder
-            .WithOrigins("http://localhost:8089", "http://localhost:8081", "http://localhost", "http://localhost:9000", "http://localhost:9001")
+            .WithOrigins(
+                "http://localhost:5173",
+                "http://localhost:8089",
+                "http://localhost:8081",
+                "http://localhost",
+                "http://localhost:9000",
+                "http://localhost:9001"
+            )
             .AllowAnyMethod()
             .AllowAnyHeader()
         |> ignore
@@ -42,10 +47,7 @@ module Program =
 
         (match env.IsDevelopment() with
          | true -> app.UseDeveloperExceptionPage()
-         | false ->
-             app
-                 .UseGiraffeErrorHandler(errorHandler)
-                 .UseHttpsRedirection())
+         | false -> app.UseGiraffeErrorHandler(errorHandler).UseHttpsRedirection())
             .UseAuthentication()
             .UseCors(configureCors)
             .UseStaticFiles()
